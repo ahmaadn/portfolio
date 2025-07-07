@@ -15,8 +15,5 @@ let latestProject = PROJECTS.filter((project) => project?.latest || false)[0] ||
 			>
 			<p class="text-sm">{latestProject.desc.short}</p>
 		</div>
-		<div class="inline-flex flex-wrap gap-4">
-			{latestProject.tags.map((tag) => <Badge>{tag}</Badge>)}
-		</div>
 	</div>
 </div>

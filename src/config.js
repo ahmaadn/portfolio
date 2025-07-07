@@ -11,7 +11,15 @@ export const SITE = {
 	],
 };
 
-export const SOSIAL_LINK = [{ label: "Github", url: "https://github.com/ahmaadn" }];
+export const SOSIAL_LINK = [
+	{ label: "Github", url: "https://github.com/ahmaadn", icon: "simple-icons:github" },
+	{
+		label: "Resume",
+		url: "./resume.pdf",
+		icon: "simple-icons:googledocs",
+		download: "./resume.pdf",
+	},
+];
 
 export const EDUCATION = [
 	{
