@@ -11,17 +11,9 @@ import { Icon } from "astro-iconify";
 			<Navbar />
 			<div class="inline-flex items-center justify-center space-x-4 text-base">
 				<ThemeButton />
-				<a
-					href="/resume.pdf"
-					target="_blank"
-					download="/resume.pdf"
-					class="blend group flex w-fit items-center gap-2 rounded border border-neutral-200 px-3 py-2 transition-colors hover:border-neutral-800 hover:bg-neutral-800">
-					<Icon name="mdi:resume" width="20" height="20" />
-					<span class="blend text-sm capitalize">Resume</span>
-				</a>
 			</div>
 		</div>
-		<!-- Mobile -->
-		<NavbarMenu class="gap-4 md:hidden" />
 	</div>
+	<!-- Mobile -->
+	<NavbarMenu class="gap-4 md:hidden" />
 </header>
