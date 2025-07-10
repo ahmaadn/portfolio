@@ -6,15 +6,13 @@ const { id, title, class: className = "", "background-text": backgoundText = "" 
 
 <section class="relative" id={id}>
 	<div class={cn("container max-w-7xl", className)}>
-		<h1 class="mb-8 text-4xl font-bold capitalize dark:text-white">{title}</h1>
+		<h1 class="mb-8 text-4xl font-bold capitalize">{title}</h1>
 		<slot />
 	</div>
 	{
 		backgoundText && (
 			<div class="absolute top-0 left-0 -z-10 md:left-32">
-				<p class="text-[15rem] font-bold text-neutral-200/50 select-none dark:text-neutral-900">
-					{backgoundText}
-				</p>
+				<p class="text-content-muted/10 text-[15rem] font-bold">{backgoundText}</p>
 			</div>
 		)
 	}
