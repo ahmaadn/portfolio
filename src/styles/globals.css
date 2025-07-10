@@ -36,7 +36,7 @@
 }
 
 [data-theme="dark"] {
-	--main-dark: oklch(0.1 0 340);
+	--main-dark: oklch(9.693% 0.00001 271.152);
 	--main: oklch(0.15 0 340);
 	--main-light: oklch(0.2 0 340);
 	--content: oklch(0.96 0 340);
@@ -87,7 +87,7 @@
 }
 
 body {
-	@apply bg-main-light dark:bg-main text-content;
+	@apply bg-main-light text-content;
 }
 
 .badge {
