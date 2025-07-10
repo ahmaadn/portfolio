@@ -1,6 +1,6 @@
 ---
 import BaseContent from "./content/BaseContent.astro";
-import SosialLink from "./SosialLink.astro";
+import Links from "./Links.astro";
 import { cn } from "@/lib/utils";
 
 interface Props {
@@ -17,7 +17,7 @@ const { class: className, mail } = Astro.props;
 			social links.
 		</p>
 		<div class="mt-4">
-			<SosialLink />
+			<Links />
 		</div>
 	</BaseContent>
 </footer>

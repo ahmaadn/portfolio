@@ -11,7 +11,7 @@ export const SITE = {
 	],
 };
 
-export const SOSIAL_LINK = [
+export const LINKS = [
 	{ label: "Github", url: "https://github.com/ahmaadn", icon: "simple-icons:github" },
 	{
 		label: "Resume",

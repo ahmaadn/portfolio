@@ -1,0 +1,59 @@
+---
+import ThemeButton from "./ThemeButton.astro";
+
+const menuItems = [
+	{
+		name: "Skills",
+		link: "#skills",
+	},
+	{
+		name: "Education",
+		link: "#education",
+	},
+	{
+		name: "Project",
+		link: "#project",
+	},
+	{
+		name: "Contact",
+		link: "#contact",
+	},
+];
+---
+
+<header id="header" class="w-full py-8">
+	<div class="flex w-full flex-col justify-center gap-y-4">
+		<div class="flex justify-between">
+			<nav class="flex flex-row items-center gap-8">
+				<a class="link text-2xl font-semibold transition-colors" href="/">AN.</a>
+				<ul class="menu hidden gap-8 text-lg font-medium md:inline-flex">
+					{
+						menuItems.map((item) => (
+							<li>
+								<a class="menu-item link" href={item.link}>
+									{item.name}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</nav>
+
+			<div class="inline-flex items-center justify-center text-base">
+				<ThemeButton />
+			</div>
+		</div>
+	</div>
+	<!-- Mobile -->
+	<ul class="menu inline-flex gap-4 text-base font-medium md:hidden">
+		{
+			menuItems.map((item) => (
+				<li>
+					<a class="menu-item link:" href={item.link}>
+						{item.name}
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</header>
