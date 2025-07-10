@@ -95,3 +95,27 @@ export const PROJECTS = [
 		latest: true,
 	},
 ];
+
+export const SKILLS = [
+	{ name: "Python", icon: "logos:python" },
+	{ name: "pyTorch", icon: "logos:pytorch-icon" },
+	{ name: "Jupyter", icon: "logos:jupyter" },
+	{ name: "Vue", icon: "logos:vue" },
+	{ name: "HTML5", icon: "logos:html-5" },
+	{ name: "CSS", icon: "logos:css-3" },
+	{ name: "JavaScript", icon: "logos:javascript" },
+	{ name: "Astro", icon: "logos:astro-icon" },
+	{ name: "TensorFlow", icon: "logos:tensorflow" },
+	{ name: "PHP", icon: "logos:php" },
+	{ name: "Laravel", icon: "logos:laravel" },
+	{ name: "FastApi", icon: "logos:fastapi-icon" },
+	{ name: "PostgreSQL", icon: "logos:postgresql" },
+	{ name: "MySQL", icon: "logos:mysql" },
+	{ name: "TypeScript", icon: "logos:typescript-icon" },
+	{ name: "Bootstrap", icon: "logos:bootstrap" },
+	{ name: "Dart", icon: "logos:dart" },
+	{ name: "Flutter", icon: "logos:flutter" },
+	{ name: "ScikitLearn", icon: "devicon:scikitlearn" },
+	{ name: "TailwindCSS", icon: "logos:tailwindcss-icon" },
+	{ name: "Pandas", icon: "logos:pandas-icon" },
+];
