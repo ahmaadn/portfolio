@@ -18,7 +18,7 @@
 	--content-muted: oklch(0.4 0 340);
 
 	--highlight: oklch(1 0 340);
-	--border: oklch(0.6 0 340);
+	--border: oklch(92% 0.006 264.531);
 	--border-muted: oklch(0.7 0 340);
 
 	--neutral: oklch(0.15 0 340);
@@ -90,9 +90,6 @@ body {
 	@apply bg-main-light text-content;
 }
 
-.badge {
-	@apply rounded-sm bg-neutral-900 px-3 py-0.5 text-center text-xs font-medium text-neutral-200 capitalize dark:bg-neutral-100 dark:text-neutral-900;
-}
 
 .link {
 	@apply decoration-2 hover:underline;
