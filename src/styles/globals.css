@@ -87,7 +87,7 @@
 }
 
 body {
-	@apply bg-main-light text-content;
+	@apply bg-main-light text-content-muted;
 }
 
 
