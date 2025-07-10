@@ -1,9 +1,9 @@
 ---
-import LatestProject from "./LatestProject.astro";
-import Header from "./Header.astro";
+import { LINKS, PROJECTS, SITE } from "@/config";
 import BackgoundSquare from "./BackgoundSquare.astro";
 import Button from "./Button.astro";
-import { PROJECTS, SITE, LINKS } from "@/config";
+import Header from "./Header.astro";
+import LatestProject from "./LatestProject.astro";
 
 let latestProject = PROJECTS.filter((project) => project?.latest || false)[0] || PROJECTS[0];
 ---

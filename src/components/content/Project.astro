@@ -1,11 +1,11 @@
 ---
-import BaseContent from "./BaseContent.astro";
-import Badge from "../Badge.astro";
-import Chips from "../Chips.astro";
 import { PROJECTS } from "@/config";
-import Card from "../Card.astro";
 import { Image } from "astro:assets";
+import Badge from "../Badge.astro";
+import Card from "../Card.astro";
 import CardContent from "../CardContent.astro";
+import Chips from "../Chips.astro";
+import BaseContent from "./BaseContent.astro";
 const imagePaths = import.meta.glob("/src/images/project/*.{jpeg,jpg,png,gif}");
 
 const getImage = (path) => {
