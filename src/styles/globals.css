@@ -18,7 +18,7 @@
 	--content-muted: oklch(0.4 0 340);
 
 	--highlight: oklch(1 0 340);
-	--border: oklch(92% 0.006 264.531);
+	--border: oklch(87% 0.006 286.286);
 	--border-muted: oklch(0.7 0 340);
 
 	--neutral: oklch(0.15 0 340);
@@ -89,7 +89,6 @@
 body {
 	@apply bg-main-light text-content-muted;
 }
-
 
 .link {
 	@apply decoration-2 hover:underline;
