@@ -11,6 +11,7 @@
     "format": "prettier . --write"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.12",
     "@astrojs/sitemap": "^3.4.1",
     "@astrojs/vercel": "^8.2.1",
     "@tailwindcss/vite": "^4.1.11",

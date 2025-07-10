@@ -1,4 +1,5 @@
 ---
+import Icon from "astro-iconify";
 import ThemeButton from "./ThemeButton.astro";
 
 const menuItems = [
@@ -39,8 +40,18 @@ const menuItems = [
 				</ul>
 			</nav>
 
-			<div class="inline-flex items-center justify-center text-base">
-				<ThemeButton />
+			<div
+				id="menu-right"
+				class="inline-flex items-center justify-center space-x-4 divide-x text-base">
+				<div class="flex items-center justify-center pr-4">
+					<ThemeButton />
+				</div>
+				<a
+					class="inline-flex h-8 w-8 items-center justify-center"
+					href="/rss.xml"
+					target="_blank">
+					<Icon name="tabler:rss" size="24" />
+				</a>
 			</div>
 		</div>
 	</div>

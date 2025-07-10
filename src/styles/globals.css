@@ -93,3 +93,7 @@ body {
 .link {
 	@apply decoration-2 hover:underline;
 }
+
+#site-heading #menu-right {
+	@apply divide-primary-content/20;
+}
