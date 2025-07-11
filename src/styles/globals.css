@@ -94,6 +94,10 @@ body {
 	@apply decoration-2 hover:underline;
 }
 
+#site-heading {
+	@apply text-primary-content;
+}
+
 #site-heading #menu-right {
 	@apply divide-primary-content/20;
 }
