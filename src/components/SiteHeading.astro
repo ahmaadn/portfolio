@@ -7,10 +7,10 @@ interface Props {
 	id?: string;
 }
 
-const { class: className = "", id = "post-heading" } = Astro.props;
+const { class: className = "", id = "post-heading", ...extra } = Astro.props;
 ---
 
-<div id={id} class={cn(className)}>
+<div id={id} class={cn(className)} {...extra}>
 	<div class="container h-full w-full max-w-7xl">
 		<Header />
 		<div class="mt-6 md:mt-12">
