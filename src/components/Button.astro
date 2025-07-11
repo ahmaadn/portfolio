@@ -1,0 +1,17 @@
+---
+import { cn } from "@/lib/utils";
+import { Icon } from "astro-iconify";
+
+const { label, url, icon, class: className = "", ...extra } = Astro.props;
+---
+
+<a
+	href={url}
+	class={cn(
+		"blend group border-border flex w-fit items-center gap-2 rounded-full border px-4 py-1 transition-colors text-content-muted hover:text-content shadow-xs shadow-highlight ",
+		className
+	)}
+	{...extra}>
+	<Icon name={icon} width="16" height="16" />
+	<span class="blend text-sm capitalize">{label}</span>
+</a>

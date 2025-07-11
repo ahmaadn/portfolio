@@ -1,11 +1,11 @@
 ---
-import BaseContent from "./BaseContent.astro";
-import Badge from "../Badge.astro";
-import Chips from "../Chips.astro";
 import { PROJECTS } from "@/config";
-import Card from "../Card.astro";
 import { Image } from "astro:assets";
+import Badge from "../Badge.astro";
+import Button from "../Button.astro";
+import Card from "../Card.astro";
 import CardContent from "../CardContent.astro";
+import BaseContent from "./BaseContent.astro";
 const imagePaths = import.meta.glob("/src/images/project/*.{jpeg,jpg,png,gif}");
 
 const getImage = (path) => {
@@ -40,7 +40,7 @@ const getImage = (path) => {
 						</div>
 						<p class="mt-4 max-w-sm overflow-hidden text-sm">{desc.short}</p>
 						<div class="mt-4 inline-flex flex-wrap gap-2">
-							<Chips name="github" icon="mdi:github" href={url} target="_blank" />
+							<Button label="github" icon="mdi:github" href={url} target="_blank" />
 						</div>
 					</CardContent>
 				</Card>

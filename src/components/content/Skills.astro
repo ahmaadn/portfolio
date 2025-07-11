@@ -1,28 +1,13 @@
 ---
+import { SKILLS } from "@/config";
 import Chips from "../Chips.astro";
 import BaseContent from "./BaseContent.astro";
 ---
 
-<BaseContent id="skills" title="Tech Stack">
+<BaseContent id="skills" title="Tech Stack" background-text="Tech Stack">
 	<div class="space-y-4">
-		<div>
-			<h1 class="mb-4 text-2xl font-normal dark:text-white">Frontend</h1>
-			<div class="inline-flex w-full flex-wrap items-center gap-3 py-2">
-				<Chips name="Astro" icon="simple-icons:astro" />
-				<Chips name="Vue" icon="logos:vue" />
-				<Chips name="TailwindCSS" icon="logos:tailwindcss-icon" />
-				<Chips name="Typescript" icon="logos:typescript-icon" />
-				<Chips name="Laravel" icon="logos:laravel" />
-				<Chips name="Bootstrap" icon="logos:bootstrap" />
-			</div>
-		</div>
-		<div>
-			<h1 class="mb-4 text-2xl font-normal dark:text-white">Backend</h1>
-			<div class="inline-flex w-full flex-wrap items-center gap-3 py-2">
-				<Chips name="Python" icon="logos:python" />
-				<Chips name="Fastapi" icon="logos:fastapi-icon" />
-				<Chips name="PHP" icon="logos:php" />
-			</div>
+		<div class="inline-flex w-full flex-wrap items-center gap-3 py-2">
+			{SKILLS.map(({ name, icon }) => <Chips name={name} icon={icon} />)}
 		</div>
 	</div>
 </BaseContent>

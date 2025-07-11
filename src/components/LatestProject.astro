@@ -1,22 +1,12 @@
 ---
-import { PROJECTS } from "@/config";
-import Badge from "./Badge.astro";
-
-const { className = "" } = Astro.props;
-
-let latestProject = PROJECTS.filter((project) => project?.latest || false)[0] || PROJECTS[0];
+const { project, class: className = "" } = Astro.props;
 ---
 
 <div class:list={["flex", className]}>
 	<div class="flex flex-col gap-y-4 lg:max-w-lg">
 		<div class="">
-			<a href={latestProject.url} target="_blank" class="link text-lg font-semibold"
-				>{latestProject.name}</a
-			>
-			<p class="text-sm">{latestProject.desc.short}</p>
-		</div>
-		<div class="inline-flex flex-wrap gap-4">
-			{latestProject.tags.map((tag) => <Badge>{tag}</Badge>)}
+			<a href={project.url} target="_blank" class="link text-lg font-semibold">{project.name}</a>
+			<p class="text-sm">{project.desc.short}</p>
 		</div>
 	</div>
 </div>

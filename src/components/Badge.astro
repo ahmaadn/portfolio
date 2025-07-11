@@ -8,6 +8,10 @@ interface Props {
 const { class: className = "" } = Astro.props;
 ---
 
-<span class={cn("badge", className)}>
+<span
+	class={cn(
+		"rounded-sm bg-main px-3 py-0.5 text-center text-xs font-medium text-content capitalize border-border border shadow shadow-highlight",
+		className
+	)}>
 	<slot />
 </span>

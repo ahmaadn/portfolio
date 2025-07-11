@@ -1,7 +1,7 @@
 ---
+import { EDUCATION } from "@/config";
 import Icon from "astro-iconify";
 import BaseContent from "./BaseContent.astro";
-import { EDUCATION } from "@/config";
 ---
 
 <BaseContent
@@ -12,22 +12,21 @@ import { EDUCATION } from "@/config";
 	<ol class="w-full space-y-12 overflow-hidden">
 		{
 			EDUCATION.map((edu) => (
-				<li class="relative flex-1 after:absolute after:-bottom-11 after:left-4 after:inline-block after:h-full after:w-0.5 after:bg-blue-600 after:content-[''] lg:after:left-5 dark:after:bg-orange-600">
+				<li class="after:bg-primary relative flex-1 after:absolute after:-bottom-11 after:left-4 after:inline-block after:h-full after:w-0.5 after:content-[''] lg:after:left-5">
 					<div class="flex w-full items-start font-medium">
-						<span class="mr-8 flex aspect-square h-8 w-8 items-center justify-center rounded-full border-2 border-transparent bg-blue-600 text-sm text-white lg:h-10 lg:w-10 dark:bg-orange-600">
+						<span class="bg-primary mr-8 flex aspect-square h-8 w-8 items-center justify-center rounded-full border-2 border-transparent text-sm text-white lg:h-10 lg:w-10">
 							<Icon name="mdi:education-outline" class="h-6 w-6 md:h-7 md:w-7" />
 						</span>
 						<div class="block w-full space-y-2">
-							<div class="flex flex-col gap-y-2 md:flex-row md:items-center md:justify-between">
-								<h4 class="text-xl font-bold text-black dark:text-white">
-									{edu.institute}
-								</h4>
-								<span>
+							<div>
+								<time class="text-sm/none font-medium">
 									{edu.from} - {edu.to}
-								</span>
+								</time>
+
+								<h3 class="text-content mt-1 text-2xl font-bold">{edu.institute}</h3>
+								<p class="mt-2 text-base">{edu.location}</p>
+								<p class="text-base">{edu.course}</p>
 							</div>
-							<p class="text-sm text-blue-600 dark:text-orange-600">{edu.location}</p>
-							<p class="">{edu.course}</p>
 						</div>
 					</div>
 				</li>

@@ -1,42 +1,23 @@
 ---
-import Layout from "@/layouts/layout.astro";
-import SiteHeading from "@/components/SiteHeading.astro";
-import { SITE } from "@/config";
-import Heading from "@/components/Heading.astro";
 import About from "@/components/content/About.astro";
-import Header from "@/components/header/Header.astro";
 import Educations from "@/components/content/Educations.astro";
-import Skills from "@/components/content/Skills.astro";
 import Project from "@/components/content/Project.astro";
+import Skills from "@/components/content/Skills.astro";
 import Footer from "@/components/Footer.astro";
+import HomeHeading from "@/components/HomeHeading.astro";
+import { SITE } from "@/config";
+import Layout from "@/layouts/layout.astro";
 ---
 
 <Layout title="me" description={SITE.shortDercription}>
 	<div class="relative overflow-x-hidden">
-		<SiteHeading>
-			<Header />
-			<Heading />
-		</SiteHeading>
+		<HomeHeading />
 		<main class="mt-40 mb-20 min-h-screen w-full space-y-20 md:mt-44 md:space-y-24">
 			<About />
 			<Skills />
 			<Educations />
 			<Project />
-			<Footer mail="ahmadnr415@gmail.com" />
+			<Footer mail={SITE.email} />
 		</main>
-		<div class="border-t border-neutral-200 dark:border-neutral-700">
-			<div class="container mx-auto max-w-7xl">
-				<div
-					class="flex w-full flex-col py-4 text-center text-sm md:flex-row md:justify-between">
-					<p>
-						© {new Date().getFullYear()}
-						{SITE.author} | All rights reserved.
-					</p>
-					<p class="mt-2">
-						Theme inspired by <a href="https://firebase.blog/" class="link">firebase blog</a>
-					</p>
-				</div>
-			</div>
-		</div>
 	</div>
 </Layout>
