@@ -12,6 +12,6 @@ const { label, url, icon, class: className = "", ...extra } = Astro.props;
 		className
 	)}
 	{...extra}>
-	<Icon name={icon} width="16" height="16" />
+	{icon && <Icon name={icon} width="16" height="16" />}
 	<span class="blend text-sm capitalize">{label}</span>
 </a>
