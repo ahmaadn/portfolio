@@ -1,13 +1,16 @@
 ---
-
+const { backgroundText = "" } = Astro.props;
 ---
 
 <div>
 	<div class="absolute top-28 -z-10 md:left-24">
-		<p
-			class="dark:text-content-muted/70 text-content-muted text-[15rem] font-bold select-none md:text-[20rem]">
-			Porfolio
-		</p>
+		{
+			backgroundText && (
+				<p class="dark:text-content-muted/70 text-content-muted text-[15rem] font-bold select-none md:text-[20rem]">
+					{backgroundText}
+				</p>
+			)
+		}
 	</div>
 	<div
 		class="bg-primary absolute -top-[360px] -left-[275px] -z-10 h-[980px] w-[2000px] rotate-[350deg] md:h-[1000px] md:opacity-80 dark:md:opacity-60">
