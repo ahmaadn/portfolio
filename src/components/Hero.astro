@@ -1,28 +1,14 @@
 ---
-import { LINKS, SITE } from "@/config";
-import Button from "./Button.astro";
+import { SITE } from "@/config";
 ---
 
 <div class="flex flex-col gap-y-4 md:max-w-3xl md:gap-y-6">
 	<p class="flex items-end text-2xl font-medium md:text-4xl">Hello</p>
 	<h1 class="text-4xl font-bold capitalize md:text-6xl">I'm {SITE.author}</h1>
-	<div class="space-y-8 md:h-32">
+	<div class="space-y-8">
 		<p class="text-lg">
 			{SITE.shortDercription}
 		</p>
-
-		<div class="sosial-links inline-flex gap-4 text-sm">
-			{
-				LINKS.map(({ label, url, icon, ...extra }) => (
-					<Button
-						label={label}
-						url={url}
-						icon={icon}
-						class="border-primary-content hover:bg-neutral hover:border-neutral hover:text-neutral-content text-content shadow-none"
-						{...extra}
-					/>
-				))
-			}
-		</div>
 	</div>
+	<slot />
 </div>

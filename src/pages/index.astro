@@ -7,6 +7,7 @@ import Skills from "@/components/content/Skills.astro";
 import Footer from "@/components/Footer.astro";
 import Hero from "@/components/Hero.astro";
 import LatestProject from "@/components/LatestProject.astro";
+import Links from "@/components/Links.astro";
 import SiteHeading from "@/components/SiteHeading.astro";
 import { PROJECTS, SITE } from "@/config";
 import Layout from "@/layouts/layout.astro";
@@ -16,7 +17,11 @@ let latestProject = PROJECTS.filter((project) => project?.latest || false)[0] ||
 
 <Layout title="me" description={SITE.shortDercription}>
 	<SiteHeading id="site-heading">
-		<Hero />
+		<Hero>
+			<Links
+				class="border-primary-content hover:bg-neutral hover:border-neutral hover:text-neutral-content text-content shadow-none"
+			/>
+		</Hero>
 		<div class="mt-14 flex flex-col gap-y-2 md:mt-20">
 			<p class="text-2xl font-medium">Latest Project</p>
 			<LatestProject project={latestProject} />

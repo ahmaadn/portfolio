@@ -2,13 +2,13 @@
 import { cn } from "@/lib/utils";
 import Header from "./Header.astro";
 
-const { class: className = "", ...extra } = Astro.props;
+const { class: className = "", id = "post-heading" } = Astro.props;
 ---
 
-<div class={cn("container max-w-7xl", className)} {...extra}>
+<div class="container max-w-7xl" id={id}>
 	<div class="h-full w-full">
 		<Header />
-		<div class="mt-6 md:mt-12">
+		<div class={cn("mt-6 md:mt-12", className)}>
 			<slot />
 		</div>
 	</div>
