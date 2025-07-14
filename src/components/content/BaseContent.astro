@@ -12,7 +12,9 @@ const { id, title, class: className = "", "background-text": backgoundText = "" 
 	{
 		backgoundText && (
 			<div class="absolute top-0 left-0 -z-10 md:left-32">
-				<p class="text-main/70 text-[15rem] font-bold select-none">{backgoundText}</p>
+				<p class="text-main-dark/70 dark:text-content-muted/10 text-[15rem] font-bold select-none">
+					{backgoundText}
+				</p>
 			</div>
 		)
 	}
