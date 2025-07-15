@@ -1,5 +1,5 @@
 ---
-title: Frontend Kasir Apotek
+title: Kasir Apotek
 tags:
   - Vue
   - Tailwind
