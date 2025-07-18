@@ -13,10 +13,14 @@ import { SITE } from "@/config";
 import Layout from "@/layouts/layout.astro";
 import { getCollection } from "astro:content";
 
-const allProject = await getCollection("projects");
+const allProject = (await getCollection("projects")).sort(
+	(a, b) => new Date(b.data.date) - new Date(a.data.date)
+);
 
 let latestProject =
 	allProject.filter((project) => project.data.latest || false)[0] || allProject[0];
+
+let newProjects = allProject.slice(0, 3).map((project) => project.data);
 ---
 
 <Layout title="me" description={SITE.shortDercription}>
@@ -36,7 +40,7 @@ let latestProject =
 		<About />
 		<Skills />
 		<Educations />
-		<Project />
+		<Project projects={newProjects} />
 		<Footer mail={SITE.email} />
 	</main>
 </Layout>

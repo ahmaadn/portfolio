@@ -6,7 +6,9 @@ import { SITE } from "@/config";
 import Layout from "@/layouts/layout.astro";
 import { getCollection } from "astro:content";
 
-const allprojects = await getCollection("projects");
+const allprojects = (await getCollection("projects")).sort(
+	(a, b) => new Date(b.data.date) - new Date(a.data.date)
+);
 ---
 
 <Layout title="me" description={SITE.shortDercription}>
