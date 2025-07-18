@@ -9,10 +9,18 @@ import Hero from "@/components/Hero.astro";
 import LatestProject from "@/components/LatestProject.astro";
 import Links from "@/components/Links.astro";
 import SiteHeading from "@/components/SiteHeading.astro";
-import { PROJECTS, SITE } from "@/config";
+import { SITE } from "@/config";
 import Layout from "@/layouts/layout.astro";
+import { getCollection } from "astro:content";
 
-let latestProject = PROJECTS.filter((project) => project?.latest || false)[0] || PROJECTS[0];
+const allProject = (await getCollection("projects")).sort(
+	(a, b) => new Date(b.data.date) - new Date(a.data.date)
+);
+
+let latestProject =
+	allProject.filter((project) => project.data.latest || false)[0] || allProject[0];
+
+let newProjects = allProject.slice(0, 3).map((project) => project.data);
 ---
 
 <Layout title="me" description={SITE.shortDercription}>
@@ -24,7 +32,7 @@ let latestProject = PROJECTS.filter((project) => project?.latest || false)[0] ||
 		</Hero>
 		<div class="mt-14 flex flex-col gap-y-2 md:mt-20">
 			<p class="text-2xl font-medium">Latest Project</p>
-			<LatestProject project={latestProject} />
+			<LatestProject project={latestProject.data} />
 		</div>
 		<BackgoundSquare backgroundText="Portfolio" />
 	</SiteHeading>
@@ -32,7 +40,7 @@ let latestProject = PROJECTS.filter((project) => project?.latest || false)[0] ||
 		<About />
 		<Skills />
 		<Educations />
-		<Project />
+		<Project projects={newProjects} />
 		<Footer mail={SITE.email} />
 	</main>
 </Layout>
