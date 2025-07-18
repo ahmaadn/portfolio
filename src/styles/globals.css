@@ -94,6 +94,22 @@ body {
 	@apply decoration-2 hover:underline;
 }
 
+#site-heading {
+	@apply text-primary-content;
+}
+
 #site-heading #menu-right {
 	@apply divide-primary-content/20;
+}
+
+#post-heading .menu-item {
+	@apply hover:text-content text-content-muted;
+}
+
+#post-heading .menu-brand {
+	@apply text-content;
+}
+
+#site-heading .sosial-links a {
+	@apply border-primary-content hover:bg-neutral hover:border-neutral hover:text-neutral-content text-content shadow-none;
 }
