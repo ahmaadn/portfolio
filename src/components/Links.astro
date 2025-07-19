@@ -1,18 +1,18 @@
 ---
 import { LINKS } from "@/config";
-import { Icon } from "astro-iconify";
+import Button from "./Button.astro";
+
+interface Props {
+	class?: string;
+}
+
+const { class: className = "" } = Astro.props;
 ---
 
-<div class="sosial-links inline-flex gap-4 text-sm">
+<div class="group-link inline-flex gap-4 text-sm">
 	{
 		LINKS.map(({ label, url, icon, ...extra }) => (
-			<a
-				href={url}
-				class="blend group border-border flex w-fit items-center gap-2 rounded-full border px-4 py-1 transition-colors"
-				{...extra}>
-				<Icon name={icon} width="16" height="16" />
-				<span class="blend text-sm capitalize">{label}</span>
-			</a>
+			<Button label={label} url={url} icon={icon} class={className} {...extra} />
 		))
 	}
 </div>

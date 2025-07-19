@@ -1,23 +1,100 @@
 ---
-import About from "@/components/content/About.astro";
-import Educations from "@/components/content/Educations.astro";
-import Project from "@/components/content/Project.astro";
-import Skills from "@/components/content/Skills.astro";
+import Avatar from "@/components/Avatar.astro";
+import BackgoundSquare from "@/components/BackgoundSquare.astro";
+import BaseContent from "@/components/BaseContent.astro";
+import Chips from "@/components/Chips.astro";
 import Footer from "@/components/Footer.astro";
-import HomeHeading from "@/components/HomeHeading.astro";
-import { SITE } from "@/config";
+import LatestProject from "@/components/LatestProject.astro";
+import Links from "@/components/Links.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import SiteHeading from "@/components/SiteHeading.astro";
+import { EDUCATION, SITE, SKILLS } from "@/config";
 import Layout from "@/layouts/layout.astro";
+import Icon from "astro-iconify";
+import { getCollection } from "astro:content";
+
+const allProject = (await getCollection("projects")).sort(
+	(a, b) => new Date(b.data.date) - new Date(a.data.date)
+);
+
+let latestProject =
+	allProject.filter((project) => project.data.latest || false)[0] || allProject[0];
+
+let newProjects = allProject.slice(0, 3).map((project) => project.data);
 ---
 
-<Layout title="me" description={SITE.shortDercription}>
-	<div class="relative overflow-x-hidden">
-		<HomeHeading />
-		<main class="mt-40 mb-20 min-h-screen w-full space-y-20 md:mt-44 md:space-y-24">
-			<About />
-			<Skills />
-			<Educations />
-			<Project />
-			<Footer mail={SITE.email} />
-		</main>
-	</div>
+<Layout title="me" description={SITE.shortDescription}>
+	<SiteHeading id="site-heading">
+		<div class="md:max-w-3xl">
+			<p class="mb-2 flex items-end text-2xl font-medium md:text-4xl">Hello</p>
+			<h1 class="mb-4 text-4xl font-bold capitalize md:text-6xl">I'm {SITE.author}</h1>
+			<p class="mb-10 text-lg">
+				{SITE.shortDescription}
+			</p>
+			<Links
+				class="border-primary-content hover:bg-neutral hover:border-neutral hover:text-neutral-content text-content shadow-none"
+			/>
+		</div>
+		<div class="mt-14 flex flex-col gap-y-2 md:mt-20">
+			<p class="text-2xl font-medium">Latest Project</p>
+			<LatestProject project={latestProject.data} />
+		</div>
+		<BackgoundSquare background-text="Portfolio" />
+	</SiteHeading>
+	<main class="mt-40 mb-20 min-h-screen w-full space-y-20 md:mt-44 md:space-y-24">
+		<BaseContent id="me" title="About me" background-text="About me">
+			<div class="flex flex-col gap-y-8 md:flex-row">
+				<Avatar />
+				<div class="space-y-4 md:text-lg">
+					{SITE.description.map((desc) => <p>{desc}</p>)}
+				</div>
+			</div>
+		</BaseContent>
+		<BaseContent id="skills" title="Tech Stack" background-text="Tech Stack">
+			<div class="space-y-4">
+				<div class="inline-flex w-full flex-wrap items-center gap-3 py-2">
+					{SKILLS.map(({ name, icon }) => <Chips name={name} icon={icon} />)}
+				</div>
+			</div>
+		</BaseContent>
+		<BaseContent
+			id="education"
+			title="Education"
+			background-text="Education"
+			class="flex flex-col md:flex-row md:gap-x-16">
+			<ol class="w-full space-y-12 overflow-hidden">
+				{
+					EDUCATION.map((edu) => (
+						<li class="after:bg-primary relative flex-1 after:absolute after:-bottom-11 after:left-4 after:inline-block after:h-full after:w-0.5 after:content-[''] lg:after:left-5">
+							<div class="flex w-full items-start font-medium">
+								<span class="bg-primary mr-8 flex aspect-square h-8 w-8 items-center justify-center rounded-full border-2 border-transparent text-sm text-white lg:h-10 lg:w-10">
+									<Icon name="mdi:education-outline" class="h-6 w-6 md:h-7 md:w-7" />
+								</span>
+								<div class="block w-full space-y-2">
+									<div>
+										<time class="text-sm/none font-medium">
+											{edu.from} - {edu.to}
+										</time>
+
+										<h3 class="text-content mt-1 text-2xl font-bold">{edu.institute}</h3>
+										<p class="mt-2 text-base">{edu.location}</p>
+										<p class="text-base">{edu.course}</p>
+									</div>
+								</div>
+							</div>
+						</li>
+					))
+				}
+			</ol>
+		</BaseContent>
+		<BaseContent id="project" title="Project" class="relative" background-text="Project">
+			<div class="flex flex-col gap-8 md:grid md:grid-cols-2 lg:grid-cols-3">
+				{
+					newProjects &&
+						newProjects.map((project, index) => <ProjectCard project={project} key={index} />)
+				}
+			</div>
+		</BaseContent>
+		<Footer mail={SITE.email} />
+	</main>
 </Layout>

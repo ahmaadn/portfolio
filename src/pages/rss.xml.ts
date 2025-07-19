@@ -8,7 +8,7 @@ type Context = {
 export async function GET(context: Context) {
 	return rss({
 		title: SITE.title,
-		description: SITE.shortDercription,
+		description: SITE.shortDescription,
 		site: context.site,
 		items: [],
 	});

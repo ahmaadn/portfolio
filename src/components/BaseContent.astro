@@ -1,0 +1,28 @@
+---
+import { cn } from "@/lib/utils";
+
+interface Props {
+	id: string;
+	title: string;
+	class?: string;
+	"background-text"?: string;
+}
+
+const { id, title, class: className = "", "background-text": backgroundText = "" } = Astro.props;
+---
+
+<section class="relative" id={id}>
+	<div class={cn("container max-w-7xl", className)}>
+		<h1 class="text-content mb-8 text-4xl font-bold capitalize">{title}</h1>
+		<slot />
+	</div>
+	{
+		backgroundText && (
+			<div class="absolute top-0 left-0 -z-10 md:left-32">
+				<p class="text-main-dark/70 dark:text-content-muted/10 text-[15rem] font-bold select-none">
+					{backgroundText}
+				</p>
+			</div>
+		)
+	}
+</section>

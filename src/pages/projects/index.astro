@@ -1,0 +1,37 @@
+---
+import BackgoundSquare from "@/components/BackgoundSquare.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import SiteHeading from "@/components/SiteHeading.astro";
+import { SITE } from "@/config";
+import Layout from "@/layouts/layout.astro";
+import { getCollection } from "astro:content";
+
+const allprojects = (await getCollection("projects")).sort(
+	(a, b) => new Date(b.data.date) - new Date(a.data.date)
+);
+---
+
+<Layout title="me" description={SITE.shortDescription}>
+	<SiteHeading id="site-heading">
+		<div class="flex flex-col gap-y-4 md:max-w-3xl md:gap-y-6">
+			<h1 class="text-4xl font-bold capitalize md:text-6xl">Project</h1>
+			<p class="text-lg">Recent projects I have worked on.</p>
+		</div>
+		<div>
+			<BackgoundSquare
+				left-class="bg-primary md:opacity-90 dark:md:opacity-90 md:-top-[500px] -top-[560px] rotate-[357deg]"
+				right={false}
+				background-text="Projects"
+			/>
+		</div>
+	</SiteHeading>
+	<main class="mb-20 min-h-screen w-full space-y-20 md:space-y-24">
+		<div class="container max-w-7xl">
+			<section class="relative">
+				<div class="flex flex-col gap-8 md:grid md:grid-cols-2 lg:grid-cols-3">
+					{allprojects.map(({ data: project }) => <ProjectCard project={project} />)}
+				</div>
+			</section>
+		</div>
+	</main>
+</Layout>

@@ -2,16 +2,24 @@
 import { cn } from "@/lib/utils";
 import { Icon } from "astro-iconify";
 
+interface Props {
+	label: string;
+	url?: string;
+	icon?: string;
+	class?: string;
+	[key: string]: any;
+}
+
 const { label, url, icon, class: className = "", ...extra } = Astro.props;
 ---
 
 <a
 	href={url}
 	class={cn(
-		"blend group border-border flex w-fit items-center gap-2 rounded-full border px-4 py-1 transition-colors text-content-muted hover:text-content shadow-xs shadow-highlight ",
+		"blend group border-border text-content-muted hover:text-content shadow-highlight flex w-fit items-center gap-2 rounded-full border px-4 py-1 shadow-xs transition-colors",
 		className
 	)}
 	{...extra}>
-	<Icon name={icon} width="16" height="16" />
+	{icon && <Icon name={icon} width="16" height="16" />}
 	<span class="blend text-sm capitalize">{label}</span>
 </a>

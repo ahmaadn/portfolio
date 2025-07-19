@@ -7,6 +7,7 @@ export default {
 	trailingComma: "es5",
 	bracketSameLine: true,
 	singleAttributePerLine: false,
+	tailwindFunctions: ["cn"],
 	plugins: [
 		"prettier-plugin-astro",
 		"prettier-plugin-tailwindcss",
