@@ -3,7 +3,7 @@ import BackgoundSquare from "@/components/BackgoundSquare.astro";
 import ProjectCard from "@/components/ProjectCard.astro";
 import SiteHeading from "@/components/SiteHeading.astro";
 import { SITE } from "@/config";
-import Layout from "@/layouts/layout.astro";
+import Layout from "@/layouts/Layout.astro";
 import { getCollection } from "astro:content";
 
 const allprojects = (await getCollection("projects")).sort(
@@ -21,6 +21,7 @@ const allprojects = (await getCollection("projects")).sort(
 			<BackgoundSquare
 				left-class="bg-primary md:opacity-90 dark:md:opacity-90 -top-[500px]"
 				right={false}
+				background-text="Projects"
 			/>
 		</div>
 	</SiteHeading>
@@ -28,7 +29,11 @@ const allprojects = (await getCollection("projects")).sort(
 		<div class="container max-w-7xl">
 			<section class="relative">
 				<div class="flex flex-col gap-8 md:grid md:grid-cols-2 lg:grid-cols-3">
-					{allprojects.map(({ data: project }) => <ProjectCard project={project} />)}
+					{
+						allprojects.map(({ data: project, id }) => (
+							<ProjectCard project={project} id={id} />
+						))
+					}
 				</div>
 			</section>
 		</div>
