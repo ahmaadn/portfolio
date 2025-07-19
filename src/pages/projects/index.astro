@@ -3,7 +3,7 @@ import ProjectsFilter from "@/components/ProjectsFilter.astro";
 import SiteHeading from "@/components/SiteHeading.astro";
 import SkillsTabls from "@/components/SkillsTabls.astro";
 import { SITE } from "@/config";
-import Layout from "@/layouts/layout.astro";
+import Layout from "@/layouts/Layout.astro";
 import { getCollection } from "astro:content";
 const allprojects = (await getCollection("projects"))
 	.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
