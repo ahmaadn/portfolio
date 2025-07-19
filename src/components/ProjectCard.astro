@@ -8,9 +8,9 @@ import CardContent from "./CardContent.astro";
 
 interface Props {
 	project: InferEntrySchema<"projects">;
+	id: string;
 }
-
-const { project } = Astro.props;
+const { project, id } = Astro.props;
 ---
 
 <Card>
@@ -22,7 +22,9 @@ const { project } = Astro.props;
 		/>
 	</div>
 	<CardContent>
-		<h3 class="text-content truncate text-lg font-bold sm:text-xl">{project.title}</h3>
+		<a class="text-content truncate text-lg font-bold sm:text-xl" href={`/projects/${id}`}
+			>{project.title}</a
+		>te ProjectCard and Project pages)
 		<div class="mt-2 inline-flex flex-wrap gap-2">
 			{project.tags.map((tag) => <Badge>{tag}</Badge>)}
 		</div>

@@ -1,15 +1,15 @@
 ---
 import Button from "@/components/Button.astro";
-import type { InferEntrySchema } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 import ProjectCard from "./ProjectCard.astro";
 
 interface Props {
-	projects: InferEntrySchema<"projects">[];
+	projects: CollectionEntry<"projects">[];
 }
 
 const { projects } = Astro.props;
 
-const allTags = [...new Set(projects.flatMap((project) => project.tags))].sort();
+const allTags = [...new Set(projects.flatMap(({ data: project }) => project.tags))].sort();
 
 function createSlug(tag: string): string {
 	return tag.toLowerCase().replace(/[^a-z0-9]/g, "-");
@@ -41,11 +41,11 @@ function createSlug(tag: string): string {
 			id="projects-container"
 			class="flex flex-col gap-8 md:grid md:grid-cols-2 lg:grid-cols-3">
 			{
-				projects.map((project, index) => (
+				projects.map(({ data: project, id }, index) => (
 					<div
 						class="project-item active"
 						data-tags={project.tags.map((tag) => createSlug(tag)).join(",")}>
-						<ProjectCard project={project} />
+						<ProjectCard project={project} id={id} />
 					</div>
 				))
 			}

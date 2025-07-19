@@ -94,6 +94,7 @@ body {
 	@apply decoration-2 hover:underline;
 }
 
+#article-heading,
 #site-heading {
 	@apply text-primary-content;
 }

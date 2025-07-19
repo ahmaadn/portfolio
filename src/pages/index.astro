@@ -21,7 +21,7 @@ const allProject = (await getCollection("projects")).sort(
 let latestProject =
 	allProject.filter((project) => project.data.latest || false)[0] || allProject[0];
 
-let newProjects = allProject.slice(0, 3).map((project) => project.data);
+let newProjects = allProject.slice(0, 3);
 ---
 
 <Layout title="me" description={SITE.shortDescription}>
@@ -110,7 +110,12 @@ let newProjects = allProject.slice(0, 3).map((project) => project.data);
 			background-text="Project"
 			icon-title="ri:bnb-line">
 			<div class="flex flex-col gap-8 md:grid md:grid-cols-2 lg:grid-cols-3">
-				{newProjects && newProjects.map((project, index) => <ProjectCard project={project} />)}
+				{
+					newProjects &&
+						newProjects.map(({ data: project, id }, index) => (
+							<ProjectCard project={project} id={id} />
+						))
+				}
 			</div>
 			<div class="mt-12 flex items-center justify-center">
 				<Button

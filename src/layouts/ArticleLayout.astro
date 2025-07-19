@@ -1,0 +1,48 @@
+---
+import BackgoundSquare from "@/components/BackgoundSquare.astro";
+import Button from "@/components/Button.astro";
+import SiteHeading from "@/components/SiteHeading.astro";
+import Layout from "@/layouts/Layout.astro";
+
+interface Props {
+	title: string;
+	description: string;
+	subtitle?: string;
+	tags?: string[];
+	image: string;
+}
+const { title, description, image, subtitle = "", tags } = Astro.props;
+---
+
+<Layout title={title} description={description} image={image}>
+	<SiteHeading id="article-heading" class="h-[60vh]">
+		<div>
+			{
+				tags && tags.length > 0 && (
+					<div class="mb-2 flex flex-wrap gap-2">
+						{tags.map((tag) => (
+							<Button
+								label={tag}
+								class="border-primary-content hover:bg-neutral hover:border-neutral hover:text-neutral-content text-content shadow-none"
+							/>
+						))}
+					</div>
+				)
+			}
+
+			<h1 class="mb-3 text-4xl font-bold capitalize md:text-6xl">{title}</h1>
+			<p class="mb-6">April 10, 2021</p>
+			<p class="text-lg">{description}</p>
+		</div>
+		<div>
+			<BackgoundSquare
+				left-class="bg-primary md:opacity-90 dark:md:opacity-90 md:-top-[500px] -top-[560px] rotate-[357deg]"
+				right={false}
+				background-text={title || "Article"}
+			/>
+		</div>
+	</SiteHeading>
+	<main class="container min-h-screen w-full max-w-7xl">
+		<slot />
+	</main>
+</Layout>

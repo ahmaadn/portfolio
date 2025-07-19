@@ -5,9 +5,9 @@ import SkillsTabls from "@/components/SkillsTabls.astro";
 import { SITE } from "@/config";
 import Layout from "@/layouts/Layout.astro";
 import { getCollection } from "astro:content";
-const allprojects = (await getCollection("projects"))
-	.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
-	.map((project) => project.data);
+const projects = (await getCollection("projects")).sort(
+	(a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
 ---
 
 <Layout title="me" description={SITE.shortDescription}>
@@ -28,6 +28,6 @@ const allprojects = (await getCollection("projects"))
 	</SiteHeading>
 	<SkillsTabls />
 	<main class="grid-background min-h-screen w-full space-y-20 pt-8 pb-20 md:space-y-24">
-		<ProjectsFilter projects={allprojects} />
+		<ProjectsFilter projects={projects} />
 	</main>
 </Layout>
