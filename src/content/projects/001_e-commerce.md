@@ -2,6 +2,8 @@
 title: E-commerce
 tags:
   - Astro
+  - Vue
+  - Tailwind
   - FastApi
 description: E-commerce ini dibuat menggunakan Astro, FastApi, dan MySQL
 thumbnail: ../../images/project/ecommerce-01.png

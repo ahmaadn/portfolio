@@ -1,12 +1,11 @@
 ---
-title: Kasir Apotek
+title: Frontend Kasir Apotek
 tags:
-  - PHP
-  - Laravel
-  - Bootstrap
-description: Sistem donasi ini dibuat menggunakan Laravel, dan Bootstrap
+  - Vue
+  - Tailwind
+description: Website kasir Apotek ini dibuat menggunakan Vue dan Tailwind CSS.
 thumbnail: ../../images/project/kasir-apotek-01.png
 latest: true
-url: https://github.com/ahmaadn/sistem-donasi-laravel
+url: https://github.com/ahmaadn/frontend-kasir-apotek-vuejs
 date: "2024-05-23"
 ---
