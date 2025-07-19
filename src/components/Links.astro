@@ -2,6 +2,10 @@
 import { LINKS } from "@/config";
 import Button from "./Button.astro";
 
+interface Props {
+	class?: string;
+}
+
 const { class: className = "" } = Astro.props;
 ---
 

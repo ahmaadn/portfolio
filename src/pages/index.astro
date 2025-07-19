@@ -23,13 +23,13 @@ let latestProject =
 let newProjects = allProject.slice(0, 3).map((project) => project.data);
 ---
 
-<Layout title="me" description={SITE.shortDercription}>
+<Layout title="me" description={SITE.shortDescription}>
 	<SiteHeading id="site-heading">
 		<div class="md:max-w-3xl">
 			<p class="mb-2 flex items-end text-2xl font-medium md:text-4xl">Hello</p>
 			<h1 class="mb-4 text-4xl font-bold capitalize md:text-6xl">I'm {SITE.author}</h1>
 			<p class="mb-10 text-lg">
-				{SITE.shortDercription}
+				{SITE.shortDescription}
 			</p>
 			<Links
 				class="border-primary-content hover:bg-neutral hover:border-neutral hover:text-neutral-content text-content shadow-none"

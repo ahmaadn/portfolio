@@ -1,5 +1,11 @@
 ---
 import { Icon } from "astro-iconify";
+
+interface Props {
+	name: string;
+	icon: string;
+	[key: string]: any;
+}
 const { name, icon } = Astro.props;
 ---
 

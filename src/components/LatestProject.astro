@@ -1,4 +1,11 @@
 ---
+import type { InferEntrySchema } from "astro:content";
+
+interface Props {
+	project: InferEntrySchema<"projects">;
+	class?: string;
+}
+
 const { project, class: className = "" } = Astro.props;
 ---
 
