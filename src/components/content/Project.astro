@@ -1,10 +1,10 @@
 ---
-import type { InferEntrySchema } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 import ProjectCard from "../ProjectCard.astro";
 import BaseContent from "./BaseContent.astro";
 
 type Props = {
-	projects: InferEntrySchema<"projects">[];
+	projects: CollectionEntry<"projects">[];
 };
 
 const { projects } = Astro.props;
@@ -12,6 +12,6 @@ const { projects } = Astro.props;
 
 <BaseContent id="project" title="Project" class="relative" background-text="Project">
 	<div class="flex flex-col gap-8 md:grid md:grid-cols-2 lg:grid-cols-3">
-		{projects && projects.map((project, index) => <ProjectCard project={project} key={index} />)}
+		{projects && projects.map((project, index) => <ProjectCard project={project.data} id={project.id} />)}
 	</div>
 </BaseContent>
