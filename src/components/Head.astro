@@ -1,0 +1,57 @@
+---
+import { SITE } from "@/config";
+import "@/styles/globals.css";
+import { SEO } from "astro-seo";
+
+interface Props {
+	title?: string;
+	class?: string;
+	description?: string;
+	image?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<SEO
+	charset="UTF-8"
+	title={title}
+	titleDefault={SITE.title}
+	titleTemplate={SITE.title + " - %s"}
+	description={description}
+	extend={{
+		link: [{ rel: "icon", href: "/favicon.svg" }],
+		meta: [{ name: "viewport", content: "width=device-width" }],
+	}}
+	openGraph={{
+		basic: {
+			title: SITE.title,
+			type: "website",
+			image: "images/profile_pict_3.jpg",
+		},
+		optional: {
+			description: description,
+		},
+	}}
+/>
+<slot name="head" />
+<meta name="generator" content={Astro.generator} />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+	href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap"
+	rel="stylesheet"
+/>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D3JY72DTCB"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag() {
+		dataLayer.push(arguments);
+	}
+	gtag("js", new Date());
+	gtag("config", "G-D3JY72DTCB");
+</script>
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<slot />
