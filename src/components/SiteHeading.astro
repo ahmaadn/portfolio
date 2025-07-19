@@ -2,6 +2,11 @@
 import { cn } from "@/lib/utils";
 import Header from "./Header.astro";
 
+interface Props {
+	class?: string;
+	id?: string;
+}
+
 const { class: className = "", id = "post-heading" } = Astro.props;
 ---
 

@@ -1,9 +1,14 @@
 ---
 import { Image } from "astro:assets";
+import type { InferEntrySchema } from "astro:content";
 import Badge from "./Badge.astro";
 import Button from "./Button.astro";
 import Card from "./Card.astro";
 import CardContent from "./CardContent.astro";
+
+interface Props {
+	project: InferEntrySchema<"projects">;
+}
 
 const { project } = Astro.props;
 ---
