@@ -1,15 +1,16 @@
 ---
+import Avatar from "@/components/Avatar.astro";
 import BackgoundSquare from "@/components/BackgoundSquare.astro";
-import About from "@/components/content/About.astro";
-import Educations from "@/components/content/Educations.astro";
-import Project from "@/components/content/Project.astro";
-import Skills from "@/components/content/Skills.astro";
+import BaseContent from "@/components/BaseContent.astro";
+import Chips from "@/components/Chips.astro";
 import Footer from "@/components/Footer.astro";
 import LatestProject from "@/components/LatestProject.astro";
 import Links from "@/components/Links.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
 import SiteHeading from "@/components/SiteHeading.astro";
-import { SITE } from "@/config";
+import { EDUCATION, SITE, SKILLS } from "@/config";
 import Layout from "@/layouts/layout.astro";
+import Icon from "astro-iconify";
 import { getCollection } from "astro:content";
 
 const allProject = (await getCollection("projects")).sort(
@@ -41,10 +42,59 @@ let newProjects = allProject.slice(0, 3).map((project) => project.data);
 		<BackgoundSquare background-text="Portfolio" />
 	</SiteHeading>
 	<main class="mt-40 mb-20 min-h-screen w-full space-y-20 md:mt-44 md:space-y-24">
-		<About />
-		<Skills />
-		<Educations />
-		<Project projects={newProjects} />
+		<BaseContent id="me" title="About me" background-text="About me">
+			<div class="flex flex-col gap-y-8 md:flex-row">
+				<Avatar />
+				<div class="space-y-4 md:text-lg">
+					{SITE.description.map((desc) => <p>{desc}</p>)}
+				</div>
+			</div>
+		</BaseContent>
+		<BaseContent id="skills" title="Tech Stack" background-text="Tech Stack">
+			<div class="space-y-4">
+				<div class="inline-flex w-full flex-wrap items-center gap-3 py-2">
+					{SKILLS.map(({ name, icon }) => <Chips name={name} icon={icon} />)}
+				</div>
+			</div>
+		</BaseContent>
+		<BaseContent
+			id="education"
+			title="Education"
+			background-text="Education"
+			class="flex flex-col md:flex-row md:gap-x-16">
+			<ol class="w-full space-y-12 overflow-hidden">
+				{
+					EDUCATION.map((edu) => (
+						<li class="after:bg-primary relative flex-1 after:absolute after:-bottom-11 after:left-4 after:inline-block after:h-full after:w-0.5 after:content-[''] lg:after:left-5">
+							<div class="flex w-full items-start font-medium">
+								<span class="bg-primary mr-8 flex aspect-square h-8 w-8 items-center justify-center rounded-full border-2 border-transparent text-sm text-white lg:h-10 lg:w-10">
+									<Icon name="mdi:education-outline" class="h-6 w-6 md:h-7 md:w-7" />
+								</span>
+								<div class="block w-full space-y-2">
+									<div>
+										<time class="text-sm/none font-medium">
+											{edu.from} - {edu.to}
+										</time>
+
+										<h3 class="text-content mt-1 text-2xl font-bold">{edu.institute}</h3>
+										<p class="mt-2 text-base">{edu.location}</p>
+										<p class="text-base">{edu.course}</p>
+									</div>
+								</div>
+							</div>
+						</li>
+					))
+				}
+			</ol>
+		</BaseContent>
+		<BaseContent id="project" title="Project" class="relative" background-text="Project">
+			<div class="flex flex-col gap-8 md:grid md:grid-cols-2 lg:grid-cols-3">
+				{
+					newProjects &&
+						newProjects.map((project, index) => <ProjectCard project={project} key={index} />)
+				}
+			</div>
+		</BaseContent>
 		<Footer mail={SITE.email} />
 	</main>
 </Layout>
