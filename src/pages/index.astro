@@ -95,10 +95,12 @@ let newProjects = allProject.slice(0, 3).map((project) => project.data);
 		</BaseContent>
 		<BaseContent id="project" title="Project" class="relative" background-text="Project">
 			<div class="flex flex-col gap-8 md:grid md:grid-cols-2 lg:grid-cols-3">
-				{
-					newProjects &&
-						newProjects.map((project, index) => <ProjectCard project={project} key={index} />)
-				}
+				{newProjects && newProjects.map((project, index) => <ProjectCard project={project} />)}
+			</div>
+			<div class="mt-12 text-center">
+				<a href="/projects" class="link text-primary/80 hover:text-primary"
+					>Lihat semua proyek &rarr;</a
+				>
 			</div>
 		</BaseContent>
 		<Footer mail={SITE.email} />
