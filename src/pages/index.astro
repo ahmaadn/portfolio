@@ -15,7 +15,7 @@ import Icon from "astro-iconify";
 import { getCollection } from "astro:content";
 
 const allProject = (await getCollection("projects")).sort(
-	(a, b) => new Date(b.data.date) - new Date(a.data.date)
+	(a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
 );
 
 let latestProject =
