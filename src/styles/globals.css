@@ -147,3 +147,11 @@ body {
 	content: "";
 	background: var(--rainbow-gradient);
 }
+
+.description {
+	display: -webkit-box;
+	-webkit-line-clamp: 3; /* Tampilkan maksimal 3 baris */
+	line-clamp: 3;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
