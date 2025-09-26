@@ -117,3 +117,33 @@ body {
 #site-heading .sosial-links a {
 	@apply border-primary-content hover:bg-neutral hover:border-neutral hover:text-neutral-content text-content shadow-none;
 }
+
+/* Open for work button with rainbow gradient */
+#open-for-work {
+	--rainbow-gradient: linear-gradient(
+		90deg,
+		var(--error),
+		var(--success),
+		var(--info),
+		hsl(195, 100%, 63%),
+		hsl(270, 100%, 63%)
+	);
+
+	background:
+		linear-gradient(var(--color-main-light), var(--color-main-light)),
+		linear-gradient(var(--color-main-light) 50%, rgba(255, 255, 255, 0.6) 80%, transparent),
+		var(--rainbow-gradient);
+	background-size: 200%;
+}
+
+#open-for-work:where([data-theme="dark"], [data-theme="dark"] *) {
+	background:
+		linear-gradient(var(--color-main-light), var(--color-main-light)),
+		linear-gradient(var(--color-main-light) 50%, rgba(18, 18, 19, 0.6) 80%, transparent),
+		var(--rainbow-gradient);
+}
+
+#open-for-work::before {
+	content: "";
+	background: var(--rainbow-gradient);
+}
