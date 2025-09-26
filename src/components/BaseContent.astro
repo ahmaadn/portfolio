@@ -1,19 +1,32 @@
 ---
 import { cn } from "@/lib/utils";
+import Icon from "astro-iconify";
 
 interface Props {
 	id: string;
 	title: string;
 	class?: string;
 	"background-text"?: string;
+	"icon-title"?: string;
 }
 
-const { id, title, class: className = "", "background-text": backgroundText = "" } = Astro.props;
+const {
+	id,
+	title,
+	class: className = "",
+	"background-text": backgroundText = "",
+	"icon-title": iconTitle = "",
+} = Astro.props;
 ---
 
 <section class="relative" id={id}>
 	<div class={cn("container max-w-7xl", className)}>
-		<h1 class="text-content mb-8 text-4xl font-bold capitalize">{title}</h1>
+		<div>
+			<div class="text-content mb-8 inline-flex h-fit items-center gap-4">
+				{iconTitle && <Icon name={iconTitle} class="h-9 w-9 md:h-11 md:w-11" />}
+				<h1 class="text-4xl font-bold capitalize">{title}</h1>
+			</div>
+		</div>
 		<slot />
 	</div>
 	{
