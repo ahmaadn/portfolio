@@ -98,6 +98,10 @@ body {
 	@apply text-primary-content;
 }
 
+#site-heading .link {
+	@apply text-primary-content/90 hover:text-primary-content;
+}
+
 #site-heading #menu-right {
 	@apply divide-primary-content/20;
 }
