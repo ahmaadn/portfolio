@@ -112,10 +112,14 @@ let newProjects = allProject.slice(0, 3).map((project) => project.data);
 			<div class="flex flex-col gap-8 md:grid md:grid-cols-2 lg:grid-cols-3">
 				{newProjects && newProjects.map((project, index) => <ProjectCard project={project} />)}
 			</div>
-			<div class="mt-12 text-center">
-				<a href="/projects" class="link text-primary/80 hover:text-primary"
-					>Lihat semua proyek &rarr;</a
-				>
+			<div class="mt-12 flex items-center justify-center">
+				<Button
+					as="a"
+					url="/projects"
+					label="Lihat semua proyek"
+					class="hover:bg-primary hover:text-primary-content hover:border-primary text-base font-normal transition-transform duration-300 hover:-translate-y-1"
+					icon="ri:arrow-right-line"
+				/>
 			</div>
 		</BaseContent>
 		<Footer mail={SITE.email} />
