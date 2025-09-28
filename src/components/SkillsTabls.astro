@@ -1,0 +1,26 @@
+---
+import Icon from "astro-iconify";
+
+const skills = [
+	{ name: "Frontend", icon: "ri:macbook-line" },
+	{ name: "Backend", icon: "ri:database-2-line" },
+	{ name: "Mobile", icon: "ri:apps-2-ai-line" },
+	{ name: "Fullstack", icon: "ri:node-tree" },
+];
+---
+
+<div class="border-b-border overflow-hidden border-b">
+	<div class="container max-w-7xl">
+		<div
+			class="scrollbar-hide divide-border flex h-full w-full place-items-center items-center divide-x overflow-x-auto md:grid md:grid-cols-4 md:overflow-visible">
+			{
+				skills.map(({ name, icon }) => (
+					<div class="inline-flex min-w-36 flex-shrink-0 items-center justify-center gap-x-2 leading-none">
+						<Icon name={icon} class="h-5 w-5" />
+						{name}
+					</div>
+				))
+			}
+		</div>
+	</div>
+</div>
