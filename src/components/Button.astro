@@ -7,14 +7,18 @@ interface Props {
 	url?: string;
 	icon?: string;
 	class?: string;
+	as?: "a" | "button";
 	[key: string]: any;
 }
 
-const { label, url, icon, class: className = "", ...extra } = Astro.props;
+const { label, url, icon, class: className = "", as: Element = "a", ...extra } = Astro.props;
+
+// Conditional props based on element type
+const elementProps = Element === "a" ? { href: url } : { type: "button" };
 ---
 
-<a
-	href={url}
+<Element
+	{...elementProps}
 	class={cn(
 		"blend group border-border text-content-muted hover:text-content shadow-highlight flex w-fit items-center gap-2 rounded-full border px-4 py-1 shadow-xs transition-colors",
 		className
@@ -22,4 +26,4 @@ const { label, url, icon, class: className = "", ...extra } = Astro.props;
 	{...extra}>
 	{icon && <Icon name={icon} width="16" height="16" />}
 	<span class="blend text-sm capitalize">{label}</span>
-</a>
+</Element>
