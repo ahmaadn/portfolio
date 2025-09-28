@@ -168,5 +168,5 @@ body {
 	background-image:
 		linear-gradient(oklch(from var(--border) l c h / 0.3) 1px, transparent 1px),
 		linear-gradient(90deg, oklch(from var(--border) l c h / 0.3) 1px, transparent 1px);
-	background-size: 4rem 4rem;
+	background-size: 2rem 2rem;
 }
