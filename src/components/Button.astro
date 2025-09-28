@@ -6,11 +6,30 @@ interface Props {
 	label: string;
 	url?: string;
 	icon?: string;
+	"icon-class"?: string;
+	"icon-left"?: string;
+	"icon-left-class"?: string;
+	"icon-right"?: string;
+	"icon-right-class"?: string;
 	class?: string;
-	[key: string]: any;
+	as?: "a" | "button";
 }
 
-const { label, url, icon, class: className = "", ...extra } = Astro.props;
+const {
+	label,
+	url,
+	icon,
+	"icon-class": iconClass = "h-4 w-4",
+	"icon-left": iconLeft = "",
+	"icon-left-class": iconLeftClass = "h-4 w-4",
+	"icon-right": iconRight,
+	"icon-right-class": iconRightClass = "h-4 w-4",
+	class: className = "",
+	...extra
+} = Astro.props;
+
+const primaryIcon = iconLeft ? iconLeft : icon;
+const primaryIconClass = iconLeftClass ? iconLeftClass : iconClass;
 ---
 
 <a
@@ -20,6 +39,7 @@ const { label, url, icon, class: className = "", ...extra } = Astro.props;
 		className
 	)}
 	{...extra}>
-	{icon && <Icon name={icon} width="16" height="16" />}
+	{primaryIcon && <Icon name={primaryIcon} class={cn(primaryIconClass, "icon-left")} />}
 	<span class="blend text-sm capitalize">{label}</span>
+	{iconRight && <Icon name={iconRight} class={cn(iconRightClass, "icon-right")} />}
 </a>
