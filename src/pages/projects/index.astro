@@ -1,9 +1,9 @@
 ---
 import ProjectsFilter from "@/components/ProjectsFilter.astro";
 import SiteHeading from "@/components/SiteHeading.astro";
+import SkillsTabls from "@/components/SkillsTabls.astro";
 import { SITE } from "@/config";
 import Layout from "@/layouts/layout.astro";
-import Icon from "astro-iconify";
 import { getCollection } from "astro:content";
 const allprojects = (await getCollection("projects"))
 	.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
@@ -26,33 +26,7 @@ const allprojects = (await getCollection("projects"))
 			</div>
 		</section>
 	</SiteHeading>
-	<div class="border-b-border h-14 overflow-hidden border-b">
-		<div class="container max-w-7xl">
-			<div
-				class="scrollbar-hide divide-border flex h-full w-full place-items-center items-center divide-x overflow-x-auto md:grid md:grid-cols-4 md:overflow-visible">
-				<div
-					class="inline-flex min-w-36 flex-shrink-0 items-center justify-center gap-x-2 leading-none">
-					<Icon name="ri:macbook-line" class="h-5 w-5" />
-					Frontend
-				</div>
-				<div
-					class="inline-flex min-w-36 flex-shrink-0 items-center justify-center gap-x-2 leading-none">
-					<Icon name="ri:database-2-line" class="h-5 w-5" />
-					Backend
-				</div>
-				<div
-					class="inline-flex min-w-36 flex-shrink-0 items-center justify-center gap-x-2 leading-none">
-					<Icon name="ri:apps-2-ai-line" class="h-5 w-5" />
-					Mobile
-				</div>
-				<div
-					class="inline-flex min-w-36 flex-shrink-0 items-center justify-center gap-x-2 leading-none">
-					<Icon name="ri:node-tree" class="h-5 w-5" />
-					Fullstack
-				</div>
-			</div>
-		</div>
-	</div>
+	<SkillsTabls />
 	<main class="grid-background min-h-screen w-full space-y-20 pt-8 pb-20 md:space-y-24">
 		<ProjectsFilter projects={allprojects} />
 	</main>
