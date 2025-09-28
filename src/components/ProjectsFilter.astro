@@ -1,0 +1,116 @@
+---
+import Button from "@/components/Button.astro";
+import type { InferEntrySchema } from "astro:content";
+import ProjectCard from "./ProjectCard.astro";
+
+interface Props {
+	projects: InferEntrySchema<"projects">[];
+}
+
+const { projects } = Astro.props;
+
+const allTags = [...new Set(projects.flatMap((project) => project.tags))].sort();
+
+function createSlug(tag: string): string {
+	return tag.toLowerCase().replace(/[^a-z0-9]/g, "-");
+}
+---
+
+<div class="container max-w-7xl">
+	<div class="mb-12 flex flex-wrap justify-center gap-2 md:gap-4">
+		<Button
+			as="button"
+			data-filter="all"
+			label="All"
+			class="filter-btn bg-main text-content-muted [&.active]:text-primary-content/80 [&.active]:hover:text-primary-content [&.active]:bg-primary active border-border ho hover:bg-primary hover:text-primary-content border-none py-2 text-sm font-semibold shadow-none"
+		/>
+
+		{
+			allTags.map((tag) => (
+				<Button
+					as="button"
+					data-filter={createSlug(tag)}
+					label={tag}
+					class="filter-btn bg-main text-content-muted [&.active]:text-primary-content/80 [&.active]:hover:text-primary-content [&.active]:bg-primary border-border ho hover:bg-primary hover:text-primary-content border-none py-2 text-sm font-semibold shadow-none"
+				/>
+			))
+		}
+	</div>
+	<section class="relative">
+		<div
+			id="projects-container"
+			class="flex flex-col gap-8 md:grid md:grid-cols-2 lg:grid-cols-3">
+			{
+				projects.map((project, index) => (
+					<div
+						class="project-item active"
+						data-tags={project.tags.map((tag) => createSlug(tag)).join(",")}>
+						<ProjectCard project={project} />
+					</div>
+				))
+			}
+		</div>
+	</section>
+</div>
+
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		const filterButtons = document.querySelectorAll(".filter-btn");
+		const projectItems = document.querySelectorAll(".project-item");
+
+		// Fungsi untuk mengaktifkan/menonaktifkan button
+		function setActiveButton(activeButton) {
+			filterButtons.forEach((btn) => {
+				btn.classList.remove("bg-yellow-500", "dark:bg-purple-600", "text-white", "active");
+			});
+			activeButton.classList.add("active");
+		}
+
+		// Fungsi untuk filter projects
+		function filterProjects(category) {
+			projectItems.forEach((item) => {
+				const itemTags = item.getAttribute("data-tags") || "";
+
+				if (category === "all") {
+					// Tampilkan semua project
+					// item.classList.remove("hidden", "opacity-0");
+					item.classList.add("active");
+				} else {
+					// Filter berdasarkan tag yang dipilih
+					const shouldShow = itemTags.toLowerCase().includes(category);
+
+					if (shouldShow) {
+						// item.classList.remove("hidden", "opacity-0");
+						item.classList.add("active");
+					} else {
+						item.classList.remove("active");
+						// item.classList.add("hidden");
+					}
+				}
+			});
+		}
+
+		// Event listener untuk setiap filter button
+		filterButtons.forEach((button) => {
+			button.addEventListener("click", function () {
+				const filter = this.getAttribute("data-filter");
+				if (filter) {
+					setActiveButton(this);
+					filterProjects(filter);
+				}
+			});
+		});
+	});
+</script>
+
+<style>
+	.project-item.active {
+		display: block;
+		opacity: 100;
+	}
+
+	.project-item {
+		display: none;
+		opacity: 0;
+	}
+</style>
