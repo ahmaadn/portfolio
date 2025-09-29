@@ -9,12 +9,11 @@ interface Props {
 	description: string;
 	subtitle?: string;
 	tags?: string[];
-	image: string;
 }
-const { title, description, image, subtitle = "", tags } = Astro.props;
+const { title, description, subtitle = "", tags } = Astro.props;
 ---
 
-<Layout title={title} description={description} image={image}>
+<Layout title={title} description={description}>
 	<SiteHeading id="article-heading" class="h-[60vh]">
 		<div>
 			{
