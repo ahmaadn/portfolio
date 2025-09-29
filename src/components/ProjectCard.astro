@@ -22,9 +22,13 @@ const { project, id } = Astro.props;
 		/>
 	</div>
 	<CardContent>
-		<a class="text-content truncate text-lg font-bold sm:text-xl" href={`/projects/${id}`}
-			>{project.title}</a
-		>te ProjectCard and Project pages)
+		<div>
+			<a
+				class="text-content link truncate text-lg font-bold sm:text-xl"
+				href={`/projects/${id}`}>
+				{project.title}
+			</a>
+		</div>
 		<div class="mt-2 inline-flex flex-wrap gap-2">
 			{project.tags.map((tag) => <Badge>{tag}</Badge>)}
 		</div>
