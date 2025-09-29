@@ -45,4 +45,5 @@ const elementProps = Element === "a" ? { href: url } : { type: "button" };
 	{...extra}>
 	{primaryIcon && <Icon name={primaryIcon} class={cn(primaryIconClass, "icon-left")} />}
 	<span class="blend text-sm capitalize">{label}</span>
+	{iconRight && <Icon name={iconRight} class={cn(iconRightClass, "icon-right")} />}
 </Element>
