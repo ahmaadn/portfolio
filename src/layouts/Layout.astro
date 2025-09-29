@@ -1,6 +1,7 @@
 ---
 import Head from "@/components/Head.astro";
 import { SITE } from "@/config";
+import { cn } from "@/lib/utils";
 import "@/styles/globals.css";
 
 interface Props {
@@ -9,7 +10,7 @@ interface Props {
 	description?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, class: className = "" } = Astro.props;
 ---
 
 <html lang="en" class="scroll-smooth">
@@ -17,10 +18,8 @@ const { title, description } = Astro.props;
 		<Head title={title} description={description} />
 		<slot name="head" />
 	</head>
-	<body>
-		<div class="relative overflow-x-hidden">
-			<slot />
-		</div>
+	<body class={cn("overflow-x-hidden", className)}>
+		<slot />
 		<div class="border-border border-t">
 			<div class="container mx-auto max-w-7xl">
 				<div
