@@ -148,10 +148,25 @@ body {
 	background: var(--rainbow-gradient);
 }
 
+.scrollbar-hide {
+	scrollbar-width: none;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
 .description {
 	display: -webkit-box;
-	-webkit-line-clamp: 3; /* Tampilkan maksimal 3 baris */
+	-webkit-line-clamp: 3;
 	line-clamp: 3;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
+}
+
+.grid-background {
+	background-image:
+		linear-gradient(oklch(from var(--border) l c h / 0.3) 1px, transparent 1px),
+		linear-gradient(90deg, oklch(from var(--border) l c h / 0.3) 1px, transparent 1px);
+	background-size: 2rem 2rem;
 }

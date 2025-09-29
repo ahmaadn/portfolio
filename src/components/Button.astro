@@ -25,15 +25,19 @@ const {
 	"icon-right": iconRight,
 	"icon-right-class": iconRightClass = "h-4 w-4",
 	class: className = "",
+	as: Element = "a",
 	...extra
 } = Astro.props;
 
 const primaryIcon = iconLeft ? iconLeft : icon;
 const primaryIconClass = iconLeftClass ? iconLeftClass : iconClass;
+
+// Conditional props based on element type
+const elementProps = Element === "a" ? { href: url } : { type: "button" };
 ---
 
-<a
-	href={url}
+<Element
+	{...elementProps}
 	class={cn(
 		"blend group border-border text-content-muted hover:text-content shadow-highlight flex w-fit items-center gap-2 rounded-full border px-4 py-1 shadow-xs transition-colors",
 		className
@@ -42,4 +46,4 @@ const primaryIconClass = iconLeftClass ? iconLeftClass : iconClass;
 	{primaryIcon && <Icon name={primaryIcon} class={cn(primaryIconClass, "icon-left")} />}
 	<span class="blend text-sm capitalize">{label}</span>
 	{iconRight && <Icon name={iconRight} class={cn(iconRightClass, "icon-right")} />}
-</a>
+</Element>
