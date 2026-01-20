@@ -1,0 +1,108 @@
+---
+
+---
+
+<details class="catalog" open>
+	<summary class="catalog-title mb-4 text-lg font-semibold"> Catalog </summary>
+	<div class="catalog-content text-sm">
+		<ul id="catalog-list" class="catalog-list space-y-1"></ul>
+	</div>
+</details>
+
+<script is:inline>
+	document.addEventListener("DOMContentLoaded", function () {
+		const article = document.querySelector("article");
+		const catalogList = document.getElementById("catalog-list");
+
+		if (!article || !catalogList) return;
+
+		// Ambil semua heading (h1-h6) dari artikel
+		const headings = article.querySelectorAll("h1, h2, h3, h4, h5, h6");
+
+		if (headings.length === 0) {
+			// Sembunyikan catalog jika tidak ada heading
+			document.querySelector(".catalog").parentElement.style.display = "none";
+			return;
+		}
+
+		// Generate ID untuk setiap heading jika belum ada
+		headings.forEach((heading, index) => {
+			if (!heading.id) {
+				heading.id = `heading-${index + 1}`;
+			}
+		});
+
+		// Build catalog structure
+		let catalogHTML = "";
+		let currentLevel = 0;
+		let openLists = [];
+
+		headings.forEach((heading) => {
+			const level = parseInt(heading.tagName.charAt(1)); // h1 = 1, h2 = 2, etc.
+			const text = heading.textContent;
+			const id = heading.id;
+
+			// Determine nesting
+			if (level > currentLevel && level > 2) {
+				catalogHTML += '<li><ul class="ml-4 mt-1">';
+				openLists.push("</ul></li>");
+			} else if (level < currentLevel) {
+				// Close nested lists
+				const diff = currentLevel - level;
+				for (let i = 0; i < diff; i++) {
+					catalogHTML += openLists.pop() || "";
+				}
+			}
+
+			// Add catalog item
+			const itemClass = getCatalogItemClass(level);
+			catalogHTML += `
+                <li>
+                    <a href="#${id}" class="catalog-item ${itemClass}">
+                        ${text}
+                    </a>
+                </li>
+            `;
+
+			currentLevel = level;
+		});
+
+		// Close any remaining open lists
+		while (openLists.length > 0) {
+			catalogHTML += openLists.pop();
+		}
+
+		catalogList.innerHTML = catalogHTML;
+
+		// Add smooth scroll behavior
+		document.querySelectorAll(".catalog-item").forEach((link) => {
+			link.addEventListener("click", function (e) {
+				e.preventDefault();
+				const targetId = this.getAttribute("href").substring(1);
+				const target = document.getElementById(targetId);
+				if (target) {
+					target.scrollIntoView({
+						behavior: "smooth",
+						block: "start",
+					});
+				}
+			});
+		});
+	});
+
+	function getCatalogItemClass(level) {
+		switch (level) {
+			case 1:
+				return `bg-primary/10 text-primary font-semibold`;
+			case 2:
+				return `text-content hover:bg-border/50 hover:text-content`;
+			case 3:
+			case 4:
+			case 5:
+			case 6:
+				return `text-content-muted hover:bg-border/30 hover:text-content text-xs`;
+			default:
+				return `text-content-muted hover:bg-border/30 hover:text-content`;
+		}
+	}
+</script>

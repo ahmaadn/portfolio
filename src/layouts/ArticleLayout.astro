@@ -1,6 +1,7 @@
 ---
 import BackgoundSquare from "@/components/BackgoundSquare.astro";
 import Button from "@/components/Button.astro";
+import CatalogList from "@/components/CatalogList.astro";
 import SiteHeading from "@/components/SiteHeading.astro";
 import Layout from "@/layouts/Layout.astro";
 
@@ -13,35 +14,66 @@ interface Props {
 const { title, description, subtitle = "", tags } = Astro.props;
 ---
 
-<Layout title={title} description={description}>
-	<SiteHeading id="article-heading" class="h-[60vh]">
+<Layout title={title} description={description} class="grid-background">
+	<SiteHeading id="article-heading">
 		<div>
-			{
-				tags && tags.length > 0 && (
-					<div class="mb-2 flex flex-wrap gap-2">
-						{tags.map((tag) => (
-							<Button
-								label={tag}
-								class="border-primary-content hover:bg-neutral hover:border-neutral hover:text-neutral-content text-content shadow-none"
-							/>
-						))}
+			<section class="relative overflow-hidden">
+				<div class="mx-auto h-80 py-8 md:h-90">
+					{
+						tags && tags.length > 0 && (
+							<div class="mb-8 flex flex-wrap gap-2">
+								{tags.map((tag) => (
+									<Button
+										as="button"
+										label={tag}
+										class="border-primary-content hover:bg-neutral hover:border-neutral hover:text-neutral-content text-content shadow-none"
+									/>
+								))}
+							</div>
+						)
+					}
+					<div class="relative mx-auto">
+						<h1
+							class="mb-2 text-4xl font-extrabold text-gray-900 md:text-6xl dark:text-white">
+							{title}
+						</h1>
+						<p class="mb-4 text-lg">
+							{description}
+						</p>
+						<p class="mb-6 italic">April 10, 2021</p>
 					</div>
-				)
-			}
-
-			<h1 class="mb-3 text-4xl font-bold capitalize md:text-6xl">{title}</h1>
-			<p class="mb-6">April 10, 2021</p>
-			<p class="text-lg">{description}</p>
+				</div>
+			</section>
 		</div>
-		<div>
-			<BackgoundSquare
-				left-class="bg-primary md:opacity-90 dark:md:opacity-90 md:-top-[500px] -top-[560px] rotate-[357deg]"
-				right={false}
-				background-text={title || "Article"}
-			/>
-		</div>
+		<BackgoundSquare
+			left-class="-top-[500px] rotate-[356deg]"
+			right-class="-top-[500px] rotate-[15deg]"
+		/>
 	</SiteHeading>
-	<main class="container min-h-screen w-full max-w-7xl">
-		<slot />
-	</main>
+	<div class="relative h-full">
+		<div class="absolute inset-0 -z-10 container flex max-w-7xl items-start justify-start">
+			<p class="text-main-dark/60 dark:text-content-muted/5 text-[15rem] font-bold select-none">
+				{title}
+			</p>
+		</div>
+		<main class="relative container w-full max-w-7xl">
+			<div>
+				<div class="relative mx-auto max-w-screen-xl py-8">
+					<div class="grid grid-cols-1 gap-4 md:grid-cols-10 md:gap-8">
+						<div class="relative md:col-span-6">
+							<article
+								class="prose prose-neutral prose-base dark:prose-invert prose-hr:border-border max-w-none">
+								<slot />
+							</article>
+						</div>
+						<div class="sticky top-4 hidden self-start md:col-span-2 md:col-start-8 md:block">
+							<div class="top-4 h-fit">
+								<CatalogList />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
 </Layout>

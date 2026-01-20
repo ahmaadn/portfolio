@@ -17,6 +17,7 @@
     "@astrojs/vercel": "^8.2.1",
     "@tailwindcss/vite": "^4.1.11",
     "astro": "^5.11.0",
+    "astro-expressive-code": "^0.41.3",
     "astro-iconify": "^1.2.0",
     "astro-seo": "^0.8.4",
     "clsx": "^2.1.1",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@iconify/json": "^2.2.355",
+    "@tailwindcss/typography": "^0.5.19",
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",
     "prettier-plugin-astro-organize-imports": "^0.4.11",

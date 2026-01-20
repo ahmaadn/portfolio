@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@plugin "@tailwindcss/typography";
+
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @utility container {
@@ -61,7 +63,7 @@
 
 @theme {
 	--font-sans: "Onest", sans-serif;
-	--font-mono: "Geist Mono";
+	--font-mono: "JetBrains Mono";
 
 	--color-main-dark: var(--main-dark);
 	--color-main: var(--main);
@@ -170,4 +172,36 @@ body {
 		linear-gradient(oklch(from var(--border) l c h / 0.3) 1px, transparent 1px),
 		linear-gradient(90deg, oklch(from var(--border) l c h / 0.3) 1px, transparent 1px);
 	background-size: 2rem 2rem;
+}
+
+summary::-webkit-details-marker {
+	display: none;
+}
+
+summary::marker {
+	display: none;
+}
+
+.catalog-title {
+	@apply relative cursor-pointer list-none pl-6;
+
+	&::before {
+		@apply absolute top-0 left-0 text-xl font-bold content-['+'];
+	}
+}
+
+.catalog[open] > .catalog-title::before {
+	@apply content-['-'];
+}
+
+.catalog-item {
+	@apply block rounded px-4 py-2 text-sm font-medium transition-colors;
+}
+
+.catalog-item:hover {
+	@apply text-content bg-border/50;
+}
+
+.catalog-list ul {
+	@apply border-border ml-2 border-l pl-2;
 }
