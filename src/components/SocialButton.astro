@@ -1,0 +1,23 @@
+---
+import Icon from "astro-iconify";
+
+interface Props {
+	href: string;
+	title: string;
+	icon: string;
+}
+
+const { href, title, icon } = Astro.props;
+---
+
+<a
+	class="group flex items-center justify-center rounded-none border border-transparent bg-gray-900 p-4 text-white shadow-xl transition-all hover:border-white/20 hover:bg-black"
+	href={href}
+	title={title}>
+	<div>
+		<Icon
+			name={icon}
+			class="text-neutral h-7 w-7 bg-white transition-transform group-hover:scale-110"
+		/>
+	</div>
+</a>

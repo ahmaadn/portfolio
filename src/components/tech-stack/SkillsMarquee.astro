@@ -1,0 +1,24 @@
+---
+interface Props {
+	class?: string;
+	speed?: number; // Duration in seconds for one complete cycle
+	direction?: "left" | "right";
+}
+
+const { class: className = "", speed = 30, direction = "left" } = Astro.props;
+---
+
+<div
+	class:list={[
+		"marquee relative overflow-hidden border-y border-white/10 bg-white/5 py-6 lg:py-12",
+		className,
+	]}
+	data-speed={speed}
+	data-direction={direction}>
+	<div class="marquee-track flex items-center gap-12 whitespace-nowrap">
+		<div class="marquee-content flex shrink-0 items-center gap-12">
+			<slot />
+		</div>
+		<!-- Duplicate content will be added by JS for seamless loop -->
+	</div>
+</div>

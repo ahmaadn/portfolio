@@ -1,0 +1,21 @@
+---
+interface Props {
+	from: string;
+	to: string;
+	isCurrent?: boolean;
+	class?: string;
+}
+
+const { from, to, isCurrent = false, class: className = "" } = Astro.props;
+---
+
+<div
+	class:list={[
+		"h-fit w-fit flex-shrink-0 border-2 px-4 py-2 text-lg font-black",
+		isCurrent
+			? "bg-primary border-black text-black"
+			: "dark:bg-surface-dark border-black bg-gray-200 text-black dark:border-white/20 dark:text-white",
+		className,
+	]}>
+	[ {from} - {to} ]
+</div>

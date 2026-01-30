@@ -1,0 +1,23 @@
+---
+import Tag from "@/components/Tag.astro";
+import SectionTitle from "../SectionTitle.astro";
+
+interface Props {
+	tag?: string;
+	title: string;
+	class?: string;
+}
+
+const { tag, title, class: className = "" } = Astro.props;
+---
+
+<div class:list={["flex flex-col justify-center", className]}>
+	<div class="mb-8">
+		{tag && <Tag text={tag} />}
+		<SectionTitle text={title} />
+	</div>
+	<div
+		class="prose prose-xl dark:prose-invert text-content-subtle max-w-none space-y-6 text-xl font-medium">
+		<slot />
+	</div>
+</div>

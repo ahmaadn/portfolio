@@ -1,0 +1,20 @@
+---
+interface Props {
+	label: string;
+	value: string;
+	class?: string;
+}
+
+const { label, value, class: className = "" } = Astro.props;
+---
+
+<div
+	class:list={[
+		"border border-black/10 bg-black/5 p-4 dark:border-white/10 dark:bg-white/5",
+		className,
+	]}>
+	<span class="mb-1 block text-[10px] opacity-50">{label}</span>
+	<p class="text-lg font-bold text-gray-700 dark:text-gray-300">
+		<Fragment set:html={value} />
+	</p>
+</div>

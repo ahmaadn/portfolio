@@ -1,0 +1,26 @@
+---
+import Icon from "astro-iconify";
+
+interface Props {
+	name: string;
+	icon: string;
+	class?: string;
+}
+
+const { name, icon, class: className = "" } = Astro.props;
+---
+
+<div
+	class:list={[
+		"group flex items-center space-x-4 opacity-70 transition-colors duration-300 hover:opacity-100",
+		className,
+	]}>
+	<Icon
+		alt={name}
+		class="h-10 w-10 grayscale invert transition-colors duration-300 group-hover:filter-none"
+		name={icon}
+	/>
+	<span class="text-xl font-black tracking-tighter text-white uppercase lg:text-2xl">
+		{name}
+	</span>
+</div>

@@ -28,6 +28,7 @@ export const EDUCATION: Education[] = [
 		institute: "Institut Teknologi Garut",
 		course: "Teknik Informatika",
 		location: "Garut, Jawa Barat",
+		isCurrent: true,
 	},
 	{
 		from: "2019",
@@ -38,7 +39,7 @@ export const EDUCATION: Education[] = [
 	},
 ];
 
-export const SKILLS: Skill[] = [
+export const 	SKILLS: Skill[] = [
 	{ name: "Python", icon: "logos:python" },
 	{ name: "pyTorch", icon: "logos:pytorch-icon" },
 	{ name: "Jupyter", icon: "logos:jupyter" },

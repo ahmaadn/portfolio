@@ -1,0 +1,36 @@
+---
+import SectionTitle from "@/components/SectionTitle.astro";
+import Tag from "@/components/Tag.astro";
+
+interface Props {
+	id?: string;
+	tag?: string;
+	title?: string;
+	description?: string;
+	class?: string;
+}
+
+const {
+	id = "contact",
+	tag = "Comm/Sync/Channel_Listen",
+	title = "Get In Touch",
+	description = "Initiate direct connection. Available for collaboration and freelance data solutions.",
+	class: className = "",
+} = Astro.props;
+---
+
+<section class:list={["bg-primary grid-overlay relative w-full py-32", className]} id={id}>
+	<div class="scanline pointer-events-none absolute inset-0 opacity-20"></div>
+	<div class="relative z-10 mx-auto max-w-7xl px-6">
+		<div class="grid grid-cols-1 items-center gap-16 md:grid-cols-12">
+			<div class="md:col-span-6">
+				<Tag text={tag} />
+				<SectionTitle text={title} />
+				<p class="mt-4 max-w-md text-2xl font-bold text-gray-900 opacity-80">
+					{description}
+				</p>
+			</div>
+			<slot />
+		</div>
+	</div>
+</section>

@@ -1,7 +1,4 @@
 ---
-import ProjectsFilter from "@/components/ProjectsFilter.astro";
-import SiteHeading from "@/components/SiteHeading.astro";
-import SkillsTabls from "@/components/SkillsTabls.astro";
 import { SITE } from "@/config";
 import Layout from "@/layouts/layout.astro";
 import { getCollection } from "astro:content";
@@ -11,23 +8,5 @@ const allprojects = (await getCollection("projects"))
 ---
 
 <Layout title="me" description={SITE.shortDescription}>
-	<SiteHeading id="site-heading" class="bg-primary">
-		<section class="relative overflow-hidden">
-			<div class="relative mx-auto h-80 max-w-6xl px-4 py-8 sm:px-6">
-				<div class="relative mx-auto max-w-3xl text-center">
-					<h1 class="mb-4 text-4xl font-extrabold text-gray-900 md:text-6xl dark:text-white">
-						Recent projects I have worked on
-					</h1>
-					<p class="mb-8 text-lg text-gray-600 md:text-xl dark:text-gray-300">
-						Jelajahi kumpulan pekerjaan yang telah saya rancang dan bangun, dari aplikasi web
-						kompleks hingga aplikasi mobile.
-					</p>
-				</div>
-			</div>
-		</section>
-	</SiteHeading>
-	<SkillsTabls />
-	<main class="grid-background min-h-screen w-full space-y-20 pt-8 pb-20 md:space-y-24">
-		<ProjectsFilter projects={allprojects} />
-	</main>
+	<p>Under Contraction</p>
 </Layout>

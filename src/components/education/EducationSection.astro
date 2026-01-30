@@ -1,0 +1,33 @@
+---
+import SectionTitle from "@/components/SectionTitle.astro";
+import Tag from "@/components/Tag.astro";
+
+interface Props {
+	id?: string;
+	tag?: string;
+	title?: string;
+	class?: string;
+}
+
+const {
+	id = "education",
+	tag = "ARCHIVE/HISTORY/LOG_EDUCATION",
+	title = "Education",
+	class: className = "",
+} = Astro.props;
+---
+
+<section
+	class:list={[
+		"dark:bg-background-dark w-full border-b-8 border-black bg-white dark:border-white/10",
+		className,
+	]}
+	id={id}>
+	<div class="mx-auto max-w-7xl px-6">
+		<Tag text={tag} />
+		<SectionTitle text={title} />
+	</div>
+	<div class="w-full font-mono text-sm">
+		<slot />
+	</div>
+</section>

@@ -1,0 +1,28 @@
+---
+import SectionTitle from "@/components/SectionTitle.astro";
+import Tag from "@/components/Tag.astro";
+
+interface Props {
+	id?: string;
+	tag?: string;
+	title?: string;
+	class?: string;
+}
+
+const {
+	id = "projects",
+	tag = "Store/Data/Project_Archive",
+	title = "Project",
+	class: className = "",
+} = Astro.props;
+---
+
+<section id={id} class:list={["py-20", className]}>
+	<div class="mx-auto mb-10 max-w-7xl px-6">
+		<Tag text={tag} />
+		<SectionTitle text={title} />
+	</div>
+	<div class="mx-auto max-w-7xl px-6">
+		<slot />
+	</div>
+</section>

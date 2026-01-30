@@ -1,0 +1,14 @@
+---
+import { cn } from "@/lib/utils";
+
+interface Props {
+	text: string;
+	class?: string;
+}
+
+const { text, class: className = "" } = Astro.props;
+---
+
+<p class={cn("mb-12 max-w-xl text-xl leading-tight font-bold opacity-90 md:text-2xl", className)}>
+	<Fragment set:html={text} />
+</p>

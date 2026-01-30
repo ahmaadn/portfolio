@@ -1,0 +1,40 @@
+---
+interface Props {
+	title?: string;
+	projectCount?: number | string;
+	yearExperience?: number | string;
+}
+
+const { title = "logging", projectCount = 51, yearExperience = 2 } = Astro.props;
+---
+
+<div
+	class="border-neutral/10 bg-neutral/10 mt-12 flex w-32 flex-col overflow-hidden border p-3 shadow-inner backdrop-blur-sm">
+	<div class="text-neutral mb-6 text-[9px] font-bold tracking-tighter uppercase opacity-40">
+		{title}
+	</div>
+	<div class="flex flex-1 flex-col gap-8">
+		<div class="space-y-1">
+			<div class="bg-neutral/20 h-4 w-full"></div>
+			<div class="bg-neutral/10 h-4 w-3/4"></div>
+			<div class="bg-neutral/20 h-4 w-1/2"></div>
+		</div>
+		<div class="space-y-1">
+			<div class="border-neutral/20 flex h-12 items-center justify-center border">
+				<span class="text-neutral/40 text-[10px] font-black">{projectCount} Total Project</span>
+			</div>
+		</div>
+		<div class="space-y-1 opacity-50">
+			<div class="bg-neutral/20 h-4 w-full"></div>
+			<div class="bg-neutral/10 h-4 w-4/5"></div>
+			<div class="bg-neutral/20 h-4 w-3/5"></div>
+			<div class="bg-neutral/30 h-4 w-4/6"></div>
+		</div>
+		<div class="space-y-1">
+			<div class="border-neutral/20 flex h-12 flex-col items-center justify-center border">
+				<span class="text-neutral/40 text-[10px] font-black">{yearExperience}+ Years</span>
+				<span class="text-neutral/40 text-[10px] font-black">Experience</span>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,28 @@
+---
+import Icon from "astro-iconify";
+
+interface Props {
+	topLabel: string;
+	bottomLabel: string;
+	icon?: string;
+}
+
+const { topLabel, bottomLabel, icon = "ri:database-2-line" } = Astro.props;
+---
+
+<div
+	class="flex w-16 flex-col items-center border border-black/5 bg-white/10 py-6 shadow-inner backdrop-blur-sm">
+	<div class="flex h-full flex-col justify-between py-10 opacity-30">
+		<span
+			class="text-[10px] font-black tracking-[0.5em] text-black uppercase [writing-mode:vertical-lr]">
+			{topLabel}
+		</span>
+		<div class="h-32 w-px bg-black/20"></div>
+		<Icon name={icon} class="h-32 text-black" size="20" />
+		<div class="h-32 w-px bg-black/20"></div>
+		<span
+			class="text-[10px] font-black tracking-[0.5em] text-black uppercase [writing-mode:vertical-lr]">
+			{bottomLabel}
+		</span>
+	</div>
+</div>

@@ -1,0 +1,23 @@
+---
+interface Props {
+	institute: string;
+	status?: "current" | "archive";
+	class?: string;
+}
+
+const { institute, status = "archive", class: className = "" } = Astro.props;
+
+const statusConfig = {
+	current: { label: "INFO:", color: "text-green-500" },
+	archive: { label: "ARCHIVE:", color: "text-blue-500" },
+};
+
+const { label, color } = statusConfig[status];
+---
+
+<div class:list={["mb-2 flex items-center gap-2", className]}>
+	<span class:list={["font-bold", color]}>{label}</span>
+	<h3 class="text-2xl font-extrabold tracking-tight text-gray-900 uppercase dark:text-white">
+		{institute}
+	</h3>
+</div>

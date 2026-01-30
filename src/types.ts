@@ -13,6 +13,7 @@ type Education = {
 	institute: string;
 	course: string;
 	location: string;
+	isCurrent?: boolean;
 };
 
 type Link = {
@@ -25,4 +26,12 @@ type Link = {
 type Skill = {
 	name: string;
 	icon: string;
+};
+
+type Project = {
+	title: string;
+	tags: string[];
+	url: string;
+	preview: string;
+	description: string;
 };

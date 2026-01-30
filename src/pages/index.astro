@@ -1,17 +1,29 @@
 ---
+import AboutContent from "@/components/about/AboutContent.astro";
+import AboutSection from "@/components/about/AboutSection.astro";
+import ActionButton from "@/components/ActionButton.astro";
 import Avatar from "@/components/Avatar.astro";
-import BackgoundSquare from "@/components/BackgoundSquare.astro";
-import BaseContent from "@/components/BaseContent.astro";
-import Button from "@/components/Button.astro";
-import Chips from "@/components/Chips.astro";
-import Footer from "@/components/Footer.astro";
-import LatestProject from "@/components/LatestProject.astro";
-import Links from "@/components/Links.astro";
-import ProjectCard from "@/components/ProjectCard.astro";
+import {
+	ContactCard,
+	ContactEmail,
+	ContactLink,
+	ContactLinksGrid,
+	ContactSection,
+} from "@/components/contact";
+import {
+	EducationDateBadge,
+	EducationInfoCard,
+	EducationItem,
+	EducationSection,
+	EducationTitle,
+} from "@/components/education";
+import FrameImage from "@/components/FrameImage.astro";
+import Navbar from "@/components/Navbar.astro";
+import { ProjectArticle, ProjectFooter, ProjectGrid, ProjectSection } from "@/components/projects";
 import SiteHeading from "@/components/SiteHeading.astro";
+import { SkillItem, SkillsMarquee, TechStackSection } from "@/components/tech-stack";
 import { EDUCATION, SITE, SKILLS } from "@/config";
 import Layout from "@/layouts/layout.astro";
-import Icon from "astro-iconify";
 import { getCollection } from "astro:content";
 
 const allProject = (await getCollection("projects")).sort(
@@ -25,103 +37,107 @@ let newProjects = allProject.slice(0, 3).map((project) => project.data);
 ---
 
 <Layout title="me" description={SITE.shortDescription}>
-	<SiteHeading id="site-heading">
-		<div class="md:max-w-3xl">
-			<Button
-				label="Open for work"
-				url="/#contact"
-				id="open-for-work"
-				class="ring-offset-background focus-visible:ring-ring group animate-rainbow text-foreground before:animate-rainbow relative mb-4 inline-flex cursor-pointer items-center justify-center rounded-full border-0 bg-[length:200%] px-6 font-medium whitespace-nowrap transition-colors transition-transform duration-200 [border:calc(0.08*1rem)_solid_transparent] before:absolute before:bottom-[-20%] before:left-1/2 before:z-[0] before:h-[20%] before:w-[60%] before:-translate-x-1/2 before:[filter:blur(calc(0.8*1rem))] hover:scale-105 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
-				icon-right="ri:arrow-right-line"
-			/>
-			<h1 class="mb-4 text-4xl font-bold capitalize md:text-6xl">I'm {SITE.author}</h1>
-			<p class="mb-10 text-lg">
-				{SITE.shortDescription}
-			</p>
-			<Links
-				class="border-primary-content hover:bg-neutral hover:border-neutral hover:text-neutral-content text-content shadow-none"
-			/>
-		</div>
-		<div class="mt-14 flex flex-col gap-y-2 md:mt-20">
-			<p class="text-2xl font-medium">Latest Project</p>
-			<LatestProject project={latestProject.data} />
-		</div>
-		<BackgoundSquare background-text="Portfolio" />
-	</SiteHeading>
-	<main class="mt-40 mb-20 min-h-screen w-full space-y-20 md:mt-44 md:space-y-24">
-		<BaseContent
-			id="me"
-			title="About me"
-			background-text="About me"
-			icon-title="ri:compasses-2-line">
-			<div class="flex flex-col gap-y-8 md:flex-row">
-				<Avatar />
-				<div class="space-y-4 md:text-lg">
-					{SITE.description.map((desc) => <p>{desc}</p>)}
+	<Navbar class="text-neutral" />
+	<SiteHeading name={SITE.author} description={SITE.shortDescription} />
+	<main>
+		<AboutSection id="about">
+			<div
+				class="border-border-strong scanline flex items-center justify-center border-b py-12 md:col-span-5 md:border-r md:border-b-0 lg:justify-end">
+				<div class="max-w-[530px] px-12">
+					<FrameImage label="IMG_REF_01">
+						<Avatar
+							alt={SITE.author}
+							class="h-full w-full object-cover grayscale transition-all duration-300 hover:filter-none"
+						/>
+					</FrameImage>
 				</div>
 			</div>
-		</BaseContent>
-		<BaseContent
-			id="skills"
-			title="Tech Stack"
-			background-text="Tech Stack"
-			icon-title="ri:code-s-slash-line">
-			<div class="space-y-4">
-				<div class="inline-flex w-full flex-wrap items-center gap-3 py-2">
-					{SKILLS.map(({ name, icon }) => <Chips name={name} icon={icon} />)}
+			<div class="bg-main flex items-center md:col-span-7">
+				<div class="max-w-[762px] p-12">
+					<AboutContent tag="Section/Bio/Info_01" title="About Me">
+						{SITE.description.map((desc) => <p>{desc}</p>)}
+					</AboutContent>
 				</div>
 			</div>
-		</BaseContent>
-		<BaseContent
-			id="education"
-			title="Education"
-			background-text="Education"
-			class="flex flex-col md:flex-row md:gap-x-16"
-			icon-title="ri:school-line">
-			<ol class="w-full space-y-12 overflow-hidden">
-				{
-					EDUCATION.map((edu) => (
-						<li class="after:bg-primary relative flex-1 after:absolute after:-bottom-11 after:left-4 after:inline-block after:h-full after:w-0.5 after:content-[''] lg:after:left-5">
-							<div class="flex w-full items-start font-medium">
-								<span class="bg-primary mr-8 flex aspect-square h-8 w-8 items-center justify-center rounded-full border-2 border-transparent text-sm text-white lg:h-10 lg:w-10">
-									<Icon name="mdi:education-outline" class="h-6 w-6 md:h-7 md:w-7" />
-								</span>
-								<div class="block w-full space-y-2">
-									<div>
-										<time class="text-sm/none font-medium">
-											{edu.from} - {edu.to}
-										</time>
-
-										<h3 class="text-content mt-1 text-2xl font-bold">{edu.institute}</h3>
-										<p class="mt-2 text-base">{edu.location}</p>
-										<p class="text-base">{edu.course}</p>
-									</div>
-								</div>
+		</AboutSection>
+		<TechStackSection id="tech-stack" tag="Systems/Core/Stack_Registry" title="Tech Stack">
+			<SkillsMarquee>
+				{SKILLS.map(({ name, icon }) => <SkillItem name={name} icon={icon} />)}
+			</SkillsMarquee>
+		</TechStackSection>
+		<EducationSection class="py-20">
+			{
+				EDUCATION.map((edu) => (
+					<EducationItem class="md:grid md:grid-cols-[1fr_70%] lg:grid-cols-[1fr_80%]">
+						<div class="col-span-1">
+							<EducationDateBadge from={edu.from} to={edu.to} isCurrent={edu.isCurrent} />
+						</div>
+						<div class="flex-grow md:contents">
+							<EducationTitle
+								slot="title"
+								institute={edu.institute}
+								status={edu?.isCurrent ? "current" : "archive"}
+								class="col-span-1 col-start-2"
+							/>
+							<div class="col-span-1 col-start-2 grid grid-cols-1 gap-4 md:grid-cols-2">
+								<EducationInfoCard label="PROGRAM_OF_STUDY" value={edu.course} />
+								<EducationInfoCard label="NODE_LOCATION" value={edu.location} />
 							</div>
-						</li>
+						</div>
+					</EducationItem>
+				))
+			}
+		</EducationSection>
+		<ProjectSection class="scanline border-b-8 border-black">
+			<ProjectGrid>
+				{
+					newProjects.map((project, index) => (
+						<ProjectArticle
+							entryId={`ENTRY_${String(index + 1).padStart(2, "0")}`}
+							title={project.title}
+							description={project.description}
+							techStack={project.tags.join(" | ")}
+							codeUrl={project.url}
+						/>
 					))
 				}
-			</ol>
-		</BaseContent>
-		<BaseContent
-			id="project"
-			title="Project"
-			class="relative"
-			background-text="Project"
-			icon-title="ri:bnb-line">
-			<div class="flex flex-col gap-8 md:grid md:grid-cols-2 lg:grid-cols-3">
-				{newProjects && newProjects.map((project, index) => <ProjectCard project={project} />)}
-			</div>
-			<div class="mt-12 flex items-center justify-center">
-				<Button
-					as="a"
-					url="/projects"
-					label="Lihat semua proyek"
-					class="hover:bg-primary hover:text-primary-content hover:border-primary text-base font-normal transition-transform duration-300 hover:scale-105"
-					icon-right="ri:arrow-right-line"
-				/>
-			</div>
-		</BaseContent>
-		<Footer mail={SITE.email} />
+			</ProjectGrid>
+			<ProjectFooter>
+				<ActionButton href="/projects" icon="ri:terminal-box-line" text="Access_All_Files" />
+			</ProjectFooter>
+		</ProjectSection>
+		<ContactSection
+			tag="Comm/Sync/Channel_Listen"
+			title="Get In Touch"
+			description="Initiate direct connection. Available for collaboration and freelance data solutions.">
+			<ContactCard>
+				<ContactEmail email="ahmadnur415@gmail.com" />
+				<ContactLinksGrid>
+					<ContactLink label="Git_Node" href="#" text="//GITHUB.COM/AHMAADN" />
+					<ContactLink label="Identity_File" href="#" text="//GET_RESUME.PDF" />
+					<ContactLink label="Network_Socket" href="#" text="//LINKEDIN.COM/IN/AHMAADN" />
+				</ContactLinksGrid>
+			</ContactCard>
+		</ContactSection>
 	</main>
+	<footer
+		class="dark:bg-background-dark border-t border-gray-200 bg-white py-8 dark:border-gray-800">
+		<div
+			class="mx-auto flex max-w-7xl flex-col items-center justify-between px-6 text-sm text-gray-500 md:flex-row dark:text-gray-400">
+			<div class="flex items-center gap-4">
+				<span class="text-xl font-black tracking-tighter text-gray-900 dark:text-white"
+					>AN.</span
+				>
+				<p>© 2025 Ahmad Nur Sahid | All rights reserved.</p>
+			</div>
+			<div class="mt-6 flex gap-8 md:mt-0">
+				<p class="font-mono text-[10px] tracking-widest uppercase opacity-50">
+					VERIFIED_IDENTITY: 0xF72A1
+				</p>
+				<p class="font-mono text-[10px] tracking-widest uppercase opacity-50">
+					BUILD_STAMP: 20250131
+				</p>
+			</div>
+		</div>
+	</footer>
 </Layout>

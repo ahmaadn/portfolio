@@ -1,0 +1,30 @@
+---
+import { cn } from "@/lib/utils";
+
+interface Props {
+	text: string;
+	class?: string;
+	theme?: "light" | "dark" | "auto";
+}
+
+const { text, class: className = "", theme = "auto" } = Astro.props;
+
+let classes: string[] = [];
+if (theme === "auto") {
+	// classes.push("dark:text-white");
+	classes = ["bg-neutral text-primary dark:bg-primary dark:text-primary-content"];
+} else if (theme === "dark") {
+	classes = ["bg-neutral text-primary"];
+} else {
+	classes = ["bg-primary text-primary-content"];
+}
+---
+
+<div
+	class={cn(
+		"text-primary mb-6 inline-block bg-black px-3 py-1 text-[10px] font-black tracking-widest uppercase",
+		className,
+		...classes
+	)}>
+	{text}
+</div>

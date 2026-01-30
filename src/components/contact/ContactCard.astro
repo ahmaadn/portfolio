@@ -1,0 +1,30 @@
+---
+interface Props {
+	remoteAddr?: string;
+	statusText?: string;
+	class?: string;
+}
+
+const {
+	remoteAddr = "127.0.0.1",
+	statusText = "ESTABLISHING_SECURE_CONNECTION...",
+	class: className = "",
+} = Astro.props;
+---
+
+<div
+	class:list={[
+		"dark:bg-surface-dark relative bg-black p-8 font-mono text-white md:col-span-6 md:p-12 dark:border-gray-800",
+		className,
+	]}>
+	<div class="absolute top-4 right-4 text-[10px] text-gray-400">
+		REMOTE_ADDR: {remoteAddr}
+	</div>
+	<div class="space-y-8">
+		<slot />
+	</div>
+	<div class="mt-12 flex items-center justify-between text-[9px] text-gray-400 dark:text-gray-600">
+		<span>{statusText}</span>
+		<span class="animate-pulse">_</span>
+	</div>
+</div>

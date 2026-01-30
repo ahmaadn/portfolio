@@ -1,20 +1,76 @@
 ---
-import { cn } from "@/lib/utils";
-import Header from "./Header.astro";
+import ActionButton from "./ActionButton.astro";
+import MetricsCard from "./card/MetricsCard.astro";
+import ProjectStreamCard from "./card/ProjectStreamCard.astro";
+import Tag from "./Tag.astro";
+import TickerBar from "./TickerBar.astro";
+import {
+	HeroDescription,
+	HeroGrid,
+	HeroHeader,
+	HeroLeftContent,
+	HeroRightPanel,
+	HeroTitle,
+} from "./ui/hero";
+import VerticalInfoBar from "./VerticalInfoBar.astro";
+
+const projects = [
+	{
+		tag: "PROJECT_TAG",
+		title: "Real-time Fraud Detection System",
+		description:
+			"High-throughput pipeline using Kafka and Scikit-learn to detect anomalies in < 200ms.",
+	},
+	{
+		tag: "PROJECT_TAG",
+		title: "Real-time Fraud Detection System",
+		description: "High-throughput pipeline using Kafka and Scikit-learn.",
+	},
+	{
+		tag: "PROJECT_TAG",
+		title: "Real-time Fraud Detection System",
+	},
+];
+
+const tickerItems = [
+	{
+		label: "Latest Project",
+		title: "Real-time Fraud Detection System",
+		meta: "KAFKA + SCIKIT-LEARN + FASTAPI_CLUSTER — LATENCY < 200MS",
+	},
+	{
+		label: "Latest Project",
+		title: "Real-time Fraud Detection System",
+		meta: "KAFKA + SCIKIT-LEARN + FASTAPI_CLUSTER — LATENCY < 200MS",
+	},
+];
 
 interface Props {
-	class?: string;
-	id?: string;
+	name: string;
+	description: string;
 }
 
-const { class: className = "", id = "post-heading" } = Astro.props;
+const { name, description } = Astro.props;
 ---
 
-<div id={id} class={cn(className)}>
-	<div class="container h-full w-full max-w-7xl">
-		<Header />
-		<div class="mt-6 md:mt-12">
-			<slot />
-		</div>
-	</div>
-</div>
+<HeroHeader class="bg-primary">
+	<HeroGrid>
+		<HeroLeftContent>
+			<Tag theme="dark" text="Root/Identity/Node_01" />
+			<HeroTitle class="text-neutral" greeting="I'm" name={name} />
+			<HeroDescription class="text-neutral" text={description} />
+			<div class="flex flex-wrap items-center gap-4">
+				<ActionButton href="/resume.pdf" icon="ri:file-text-line" text="Download_Resume" />
+			</div>
+		</HeroLeftContent>
+
+		<HeroRightPanel class="hidden lg:flex">
+			<ProjectStreamCard projects={projects} />
+			<MetricsCard projectCount={10} yearExperience={2} />
+			<VerticalInfoBar topLabel="DATA_SCIENCE" bottomLabel="BACKEND_ENGINEER" />
+		</HeroRightPanel>
+	</HeroGrid>
+
+	<!-- Ticker Bar -->
+	<TickerBar items={tickerItems} />
+</HeroHeader>

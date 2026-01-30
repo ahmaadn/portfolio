@@ -1,0 +1,28 @@
+---
+import SectionTitle from "@/components/SectionTitle.astro";
+import Tag from "@/components/Tag.astro";
+
+interface Props {
+	id?: string;
+	tag?: string;
+	title?: string;
+	class?: string;
+}
+
+const {
+	id = "tech-stack",
+	tag = "Systems/Core/Stack_Registry",
+	title = "Tech Stack",
+	class: className = "",
+} = Astro.props;
+---
+
+<section
+	class:list={["w-full overflow-hidden border-b border-white/10 bg-black py-20", className]}
+	id={id}>
+	<div class="mx-auto mb-16 max-w-7xl px-6">
+		<Tag text={tag} theme="light" />
+		<SectionTitle text={title} class="text-white" />
+	</div>
+	<slot />
+</section>

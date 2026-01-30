@@ -1,0 +1,45 @@
+---
+/**
+ * Test file for Contact Section components
+ */
+import ContactCard from "../ContactCard.astro";
+import ContactEmail from "../ContactEmail.astro";
+import ContactLink from "../ContactLink.astro";
+import ContactLinksGrid from "../ContactLinksGrid.astro";
+import ContactSection from "../ContactSection.astro";
+
+const contactLinks = [
+	{
+		label: "Git_Node",
+		href: "https://github.com/ahmaadn",
+		text: "//GITHUB.COM/AHMAADN",
+	},
+	{
+		label: "Identity_File",
+		href: "/resume.pdf",
+		text: "//GET_RESUME.PDF",
+	},
+	{
+		label: "Network_Socket",
+		href: "https://linkedin.com/in/ahmaadn",
+		text: "//LINKEDIN.COM/IN/AHMAADN",
+	},
+];
+---
+
+<ContactSection
+	id="contact"
+	tag="Comm/Sync/Channel_Listen"
+	title="Get In Touch"
+	description="Initiate direct connection. Available for collaboration and freelance data solutions.">
+	<ContactCard remoteAddr="127.0.0.1" statusText="ESTABLISHING_SECURE_CONNECTION...">
+		<ContactEmail email="ahmadnur415@gmail.com" />
+		<ContactLinksGrid>
+			{
+				contactLinks.map((link) => (
+					<ContactLink label={link.label} href={link.href} text={link.text} />
+				))
+			}
+		</ContactLinksGrid>
+	</ContactCard>
+</ContactSection>

@@ -1,12 +1,13 @@
 ---
 import profile_pict from "@/images/me.jpg";
 import { Image } from "astro:assets";
+
+interface Props {
+	alt: string;
+	class?: string;
+}
+
+const { alt, class: className = "" } = Astro.props;
 ---
 
-<div class="inline-flex w-full items-center justify-center">
-	<Image
-		src={profile_pict}
-		alt="Ahmad nur sahid"
-		class="w-56 overflow-hidden rounded-tr-3xl rounded-bl-3xl md:w-64"
-	/>
-</div>
+<Image src={profile_pict} alt={alt} class={className} />

@@ -1,0 +1,18 @@
+---
+import { cn } from "@/lib/utils";
+
+interface Props {
+	greeting?: string;
+	name: string;
+	class?: string;
+}
+
+const { greeting = "I'm", name, class: className = "" } = Astro.props;
+---
+
+<div class={cn("mb-8 space-y-4", className)}>
+	<h1 class="text-7xl leading-[0.85] font-extrabold tracking-tighter md:text-9xl">
+		<Fragment set:html={`${greeting} ${name.replace(" ", "<br />")}`} />
+	</h1>
+	<div class="bg-nautext-neutral h-2 w-32"></div>
+</div>

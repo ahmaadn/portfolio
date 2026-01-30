@@ -44,9 +44,13 @@ const { title, description } = Astro.props;
 			href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap"
 			rel="stylesheet"
 		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+			rel="stylesheet"
+		/>
 		<!-- Google tag (gtag.js) -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-D3JY72DTCB"></script>
-		<script>
+		<script type="text/javascript">
 			window.dataLayer = window.dataLayer || [];
 			function gtag() {
 				dataLayer.push(arguments);
@@ -55,24 +59,9 @@ const { title, description } = Astro.props;
 			gtag("config", "G-D3JY72DTCB");
 		</script>
 		<link rel="sitemap" href="/sitemap-index.xml" />
+		<script src="../lib/marquee.ts"></script>
 	</head>
-	<body>
-		<div class="relative overflow-x-hidden">
-			<slot />
-		</div>
-		<div class="border-border border-t">
-			<div class="container mx-auto max-w-7xl">
-				<div
-					class="flex w-full flex-col py-4 text-center text-sm md:flex-row md:justify-between">
-					<p>
-						© {new Date().getFullYear()}
-						{SITE.author} | All rights reserved.
-					</p>
-					<p class="mt-2">
-						Theme inspired by <a href="https://firebase.blog/" class="link">firebase blog</a>
-					</p>
-				</div>
-			</div>
-		</div>
+	<body class="relative transition-colors duration-300">
+		<slot />
 	</body>
 </html>
