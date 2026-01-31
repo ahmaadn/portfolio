@@ -11,7 +11,7 @@
 }
 
 :root {
-	/*  Base color palette*/
+	/*  Base color palette */
 	--base-50: oklch(98.5% 0.002 247.839); /* gray-50 */
 	--base-100: oklch(96.7% 0.003 264.542); /* gray-100 */
 	--base-200: oklch(92.8% 0.006 264.531); /* gray-200 */
@@ -22,36 +22,48 @@
 	--base-700: oklch(37.3% 0.034 259.733); /* gray-700 */
 	--base-800: oklch(27.8% 0.033 256.848); /* gray-800 - surface-dark  */
 	--base-900: oklch(21% 0.034 264.665); /* gray-900 */
-
-	--neutral: oklch(21% 0.034 264.665); /* near black for bg-black */
-	--neutral-content: oklch(1 0 0); /* white text on dark bg */
+	--base: oklch(21% 0.034 264.665); /* black for bg-black */
+	--base-content: oklch(0.9254 0.0168 271.23); /* text on dark bg */
 
 	/* Main background */
 	--main-dark: oklch(0.92 0 0); /* Subtle depth layer */
 	--main: oklch(0.97 0 0); /* #F9FAFB - close to gray-50 */
 	--main-light: oklch(1 0 0); /* #FFFFFF - pure white */
 
-	/* Surface */
-	--surface: var(--base-100); /* #F3F4F6 - gray-100 for cards */
-	--surface-alt: var(--base-50); /* #F9FAFB - gray-50 for hover */
-
 	/* content/text colors */
 	--content: var(--base-900); /*  headings */
 	--content-muted: var(--base-800); /* body */
 	--content-subtle: var(--base-600); /* descriptions */
-	--content-faint: var(--base-500); /* labels */
 
 	/* Border Colors*/
-	--border: var(--base-200);
-	--border-muted: var(--base-100); /*  subtle */
-	--border-strong: var(--base-300);
+	--border: var(--base-300);
+	--border-muted: var(--base-200); /*  subtle */
+	--border-strong: var(--base-400);
+
+	/* semantic colors === */
+	--primary: oklch(0.8575 0.1752 88.49); /* #FFC800 - vibrant gold */
+	--primary-content: var(--base); /* text on primary */
+	--success: oklch(0.7 0.17 142);
+	--success-content: oklch(0.26 0.065 153);
+	--info: oklch(0.54 0.245 263);
+	--info-content: oklch(0.97 0.014 255);
+	--warning: oklch(0.79 0.184 86);
+	--warning-content: oklch(0.28 0.066 54);
+	--error: oklch(0.57 0.245 27);
+	--error-content: oklch(0.97 0.013 17);
+
+	/* Surface */
+	--surface: var(--base-100); /* #F3F4F6 - gray-100 for cards */
+	--surface-alt: var(--base-50); /* #F9FAFB - gray-50 for hover */
+
+	--content-faint: var(--base-500); /* labels */
 
 	/* primary */
 	--primary: oklch(0.8575 0.1752 88.49); /* #FFC800 - vibrant gold */
-	--primary-content: oklch(0.15 0 0); /* near black text on primary */
+	--primary-content: var(--base); /* near black text on primary */
 
 	/* semantic colors === */
-	--success: oklch(0.7 0.17 142); /* green-400 for status */
+	--success: oklch(0.7 0.17 142);
 	--success-content: oklch(0.26 0.065 153);
 	--info: oklch(0.54 0.245 263);
 	--info-content: oklch(0.97 0.014 255);
@@ -68,39 +80,23 @@
 	--overlay-strong: oklch(0 0 0 / 0.2);
 }
 
-[data-theme="dark"] {
-	--main-dark: oklch(0.15 0.015 260); /*  deep dark blue */
-	--main: oklch(0.18 0.012 260); /* Slightly lighter background */
-	--main-light: oklch(0.22 0.01 260); /* Elevated surfaces */
-
-	--surface: var(--base-800); /* cards */
-	--surface-alt: var(--base-700); /* for hover */
-
-	--content: oklch(1 0 0); /* headings */
-	--content-muted: var(--base-200); /* body */
-	--content-subtle: var(--base-400); /* descriptions */
-	--content-faint: var(--base-400); /* labels */
-
-	--border: var(--base-700);
-	--border-muted: var(--base-600); /* Subtle border */
-	--border-strong: var(--base-800);
-
-	--success: oklch(0.7 0.17 142);
-	--success-content: oklch(0.26 0.065 153);
-	--info: oklch(0.54 0.245 263);
-	--info-content: oklch(0.97 0.014 255);
-	--warning: oklch(0.79 0.184 86);
-	--warning-content: oklch(0.28 0.066 54);
-	--error: oklch(0.57 0.245 27);
-	--error-content: oklch(0.97 0.013 17);
-
-	--highlight: oklch(0.5 0 0);
-	--scrollbar: var(--base-700);
-}
-
 @theme {
 	--font-sans: "Plus Jakarta Sans", "Onest", sans-serif;
 	--font-mono: "Geist Mono", monospace;
+
+	/* Base Color */
+	--color-base-50: var(--base-50);
+	--color-base-100: var(--base-100);
+	--color-base-200: var(--base-200);
+	--color-base-300: var(--base-300);
+	--color-base-400: var(--base-400);
+	--color-base-500: var(--base-500);
+	--color-base-600: var(--base-600);
+	--color-base-700: var(--base-700);
+	--color-base-800: var(--base-800);
+	--color-base-900: var(--base-900);
+	--color-base: var(--base);
+	--color-base-content: var(--base-content);
 
 	/* Main backgrounds */
 	--color-main-dark: var(--main-dark);
@@ -115,32 +111,15 @@
 	--color-content: var(--content);
 	--color-content-muted: var(--content-muted);
 	--color-content-subtle: var(--content-subtle);
-	--color-content-faint: var(--content-faint);
-
-	/* Neutral scale */
-	--color-base-50: var(--base-50);
-	--color-base-100: var(--base-100);
-	--color-base-200: var(--base-200);
-	--color-base-300: var(--base-300);
-	--color-base-400: var(--base-400);
-	--color-base-500: var(--base-500);
-	--color-base-600: var(--base-600);
-	--color-base-700: var(--base-700);
-	--color-base-800: var(--base-800);
-	--color-base-900: var(--base-900);
-	--color-neutral: var(--neutral);
-	--color-neutral-content: var(--neutral-content);
 
 	/* Border colors */
 	--color-border: var(--border);
 	--color-border-muted: var(--border-muted);
 	--color-border-strong: var(--border-strong);
 
-	/* Primary/Accent */
+	/* Semantic colors */
 	--color-primary: var(--primary);
 	--color-primary-content: var(--primary-content);
-
-	/* Semantic colors */
 	--color-success: var(--success);
 	--color-success-content: var(--success-content);
 	--color-info: var(--info);
@@ -156,7 +135,45 @@
 	--color-overlay-light: var(--overlay-light);
 	--color-overlay-medium: var(--overlay-medium);
 	--color-overlay-strong: var(--overlay-strong);
+
+	--text-md: 1rem;
+	--text-md--line-height: 1.5rem;
+
+	/* FOR COMPABILITY OLD VERSION */
+	--color-neutral: var(--base);
+	--color-neutral-content: var(--base-content);
+	--color-content-faint: var(--content-faint);
 }
+
+/* FOR NOW DISABLE DARK MODE */
+/* [data-theme="dark"] {
+	--main-dark: oklch(0.15 0.015 260);
+	--main: oklch(0.18 0.012 260);
+	--main-light: oklch(0.22 0.01 260);
+
+	--surface: var(--base-800);
+	--surface-alt: var(--base-700);
+
+	--content: oklch(1 0 0);
+	--content-muted: var(--base-200);
+	--content-subtle: var(--base-400);
+	--content-faint: var(--base-400);
+	--border: var(--base-700);
+	--border-muted: var(--base-600);
+	--border-strong: var(--base-800);
+
+	--success: oklch(0.7 0.17 142);
+	--success-content: oklch(0.26 0.065 153);
+	--info: oklch(0.54 0.245 263);
+	--info-content: oklch(0.97 0.014 255);
+	--warning: oklch(0.79 0.184 86);
+	--warning-content: oklch(0.28 0.066 54);
+	--error: oklch(0.57 0.245 27);
+	--error-content: oklch(0.97 0.013 17);
+
+	--highlight: oklch(0.5 0 0);
+	--scrollbar: var(--base-700);
+} */
 
 body {
 	@apply bg-main-light dark:bg-main-dark text-content-muted;

@@ -1,76 +1,11 @@
 ---
-import ActionButton from "./ActionButton.astro";
-import MetricsCard from "./card/MetricsCard.astro";
-import ProjectStreamCard from "./card/ProjectStreamCard.astro";
-import Tag from "./Tag.astro";
-import TickerBar from "./TickerBar.astro";
-import {
-	HeroDescription,
-	HeroGrid,
-	HeroHeader,
-	HeroLeftContent,
-	HeroRightPanel,
-	HeroTitle,
-} from "./ui/hero";
-import VerticalInfoBar from "./VerticalInfoBar.astro";
-
-const projects = [
-	{
-		tag: "PROJECT_TAG",
-		title: "Real-time Fraud Detection System",
-		description:
-			"High-throughput pipeline using Kafka and Scikit-learn to detect anomalies in < 200ms.",
-	},
-	{
-		tag: "PROJECT_TAG",
-		title: "Real-time Fraud Detection System",
-		description: "High-throughput pipeline using Kafka and Scikit-learn.",
-	},
-	{
-		tag: "PROJECT_TAG",
-		title: "Real-time Fraud Detection System",
-	},
-];
-
-const tickerItems = [
-	{
-		label: "Latest Project",
-		title: "Real-time Fraud Detection System",
-		meta: "KAFKA + SCIKIT-LEARN + FASTAPI_CLUSTER — LATENCY < 200MS",
-	},
-	{
-		label: "Latest Project",
-		title: "Real-time Fraud Detection System",
-		meta: "KAFKA + SCIKIT-LEARN + FASTAPI_CLUSTER — LATENCY < 200MS",
-	},
-];
-
-interface Props {
-	name: string;
-	description: string;
-}
-
-const { name, description } = Astro.props;
+import Navbar from "./Navbar.astro";
+import Scanline from "./scanline.astro";
 ---
 
-<HeroHeader class="bg-primary">
-	<HeroGrid>
-		<HeroLeftContent>
-			<Tag theme="dark" text="Root/Identity/Node_01" />
-			<HeroTitle class="text-neutral" greeting="I'm" name={name} />
-			<HeroDescription class="text-neutral" text={description} />
-			<div class="flex flex-wrap items-center gap-4">
-				<ActionButton href="/resume.pdf" icon="ri:file-text-line" text="Download_Resume" />
-			</div>
-		</HeroLeftContent>
-
-		<HeroRightPanel class="hidden lg:flex">
-			<ProjectStreamCard projects={projects} />
-			<MetricsCard projectCount={10} yearExperience={2} />
-			<VerticalInfoBar topLabel="DATA_SCIENCE" bottomLabel="BACKEND_ENGINEER" />
-		</HeroRightPanel>
-	</HeroGrid>
-
-	<!-- Ticker Bar -->
-	<TickerBar items={tickerItems} />
-</HeroHeader>
+<Navbar class="text-primary-content" />
+<header
+	class="grid-overlay bg-primary text-primary-content relative h-screen min-h-[800px] overflow-hidden">
+	<Scanline />
+	<slot />
+</header>

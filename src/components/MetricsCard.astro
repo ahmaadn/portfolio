@@ -1,0 +1,50 @@
+---
+import { cn } from "@/lib/utils";
+
+interface Props {
+	title?: string;
+	projectCount?: number | string;
+	yearExperience?: number | string;
+	class?: string;
+}
+
+const {
+	title = "logging",
+	projectCount = 51,
+	yearExperience = 2,
+	class: className = "",
+} = Astro.props;
+---
+
+<div
+	class={cn(
+		"border-base/10 bg-base/10 mt-12 flex w-32 flex-col overflow-hidden border p-3 shadow-inner backdrop-blur-sm",
+		className
+	)}>
+	<div class="mb-6 text-base text-[9px] font-bold tracking-tighter uppercase opacity-40">
+		{title}
+	</div>
+	<div class="flex flex-1 flex-col gap-8">
+		<div class="space-y-1">
+			<div class="bg-base/20 h-4 w-full animate-pulse"></div>
+			<div class="bg-base/10 h-4 w-3/4 animate-pulse"></div>
+			<div class="bg-base/20 h-4 w-1/2 animate-pulse"></div>
+		</div>
+		<div class="space-y-1">
+			<div class="border-base/20 flex h-12 items-center justify-center border">
+				<span class="text-base/40 text-[10px] font-black">{projectCount} Total Project</span>
+			</div>
+		</div>
+		<div class="space-y-1 opacity-50">
+			<div class="bg-base/10 h-4 w-4/5 animate-pulse"></div>
+			<div class="bg-base/20 h-4 w-3/5 animate-pulse"></div>
+			<div class="bg-base/30 h-4 w-4/6 animate-pulse"></div>
+		</div>
+		<div class="space-y-1">
+			<div class="border-base/20 flex h-12 flex-col items-center justify-center border">
+				<span class="text-base/40 text-[10px] font-black">{yearExperience}+ Years</span>
+				<span class="text-base/40 text-[10px] font-black">Experience</span>
+			</div>
+		</div>
+	</div>
+</div>

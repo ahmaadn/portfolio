@@ -14,5 +14,5 @@ const { greeting = "I'm", name, class: className = "" } = Astro.props;
 	<h1 class="text-7xl leading-[0.85] font-extrabold tracking-tighter md:text-9xl">
 		<Fragment set:html={`${greeting} ${name.replace(" ", "<br />")}`} />
 	</h1>
-	<div class="bg-nautext-neutral h-2 w-32"></div>
+	<div class="bg-primary-content h-2 w-32"></div>
 </div>

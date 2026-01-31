@@ -1,0 +1,40 @@
+---
+import Tag from "./Tag.astro";
+
+interface TickerItem {
+	label: string;
+	title: string;
+	meta: string;
+}
+
+interface Props {
+	items: TickerItem[];
+	speed?: number;
+	direction?: "left" | "right";
+}
+
+const { items, speed = 30, direction = "left" } = Astro.props;
+---
+
+<div
+	class="marquee bg-base absolute bottom-0 left-0 z-[30] w-full py-4"
+	data-speed={speed}
+	data-direction={direction}>
+	<div class="marquee-track space-x-12">
+		<div class="marquee-content flex items-center gap-12 whitespace-nowrap">
+			{
+				items.map((item) => (
+					<div class="flex items-center space-x-6">
+						<Tag text={item.label} theme="light" />
+						<span class="text-base-content text-sm font-bold tracking-wider uppercase">
+							{item.title}
+						</span>
+						<span class="text-base-content/70 font-mono text-xs tracking-tighter">
+							— {item.meta}
+						</span>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</div>

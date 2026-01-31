@@ -14,16 +14,16 @@ const {
 
 <div
 	class:list={[
-		"dark:bg-surface-dark relative bg-black p-8 font-mono text-white md:col-span-6 md:p-12 dark:border-gray-800",
+		"bg-primary-content relative p-8 font-mono text-white md:col-span-6 md:p-12",
 		className,
 	]}>
-	<div class="absolute top-4 right-4 text-[10px] text-gray-400">
+	<div class="text-base-400 absolute top-4 right-4 text-[10px]">
 		REMOTE_ADDR: {remoteAddr}
 	</div>
 	<div class="space-y-8">
 		<slot />
 	</div>
-	<div class="mt-12 flex items-center justify-between text-[9px] text-gray-400 dark:text-gray-600">
+	<div class="text-base-400 mt-12 flex items-center justify-between text-[9px]">
 		<span>{statusText}</span>
 		<span class="animate-pulse">_</span>
 	</div>

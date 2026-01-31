@@ -1,0 +1,33 @@
+---
+import SectionTitle from "@/components/SectionTitle.astro";
+import Tag from "@/components/Tag.astro";
+import { cn } from "@/lib/utils";
+
+interface Props {
+	id?: string;
+	tag?: string;
+	title?: string;
+	class?: string;
+	tagTheme?: "light" | "dark" | "auto";
+	as?: string;
+}
+
+const {
+	id = "",
+	tag = "ARCHIVE/HISTORY/LOG_EDUCATION",
+	title = "Education",
+	class: className = "",
+	tagTheme = "auto",
+	as: Element = "section",
+} = Astro.props;
+---
+
+<Element class={cn("border-base bg-main-light w-full border-b-8 py-20", className)} id={id}>
+	<div class="mx-auto mb-16 max-w-7xl px-6">
+		<Tag text={tag} class="mb-6" theme={tagTheme} />
+		<SectionTitle text={title} class="text-inherit" />
+	</div>
+	<div class="w-full">
+		<slot />
+	</div>
+</Element>

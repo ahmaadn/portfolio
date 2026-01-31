@@ -9,10 +9,7 @@ const { class: className = "", speed = 30, direction = "left" } = Astro.props;
 ---
 
 <div
-	class:list={[
-		"marquee relative overflow-hidden border-y border-white/10 bg-white/5 py-6 lg:py-12",
-		className,
-	]}
+	class:list={["marquee relative overflow-hidden py-6", className]}
 	data-speed={speed}
 	data-direction={direction}>
 	<div class="marquee-track flex items-center gap-12 whitespace-nowrap">

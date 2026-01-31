@@ -15,9 +15,9 @@ const statusConfig = {
 const { label, color } = statusConfig[status];
 ---
 
-<div class:list={["mb-2 flex items-center gap-2", className]}>
+<div class:list={["flex items-center gap-2", className]}>
 	<span class:list={["font-bold", color]}>{label}</span>
-	<h3 class="text-2xl font-extrabold tracking-tight text-gray-900 uppercase dark:text-white">
+	<h3 class="text-content text-2xl font-extrabold tracking-tight uppercase">
 		{institute}
 	</h3>
 </div>

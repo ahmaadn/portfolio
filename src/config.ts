@@ -12,12 +12,17 @@ export const SITE: Site = {
 };
 
 export const LINKS: Link[] = [
-	{ label: "Github", url: "https://github.com/ahmaadn", icon: "simple-icons:github" },
+	{ label: "Git_Node", url: "https://github.com/ahmaadn", icon: "simple-icons:github" },
 	{
-		label: "Resume",
+		label: "Identity_File",
 		url: "./resume.pdf",
 		icon: "simple-icons:googledocs",
 		download: "./resume.pdf",
+	},
+	{
+		label: "Network_Socket",
+		url: "www.linkedin.com/in/ahmaadn",
+		icon: "ri:linkedin-fill",
 	},
 ];
 
@@ -39,7 +44,7 @@ export const EDUCATION: Education[] = [
 	},
 ];
 
-export const 	SKILLS: Skill[] = [
+export const SKILLS: Skill[] = [
 	{ name: "Python", icon: "logos:python" },
 	{ name: "pyTorch", icon: "logos:pytorch-icon" },
 	{ name: "Jupyter", icon: "logos:jupyter" },

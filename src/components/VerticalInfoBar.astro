@@ -1,27 +1,46 @@
 ---
+import { cn } from "@/lib/utils";
 import Icon from "astro-iconify";
 
 interface Props {
 	topLabel: string;
 	bottomLabel: string;
 	icon?: string;
+	class?: string;
+	opacity?: number;
 }
 
-const { topLabel, bottomLabel, icon = "ri:database-2-line" } = Astro.props;
+const {
+	topLabel,
+	bottomLabel,
+	icon = "ri:database-2-line",
+	class: className = "",
+	opacity = 100,
+} = Astro.props;
+
+let normOpacity = opacity;
+if (opacity > 100) {
+	normOpacity = 100;
+} else if (opacity < 0) {
+	normOpacity = 0;
+}
 ---
 
 <div
-	class="flex w-16 flex-col items-center border border-black/5 bg-white/10 py-6 shadow-inner backdrop-blur-sm">
-	<div class="flex h-full flex-col justify-between py-10 opacity-30">
+	class={cn(
+		"border-base bg-main-light flex w-16 flex-col items-center border py-6 shadow-inner backdrop-blur-sm",
+		className
+	)}>
+	<div class:list={["flex h-full flex-col justify-between py-10", `opacity-${normOpacity}`]}>
 		<span
-			class="text-[10px] font-black tracking-[0.5em] text-black uppercase [writing-mode:vertical-lr]">
+			class="text-content text-[10px] font-black tracking-[0.5em] uppercase [writing-mode:vertical-lr]">
 			{topLabel}
 		</span>
-		<div class="h-32 w-px bg-black/20"></div>
-		<Icon name={icon} class="h-32 text-black" size="20" />
-		<div class="h-32 w-px bg-black/20"></div>
+		<div class="bg-base/20 h-32 w-px"></div>
+		<Icon name={icon} class="text-content h-32" size="20" />
+		<div class="bg-base/20 h-32 w-px"></div>
 		<span
-			class="text-[10px] font-black tracking-[0.5em] text-black uppercase [writing-mode:vertical-lr]">
+			class="text-content text-[10px] font-black tracking-[0.5em] uppercase [writing-mode:vertical-lr]">
 			{bottomLabel}
 		</span>
 	</div>

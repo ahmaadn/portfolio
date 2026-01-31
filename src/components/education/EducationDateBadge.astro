@@ -11,11 +11,9 @@ const { from, to, isCurrent = false, class: className = "" } = Astro.props;
 
 <div
 	class:list={[
-		"h-fit w-fit flex-shrink-0 border-2 px-4 py-2 text-lg font-black",
-		isCurrent
-			? "bg-primary border-black text-black"
-			: "dark:bg-surface-dark border-black bg-gray-200 text-black dark:border-white/20 dark:text-white",
+		"text-md h-fit w-fit flex-shrink-0 px-4 py-2 font-mono font-black uppercase",
+		isCurrent ? "text-content" : "text-content-muted",
 		className,
 	]}>
-	[ {from} - {to} ]
+	/{isCurrent ? "Active" : "GRADUATED"}/{from}-{to}
 </div>

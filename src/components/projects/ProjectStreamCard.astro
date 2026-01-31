@@ -1,4 +1,6 @@
 ---
+import { cn } from "@/lib/utils";
+
 interface Project {
 	tag: string;
 	title: string;
@@ -12,6 +14,7 @@ interface Props {
 	projects: Project[];
 	latency?: string;
 	status?: string;
+	class?: string;
 }
 
 const {
@@ -19,15 +22,17 @@ const {
 	currentIndex = 1,
 	totalCount = 3,
 	projects,
-	latency = "12ms",
-	status = "ACTIVE",
+	class: className = "",
 } = Astro.props;
 ---
 
 <div
-	class="border-neutral/10 bg-neutral/5 relative flex w-56 flex-col overflow-hidden border p-4 shadow-inner backdrop-blur-md">
+	class={cn(
+		"relative flex w-56 flex-col overflow-hidden border p-4 shadow-inner backdrop-blur-md",
+		className
+	)}>
 	<div
-		class="text-neutral border-neutral/10 mb-8 flex justify-between border-b pb-2 text-[9px] font-bold tracking-tighter uppercase opacity-60">
+		class="mb-8 flex justify-between border-b border-inherit pb-2 text-base text-[9px] font-bold tracking-tighter uppercase">
 		<span>{title}</span>
 		<span>{String(currentIndex).padStart(2, "0")}/{String(totalCount).padStart(2, "0")}</span>
 	</div>
@@ -40,11 +45,11 @@ const {
 						index === 1 ? "opacity-40" : "",
 						index === 2 ? "opacity-20" : "",
 					]}>
-					<span class="text-neutral/40 mb-1 block text-[10px] font-black">{project.tag}</span>
-					<h4 class="text-neutral mb-2 text-sm leading-tight font-bold">{project.title}</h4>
-					<div class="bg-neutral/20 mb-3 h-px w-full" />
+					<span class="mb-1 block text-[10px] font-black text-inherit/70">{project.tag}</span>
+					<h4 class="mb-2 text-sm leading-tight font-bold text-inherit">{project.title}</h4>
+					<div class="bg-base/10 mb-3 h-px w-full" />
 					{project.description && (
-						<p class="text-[11px] leading-relaxed font-medium text-gray-700 italic">
+						<p class="text-[11px] leading-relaxed font-medium text-inherit/80 italic">
 							{project.description}
 						</p>
 					)}

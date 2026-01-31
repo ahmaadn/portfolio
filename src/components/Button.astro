@@ -17,7 +17,7 @@ interface Props {
 
 const {
 	label,
-	url,
+	href,
 	icon,
 	"icon-class": iconClass = "h-4 w-4",
 	"icon-left": iconLeft = "",
@@ -33,17 +33,17 @@ const primaryIcon = iconLeft ? iconLeft : icon;
 const primaryIconClass = iconLeftClass ? iconLeftClass : iconClass;
 
 // Conditional props based on element type
-const elementProps = Element === "a" ? { href: url } : { type: "button" };
+const elementProps = Element === "a" ? { href } : { type: "button" };
 ---
 
 <Element
 	{...elementProps}
 	class={cn(
-		"blend group border-border text-content-muted hover:text-content shadow-highlight flex w-fit items-center gap-2 rounded-full border px-4 py-1 shadow-xs transition-colors",
+		"blend group bg-main-light text-content border-base flex items-center space-x-3 rounded-none border-l-4 px-8 py-4 text-sm font-black tracking-widest uppercase shadow-xl transition-transform hover:translate-x-2",
 		className
 	)}
 	{...extra}>
 	{primaryIcon && <Icon name={primaryIcon} class={cn(primaryIconClass, "icon-left")} />}
-	<span class="blend text-sm capitalize">{label}</span>
+	{label}
 	{iconRight && <Icon name={iconRight} class={cn(iconRightClass, "icon-right")} />}
 </Element>

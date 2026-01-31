@@ -10,6 +10,6 @@ const { label, href, text, class: className = "" } = Astro.props;
 ---
 
 <div class:list={["flex flex-col gap-2", className]}>
-	<span class="text-[10px] tracking-widest text-gray-500 uppercase">{label}</span>
-	<a class="hover:text-primary text-sm font-bold text-white" href={href}>{text}</a>
+	<span class="text-base-400 text-[10px] tracking-widest uppercase">{label}</span>
+	<a class="hover:text-primary text-sm font-bold text-white uppercase" href={href}>{text}</a>
 </div>

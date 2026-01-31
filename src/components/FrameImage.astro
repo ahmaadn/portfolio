@@ -11,11 +11,11 @@ const { label = "IMG_REF_01", class: className = "" } = Astro.props;
 
 <div
 	class={cn(
-		"relative aspect-square w-full max-w-md border-8 border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[12px_12px_0px_0px_var(--color-primary)]",
+		"border-base relative aspect-square w-full max-w-md border-8 shadow-[12px_12px_0px_0px_var(--color-base)]",
 		className
 	)}>
 	<slot />
-	<div class="absolute top-2 left-2 bg-black px-1 text-[8px] font-black text-white">
+	<div class="bg-base text-base-content absolute top-2 left-2 px-1 text-[8px] font-black">
 		{label}
 	</div>
 </div>

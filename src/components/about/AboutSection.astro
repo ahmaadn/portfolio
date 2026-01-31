@@ -1,4 +1,6 @@
 ---
+import { cn } from "@/lib/utils";
+
 interface Props {
 	id?: string;
 	class?: string;
@@ -7,9 +9,7 @@ interface Props {
 const { id, class: className = "" } = Astro.props;
 ---
 
-<section
-	class:list={["bg-main-dark border-border-strong relative w-full border-b", className]}
-	id={id}>
+<section class={cn("relative w-full", className)} id={id}>
 	<div class="mx-auto grid min-h-[600px] grid-cols-1 md:grid-cols-12">
 		<slot />
 	</div>

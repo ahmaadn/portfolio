@@ -1,4 +1,6 @@
 ---
+import Tag from "../Tag.astro";
+
 interface Props {
 	entryId: string;
 	title: string;
@@ -20,32 +22,30 @@ const {
 
 <article
 	class:list={[
-		"dark:bg-surface-dark group hover:border-primary flex flex-col border border-gray-200 bg-white p-5 font-mono transition-colors dark:border-gray-700",
+		"group hover:border-primary border-border-muted bg-main-light flex flex-col border p-5 font-mono transition-colors",
 		className,
 	]}>
 	<div class="mb-6 flex items-start justify-between">
-		<div class="text-primary bg-black px-1.5 py-0.5 text-[10px] font-black">
-			{entryId}
-		</div>
+		<Tag text={entryId} />
 	</div>
-	<h3 class="mb-3 text-lg leading-none font-black text-gray-900 uppercase dark:text-white">
+	<h3 class="text-content mb-3 text-lg leading-none font-black uppercase">
 		{title}
 	</h3>
-	<div class="mb-6 space-y-4">
-		<div class="flex gap-2 text-[10px] leading-relaxed">
+	<div class="mb-6 flex h-full flex-col justify-between space-y-4">
+		<div class="flex flex-1 gap-2 overflow-hidden text-xs leading-relaxed">
 			<span class="text-primary font-bold">STATUS:</span>
-			<p class="text-gray-600 dark:text-gray-400">
+			<p class="text-content-muted">
 				{description}
 			</p>
 		</div>
 		<div
-			class="border-t border-gray-100 pt-2 text-[9px] tracking-tighter text-gray-400 uppercase dark:border-gray-800 dark:text-gray-500">
+			class="border-border text-content-muted border-t pt-2 text-[9px] tracking-tighter uppercase">
 			{techStack}
 		</div>
 	</div>
 	<div class="mt-auto flex items-center justify-between">
 		<a
-			class="dark:text-primary text-[10px] font-black text-gray-900 uppercase hover:underline"
+			class="dark:text-primary text-content text-[10px] font-black uppercase hover:underline"
 			href={codeUrl}>[ VIEW_CODE ]</a
 		>
 	</div>

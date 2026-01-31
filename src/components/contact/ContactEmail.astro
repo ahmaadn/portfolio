@@ -11,7 +11,7 @@ const { command = "$ connect --protocol=email", email, class: className = "" } =
 <div class:list={[className]}>
 	<span class="text-primary mb-2 block text-xs font-bold">{command}</span>
 	<a
-		class="border-primary hover:bg-primary border-b-4 text-2xl font-bold transition-all hover:text-black md:text-3xl"
+		class="border-primary hover:bg-primary hover:text-primary-content border-b-4 text-2xl font-bold transition-all md:text-3xl"
 		href={`mailto:${email}`}>
 		{email}
 	</a>

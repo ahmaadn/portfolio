@@ -17,12 +17,10 @@ const {
 } = Astro.props;
 ---
 
-<section
-	class:list={["w-full overflow-hidden border-b border-white/10 bg-black py-20", className]}
-	id={id}>
+<section class:list={["bg-base w-full overflow-hidden py-20", className]} id={id}>
 	<div class="mx-auto mb-16 max-w-7xl px-6">
 		<Tag text={tag} theme="light" />
-		<SectionTitle text={title} class="text-white" />
+		<SectionTitle text={title} class="text-base-content" />
 	</div>
 	<slot />
 </section>

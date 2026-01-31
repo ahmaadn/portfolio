@@ -1,6 +1,7 @@
 ---
 import SectionTitle from "@/components/SectionTitle.astro";
 import Tag from "@/components/Tag.astro";
+import Scanline from "../Scanline.astro";
 
 interface Props {
 	id?: string;
@@ -19,14 +20,16 @@ const {
 } = Astro.props;
 ---
 
-<section class:list={["bg-primary grid-overlay relative w-full py-32", className]} id={id}>
-	<div class="scanline pointer-events-none absolute inset-0 opacity-20"></div>
+<section
+	class:list={["bg-primary text-primary-content grid-overlay relative w-full py-32", className]}
+	id={id}>
+	<Scanline />
 	<div class="relative z-10 mx-auto max-w-7xl px-6">
 		<div class="grid grid-cols-1 items-center gap-16 md:grid-cols-12">
 			<div class="md:col-span-6">
-				<Tag text={tag} />
+				<Tag text={tag} class="mb-6" />
 				<SectionTitle text={title} />
-				<p class="mt-4 max-w-md text-2xl font-bold text-gray-900 opacity-80">
+				<p class="mt-4 max-w-md text-2xl font-bold opacity-80">
 					{description}
 				</p>
 			</div>
