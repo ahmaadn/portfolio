@@ -23,7 +23,7 @@ const {
 ---
 
 <Element
-	class={cn(className)}
+	class={cn("opacity-0", className)}
 	data-stagger-group
 	data-stagger-animation={animation}
 	data-stagger-duration={duration}
@@ -64,7 +64,7 @@ const {
 					{ opacity: [0, 1], transform: [t.from, t.to] },
 					{ duration, easing: EASING, delay: stagger(delay) }
 				);
-
+				group.classList.remove("opacity-0");
 				items.forEach((el) => el.classList.remove("stagger-hidden"));
 			},
 			{ amount: 0.15 }
