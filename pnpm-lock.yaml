@@ -51,9 +51,6 @@ importers:
       '@iconify-json/devicon':
         specifier: ^1.2.59
         version: 1.2.59
-      '@iconify-json/logos':
-        specifier: ^1.2.10
-        version: 1.2.10
       '@iconify-json/mdi':
         specifier: ^1.2.3
         version: 1.2.3
@@ -498,9 +495,6 @@ packages:
 
   '@iconify-json/devicon@1.2.59':
     resolution: {integrity: sha512-OBa/V8rB3zyDmT0W+XAdF/20ErDIL8hxwtPjxv6fRKkokqdWhfTJiRXtS6YZXp8M03scjT+uugd7jonIgfbnfg==}
-
-  '@iconify-json/logos@1.2.10':
-    resolution: {integrity: sha512-qxaXKJ6fu8jzTMPQdHtNxlfx6tBQ0jXRbHZIYy5Ilh8Lx9US9FsAdzZWUR8MXV8PnWTKGDFO4ZZee9VwerCyMA==}
 
   '@iconify-json/mdi@1.2.3':
     resolution: {integrity: sha512-O3cLwbDOK7NNDf2ihaQOH5F9JglnulNDFV7WprU2dSoZu3h3cWH//h74uQAB87brHmvFVxIOkuBX2sZSzYhScg==}
@@ -3447,10 +3441,6 @@ snapshots:
     optional: true
 
   '@iconify-json/devicon@1.2.59':
-    dependencies:
-      '@iconify/types': 2.0.0
-
-  '@iconify-json/logos@1.2.10':
     dependencies:
       '@iconify/types': 2.0.0
 
