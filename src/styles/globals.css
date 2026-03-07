@@ -60,7 +60,7 @@
 }
 
 @theme {
-	--font-sans: "Plus Jakarta Sans",sans-serif;
+	--font-sans: "Plus Jakarta Sans", sans-serif;
 	--font-mono: "Geist Mono", monospace;
 
 	--color-main-dark: var(--main-dark);
