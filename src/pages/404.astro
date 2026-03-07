@@ -1,20 +1,21 @@
 ---
+import Button from "@/components/Button.astro";
 import Layout from "@/layouts/layout.astro";
 ---
 
-<Layout title="404" class="flex items-center">
+<Layout title="404">
 	<div
 		class="flex h-full flex-col items-center justify-center py-10 md:grid md:grid-cols-2 md:py-32">
-		<h1 class="py-3 text-center text-9xl font-bold">(&#62;_&#60;)</h1>
+		<h1 class="text-content py-3 text-center text-9xl font-bold">(&#62;_&#60;)</h1>
 		<div class="mt-8 space-y-2 text-center lg:text-left">
-			<h3 class="text-5xl font-bold lg:text-6xl">404</h3>
-			<h5 class="text-xl font-bold">UH OH! You're lost.</h5>
+			<h3 class="text-content text-5xl font-bold lg:text-6xl">404</h3>
+			<h5 class="text-content text-xl font-bold">UH OH! You're lost.</h5>
 			<p>
 				The page you are looking for does not exist. How you got here is a mystery. But you can
 				click the button below to go back to the homepage.
 			</p>
 			<div class="pt-2">
-				<a href="/" type="button" class="">Home </a>
+				<Button as="a" url="/" label="Home" icon="ri:home-line" />
 			</div>
 		</div>
 	</div>

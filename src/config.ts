@@ -12,12 +12,11 @@ export const SITE: Site = {
 };
 
 export const LINKS: Link[] = [
-	{ label: "Github", url: "https://github.com/ahmaadn", icon: "simple-icons:github" },
+	{ label: "Github", url: "https://github.com/ahmaadn", icon: "ri:github-fill" },
 	{
-		label: "Resume",
-		url: "./resume.pdf",
-		icon: "simple-icons:googledocs",
-		download: "./resume.pdf",
+		label: "LinkedIn",
+		url: "https://www.linkedin.com/in/ahmaadn",
+		icon: "ri:linkedin-box-fill",
 	},
 ];
 
@@ -38,26 +37,49 @@ export const EDUCATION: Education[] = [
 	},
 ];
 
-export const SKILLS: Skill[] = [
-	{ name: "Python", icon: "logos:python" },
-	{ name: "pyTorch", icon: "logos:pytorch-icon" },
-	{ name: "Jupyter", icon: "logos:jupyter" },
-	{ name: "Vue", icon: "logos:vue" },
-	{ name: "HTML5", icon: "logos:html-5" },
-	{ name: "CSS", icon: "logos:css-3" },
-	{ name: "JavaScript", icon: "logos:javascript" },
-	{ name: "Astro", icon: "logos:astro-icon" },
-	{ name: "TensorFlow", icon: "logos:tensorflow" },
-	{ name: "PHP", icon: "logos:php" },
-	{ name: "Laravel", icon: "logos:laravel" },
-	{ name: "FastApi", icon: "logos:fastapi-icon" },
-	{ name: "PostgreSQL", icon: "logos:postgresql" },
-	{ name: "MySQL", icon: "logos:mysql" },
-	{ name: "TypeScript", icon: "logos:typescript-icon" },
-	{ name: "Bootstrap", icon: "logos:bootstrap" },
-	{ name: "Dart", icon: "logos:dart" },
-	{ name: "Flutter", icon: "logos:flutter" },
-	{ name: "ScikitLearn", icon: "devicon:scikitlearn" },
-	{ name: "TailwindCSS", icon: "logos:tailwindcss-icon" },
-	{ name: "Pandas", icon: "logos:pandas-icon" },
+export const SKILL_CATEGORIES: SkillCategory[] = [
+	{
+		category: "Languages",
+		icon: "ri:terminal-box-line",
+		items: [
+			{ name: "Python", icon: "devicon:python" },
+			{ name: "JavaScript", icon: "devicon:javascript" },
+			{ name: "TypeScript", icon: "devicon:typescript" },
+			{ name: "PHP", icon: "devicon:php" },
+			{ name: "Dart", icon: "devicon:dart" },
+			{ name: "HTML5", icon: "devicon:html5" },
+			{ name: "CSS", icon: "devicon:css3" },
+		],
+	},
+	{
+		category: "Frameworks",
+		icon: "ri:stack-line",
+		items: [
+			{ name: "Vue", icon: "devicon:vuejs" },
+			{ name: "Astro", icon: "devicon:astro" },
+			{ name: "Laravel", icon: "devicon:laravel" },
+			{ name: "FastApi", icon: "devicon:fastapi" },
+			{ name: "Flutter", icon: "devicon:flutter" },
+			{ name: "TailwindCSS", icon: "devicon:tailwindcss" },
+			{ name: "Bootstrap", icon: "devicon:bootstrap" },
+		],
+	},
+	{
+		category: "Data & ML",
+		icon: "ri:brain-line",
+		items: [
+			{ name: "pyTorch", icon: "devicon:pytorch" },
+			{ name: "TensorFlow", icon: "devicon:tensorflow" },
+			{ name: "Pandas", icon: "devicon:pandas" },
+			{ name: "Jupyter", icon: "devicon:jupyter" },
+		],
+	},
+	{
+		category: "Databases",
+		icon: "ri:database-2-line",
+		items: [
+			{ name: "PostgreSQL", icon: "devicon:postgresql" },
+			{ name: "MySQL", icon: "devicon:mysql" },
+		],
+	},
 ];

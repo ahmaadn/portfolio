@@ -1,6 +1,6 @@
 ---
 import { cn } from "@/lib/utils";
-import Header from "./Header.astro";
+import Navbar from "./Navbar.astro";
 
 interface Props {
 	class?: string;
@@ -10,11 +10,19 @@ interface Props {
 const { class: className = "", id = "post-heading" } = Astro.props;
 ---
 
-<div id={id} class={cn(className)}>
-	<div class="container h-full w-full max-w-7xl">
-		<Header />
-		<div class="mt-6 md:mt-12">
-			<slot />
-		</div>
+<header id={id} class={cn("relative h-screen min-h-200 overflow-hidden", className)}>
+	<!-- Subtle grid background -->
+	<div class="bg-grid absolute inset-0 opacity-50"></div>
+	<!-- Radial fade overlay to soften the grid edges -->
+	<div
+		class="absolute inset-0"
+		style="background: radial-gradient(ellipse at 30% 50%, transparent 20%, var(--main-light) 70%);">
 	</div>
-</div>
+	<!-- Bottom fade -->
+	<div
+		class="absolute right-0 bottom-0 left-0 h-32"
+		style="background: linear-gradient(to bottom, transparent, var(--main-light));">
+	</div>
+	<Navbar />
+	<slot />
+</header>
