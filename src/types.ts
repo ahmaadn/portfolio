@@ -26,3 +26,9 @@ type Skill = {
 	name: string;
 	icon: string;
 };
+
+type SkillCategory = {
+	category: string;
+	icon: string;
+	items: Skill[];
+};

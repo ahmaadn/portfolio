@@ -1,24 +1,66 @@
 ---
 import { cn } from "@/lib/utils";
-import BaseContent from "./BaseContent.astro";
-import Links from "./Links.astro";
+import SocialLinks from "./SocialLinks.astro";
+
+interface FooterNavItem {
+	label: string;
+	href: string;
+}
 
 interface Props {
 	class?: string;
 	mail: string;
+	brand?: string;
+	tagline?: string;
+	navItems?: FooterNavItem[];
+	showSocialLinks?: boolean;
 }
 
-const { class: className = "", mail } = Astro.props;
+const {
+	class: className = "",
+	mail,
+	brand = "AN.",
+	tagline = "Open for freelance and full-time opportunities.",
+	navItems = [
+		{ label: "Home", href: "/" },
+		{ label: "Projects", href: "/projects" },
+		{ label: "Contact", href: "#contact" },
+	],
+	showSocialLinks = true,
+} = Astro.props;
+
+const year = new Date().getFullYear();
 ---
 
-<footer class={cn(className)}>
-	<BaseContent id="contact" title="Get in touch" icon-title="ri:bard-line">
-		<p>
-			Email me at <a href=`mailto:${mail}` class="link italic">{mail}</a> linkor follow me via my
-			social links.
-		</p>
-		<div class="mt-4">
-			<Links />
+<footer id="contact" class={cn("mx-auto w-full max-w-6xl pb-10", "text-content-muted", className)}>
+	<div class="rounded-3xl px-6 py-8 md:px-8">
+		<div class="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+			<div class="max-w-md space-y-3">
+				<p class="text-content text-xl font-semibold tracking-tight">{brand}</p>
+				<p class="text-sm leading-relaxed">{tagline}</p>
+				<a href={`mailto:${mail}`} class="text-content link inline-block text-sm">
+					{mail}
+				</a>
+			</div>
+
+			<div class="space-y-4 md:text-right">
+				{
+					navItems.length > 0 && (
+						<nav aria-label="Footer navigation" class="flex flex-wrap gap-4 md:justify-end">
+							{navItems.map((item) => (
+								<a href={item.href} class="hover:text-content text-sm transition-colors">
+									{item.label}
+								</a>
+							))}
+						</nav>
+					)
+				}
+				{showSocialLinks && <SocialLinks class="text-xs" />}
+			</div>
 		</div>
-	</BaseContent>
+
+		<div class="border-border-muted/70 mt-8 border-t pt-4 text-xs tracking-wide">
+			<p>&copy; {year} {brand}. Crafted with care.</p>
+		</div>
+	</div>
 </footer>

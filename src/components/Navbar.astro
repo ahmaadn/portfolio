@@ -1,0 +1,63 @@
+---
+import { Icon } from "astro-icon/components";
+import ThemeButton from "./ThemeButton.astro";
+
+const menuItems = [
+	{
+		name: "Projects",
+		link: "/projects",
+	},
+	{
+		name: "Contact",
+		link: "/#contact",
+	},
+];
+---
+
+<nav class="absolute top-0 left-0 z-50 w-full">
+	<div class="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-8">
+		<div class="flex flex-1 items-center justify-between">
+			<a class="text-content text-2xl font-bold tracking-tighter" href="/">AN.</a>
+			<div class="flex items-center space-x-8">
+				<!-- DESKTOP -->
+				<div
+					class="hidden items-center space-x-8 text-sm font-bold tracking-widest uppercase md:flex">
+					{
+						menuItems.map((item) => (
+							<a class="hover:text-content transition-colors" href={item.link}>
+								{item.name}
+							</a>
+						))
+					}
+				</div>
+				<div
+					class="divide-border inline-flex items-center justify-center space-x-4 divide-x text-base">
+					<div class="flex items-center justify-center pr-4">
+						<ThemeButton class="hover:text-content transition-colors" />
+					</div>
+					<a
+						class="hover:text-content inline-flex h-8 w-8 items-center justify-center transition-colors"
+						href="/rss.xml"
+						target="_blank">
+						<Icon name="ri:rss-line" size="24" />
+						<span class="sr-only">rss</span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<!-- MOBILE -->
+		<div class="md:hidden">
+			<div class="flex items-center space-x-8 text-sm font-bold tracking-widest uppercase">
+				{
+					menuItems.map((item) => (
+						<a
+							class="hover:text-content transition-colors transition-opacity"
+							href={item.link}>
+							{item.name}
+						</a>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</nav>
