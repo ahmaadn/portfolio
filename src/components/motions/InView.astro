@@ -1,0 +1,110 @@
+---
+import { cn } from "@/lib/utils";
+
+type Animation = "fade-up" | "fade-down" | "fade-left" | "fade-right" | "fade" | "scale-up";
+
+interface Props {
+	as?: keyof HTMLElementTagNameMap;
+	animation?: Animation;
+	delay?: number;
+	duration?: number;
+	stagger?: boolean;
+	class?: string;
+	[key: string]: any;
+}
+
+const {
+	as: Element = "div",
+	animation = "fade-up",
+	delay = 0,
+	duration = 0.6,
+	stagger = false,
+	class: className = "",
+	...attrs
+} = Astro.props;
+---
+
+<Element
+	class={cn("inview-hidden", className)}
+	data-inview={animation}
+	data-inview-delay={delay}
+	data-inview-duration={duration}
+	data-inview-stagger={stagger ? "true" : undefined}
+	{...attrs}>
+	<slot />
+</Element>
+
+<style is:global>
+	.inview-hidden {
+		opacity: 0;
+	}
+
+	.inview-hidden[data-inview="fade-up"] {
+		transform: translateY(24px);
+	}
+
+	.inview-hidden[data-inview="fade-down"] {
+		transform: translateY(-24px);
+	}
+
+	.inview-hidden[data-inview="fade-left"] {
+		transform: translateX(-24px);
+	}
+
+	.inview-hidden[data-inview="fade-right"] {
+		transform: translateX(24px);
+	}
+
+	.inview-hidden[data-inview="scale-up"] {
+		transform: scale(0.95);
+	}
+
+	.inview-hidden[data-inview="fade"] {
+		transform: none;
+	}
+
+	/* Respect reduced motion */
+	@media (prefers-reduced-motion: reduce) {
+		.inview-hidden {
+			opacity: 1 !important;
+			transform: none !important;
+		}
+	}
+</style>
+
+<script>
+	import { animate, inView } from "motion";
+
+	const EASING: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
+	const TRANSFORM_MAP: Record<string, { from: string; to: string }> = {
+		"fade-up": { from: "translateY(24px)", to: "translateY(0)" },
+		"fade-down": { from: "translateY(-24px)", to: "translateY(0)" },
+		"fade-left": { from: "translateX(-24px)", to: "translateX(0)" },
+		"fade-right": { from: "translateX(24px)", to: "translateX(0)" },
+		"scale-up": { from: "scale(0.95)", to: "scale(1)" },
+		fade: { from: "none", to: "none" },
+	};
+
+	document.querySelectorAll<HTMLElement>("[data-inview]").forEach((el) => {
+		inView(
+			el,
+			() => {
+				const anim = el.dataset.inview || "fade-up";
+				const delay = parseFloat(el.dataset.inviewDelay || "0");
+				const duration = parseFloat(el.dataset.inviewDuration || "0.6");
+				const t = TRANSFORM_MAP[anim] || TRANSFORM_MAP["fade-up"];
+
+				animate(
+					el,
+					// @ts-ignore
+					{ opacity: [0, 1], transform: [t.from, t.to] },
+					{ duration, delay, easing: EASING }
+				);
+
+				el.classList.remove("inview-hidden");
+			},
+			{ amount: 0.2 }
+		);
+	});
+</script>

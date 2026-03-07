@@ -1,0 +1,28 @@
+---
+import { cn } from "@/lib/utils";
+
+interface Props {
+	as?: keyof HTMLElementTagNameMap;
+	class?: string;
+	[key: string]: any;
+}
+
+const { as: Element = "div", class: className = "", ...attrs } = Astro.props;
+---
+
+<Element class={cn("stagger-hidden", className)} data-stagger-item {...attrs}>
+	<slot />
+</Element>
+
+<style is:global>
+	.stagger-hidden {
+		opacity: 0;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.stagger-hidden {
+			opacity: 1 !important;
+			transform: none !important;
+		}
+	}
+</style>

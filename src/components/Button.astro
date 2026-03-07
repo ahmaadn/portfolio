@@ -1,6 +1,17 @@
 ---
 import { cn } from "@/lib/utils";
-import Icon from "astro-iconify";
+import { Icon } from "astro-icon/components";
+
+type Variant =
+	| "basic"
+	| "invert"
+	| "ghost"
+	| "outline"
+	| "primary"
+	| "success"
+	| "warning"
+	| "error"
+	| "info";
 
 interface Props {
 	label: string;
@@ -13,6 +24,7 @@ interface Props {
 	"icon-right-class"?: string;
 	class?: string;
 	as?: "a" | "button";
+	variant?: Variant;
 }
 
 const {
@@ -26,24 +38,196 @@ const {
 	"icon-right-class": iconRightClass = "h-4 w-4",
 	class: className = "",
 	as: Element = "a",
+	variant = "basic",
 	...extra
 } = Astro.props;
 
 const primaryIcon = iconLeft ? iconLeft : icon;
 const primaryIconClass = iconLeftClass ? iconLeftClass : iconClass;
 
-// Conditional props based on element type
 const elementProps = Element === "a" ? { href: url } : { type: "button" };
+
+const variantMap: Record<Variant, string> = {
+	basic: "btn-basic",
+	invert: "btn-invert",
+	ghost: "btn-ghost",
+	outline: "btn-outline",
+	primary: "btn-primary",
+	success: "btn-success",
+	warning: "btn-warning",
+	error: "btn-error",
+	info: "btn-info",
+};
 ---
 
 <Element
 	{...elementProps}
 	class={cn(
-		"blend group border-border text-content-muted hover:text-content shadow-highlight flex w-fit items-center gap-2 rounded-full border px-4 py-1 shadow-xs transition-colors",
+		"group flex w-fit items-center gap-2 rounded-full border px-4 py-1",
+		variantMap[variant],
 		className
 	)}
 	{...extra}>
 	{primaryIcon && <Icon name={primaryIcon} class={cn(primaryIconClass, "icon-left")} />}
-	<span class="blend text-sm capitalize">{label}</span>
+	<span class="text-sm capitalize">{label}</span>
 	{iconRight && <Icon name={iconRight} class={cn(iconRightClass, "icon-right")} />}
 </Element>
+
+<style>
+	@reference "../styles/globals.css";
+
+	[class*="btn-"] {
+		transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+
+	.btn-basic {
+		@apply text-content border bg-transparent;
+	}
+
+	.btn-basic:hover {
+		@apply bg-main border-border-muted;
+	}
+
+	html[data-theme="dark"] .btn-basic {
+		background-color: oklch(from var(--content) l c h / 0.05);
+		border-color: oklch(from var(--content) l c h / 0.2);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+	}
+
+	html[data-theme="dark"] .btn-basic:hover {
+		background-color: oklch(from var(--content) l c h / 0.12);
+		border-color: oklch(from var(--content) l c h / 0.35);
+		box-shadow: 0 0 20px oklch(from var(--content) l c h / 0.05);
+	}
+
+	.btn-ghost {
+		background-color: transparent;
+		color: var(--content-muted);
+		border-color: transparent;
+	}
+
+	.btn-ghost:hover {
+		background-color: oklch(from var(--content) l c h / 0.06);
+		color: var(--content);
+	}
+
+	.btn-ghost.active {
+		background-color: var(--content);
+		color: var(--main-light);
+		border-color: var(--content);
+	}
+
+	.btn-ghost.active:hover {
+		background-color: oklch(from var(--content) l c h / 0.85);
+	}
+
+	html[data-theme="dark"] .btn-ghost {
+		color: var(--content-muted);
+	}
+
+	html[data-theme="dark"] .btn-ghost:hover {
+		background-color: oklch(from var(--content) l c h / 0.08);
+		color: var(--content);
+	}
+
+	html[data-theme="dark"] .btn-ghost.active {
+		background-color: oklch(from var(--content) l c h / 0.15);
+		color: var(--content);
+		border-color: oklch(from var(--content) l c h / 0.25);
+	}
+
+	html[data-theme="dark"] .btn-ghost.active:hover {
+		background-color: oklch(from var(--content) l c h / 0.2);
+	}
+
+	.btn-outline {
+		background-color: transparent;
+		color: var(--content);
+		border-color: var(--content);
+	}
+
+	.btn-outline:hover {
+		background-color: var(--content);
+		color: var(--main-light);
+	}
+
+	html[data-theme="dark"] .btn-outline {
+		color: var(--content);
+		border-color: oklch(from var(--content) l c h / 0.5);
+	}
+
+	html[data-theme="dark"] .btn-outline:hover {
+		background-color: oklch(from var(--content) l c h / 0.15);
+		color: var(--content);
+		border-color: oklch(from var(--content) l c h / 0.7);
+	}
+
+	.btn-invert {
+		background-color: var(--content);
+		color: var(--main-light);
+		border-color: var(--content);
+	}
+
+	.btn-invert:hover {
+		background-color: oklch(from var(--content) l c h / 0.85);
+	}
+
+	html[data-theme="dark"] .btn-invert {
+		box-shadow:
+			0 0 20px oklch(from var(--content) l c h / 0.08),
+			0 1px 3px oklch(from var(--content) l c h / 0.06);
+	}
+
+	html[data-theme="dark"] .btn-invert:hover {
+		background-color: oklch(from var(--content) l c h / 0.85);
+		box-shadow:
+			0 0 30px oklch(from var(--content) l c h / 0.15),
+			0 0 60px oklch(from var(--content) l c h / 0.05);
+	}
+
+	.btn-primary {
+		--_btn-glow: var(--primary);
+		background-color: var(--primary);
+		color: var(--primary-content);
+		border-color: var(--primary);
+	}
+
+	.btn-success {
+		--_btn-glow: var(--success);
+		background-color: var(--success);
+		color: var(--success-content);
+		border-color: var(--success);
+	}
+
+	.btn-warning {
+		--_btn-glow: var(--warning);
+		background-color: var(--warning);
+		color: var(--warning-content);
+		border-color: var(--warning);
+	}
+
+	.btn-error {
+		--_btn-glow: var(--error);
+		background-color: var(--error);
+		color: var(--error-content);
+		border-color: var(--error);
+	}
+
+	.btn-info {
+		--_btn-glow: var(--info);
+		background-color: var(--info);
+		color: var(--info-content);
+		border-color: var(--info);
+	}
+
+	/* Shared hover for filled variants */
+	.btn-primary:hover,
+	.btn-success:hover,
+	.btn-warning:hover,
+	.btn-error:hover,
+	.btn-info:hover {
+		filter: brightness(1.12);
+		box-shadow: 0 4px 20px oklch(from var(--_btn-glow) l c h / 0.35);
+	}
+</style>

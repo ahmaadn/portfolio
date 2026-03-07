@@ -1,6 +1,6 @@
 ---
+import Button from "@/components/Button.astro";
 import { LINKS } from "@/config";
-import Button from "./Button.astro";
 
 interface Props {
 	class?: string;
@@ -12,7 +12,14 @@ const { class: className = "" } = Astro.props;
 <div class="group-link inline-flex gap-4 text-sm">
 	{
 		LINKS.map(({ label, url, icon, ...extra }) => (
-			<Button label={label} url={url} icon={icon} class={className} {...extra} />
+			<Button
+				label={label}
+				url={url}
+				icon={icon}
+				variant="basic"
+				class={`shadow-none ${className}`}
+				{...extra}
+			/>
 		))
 	}
 </div>

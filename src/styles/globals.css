@@ -60,8 +60,8 @@
 }
 
 @theme {
-	--font-sans: "Onest", sans-serif;
-	--font-mono: "Geist Mono";
+	--font-sans: "Plus Jakarta Sans", sans-serif;
+	--font-mono: "Geist Mono", monospace;
 
 	--color-main-dark: var(--main-dark);
 	--color-main: var(--main);
@@ -76,8 +76,8 @@
 	--color-neutral-content: var(--neutral-content);
 	--color-primary: var(--primary);
 	--color-primary-content: var(--primary-content);
-	--color-danger: var(--danger);
-	--color-danger-content: var(--danger-content);
+	--color-error: var(--error);
+	--color-error-content: var(--error-content);
 	--color-warning: var(--warning);
 	--color-warning-content: var(--warning-content);
 	--color-success: var(--success);
@@ -90,62 +90,19 @@ body {
 	@apply bg-main-light text-content-muted;
 }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[role="button"]:focus-visible {
+	outline: 2px solid var(--content);
+	outline-offset: 3px;
+	border-radius: 0.5rem;
+}
+
 .link {
-	@apply decoration-2 hover:underline;
-}
-
-#site-heading {
-	@apply text-primary-content;
-}
-
-#site-heading .link {
-	@apply text-primary-content/90 hover:text-primary-content;
-}
-
-#site-heading #menu-right {
-	@apply divide-primary-content/20;
-}
-
-#post-heading .menu-item {
-	@apply hover:text-content text-content-muted;
-}
-
-#post-heading .menu-brand {
-	@apply text-content;
-}
-
-#site-heading .sosial-links a {
-	@apply border-primary-content hover:bg-neutral hover:border-neutral hover:text-neutral-content text-content shadow-none;
-}
-
-/* Open for work button with rainbow gradient */
-#open-for-work {
-	--rainbow-gradient: linear-gradient(
-		90deg,
-		var(--error),
-		var(--success),
-		var(--info),
-		hsl(195, 100%, 63%),
-		hsl(270, 100%, 63%)
-	);
-
-	background:
-		linear-gradient(var(--color-main-light), var(--color-main-light)),
-		linear-gradient(var(--color-main-light) 50%, rgba(255, 255, 255, 0.6) 80%, transparent),
-		var(--rainbow-gradient);
-	background-size: 200%;
-}
-
-#open-for-work:where([data-theme="dark"], [data-theme="dark"] *) {
-	background:
-		linear-gradient(var(--color-main-light), var(--color-main-light)),
-		linear-gradient(var(--color-main-light) 50%, rgba(18, 18, 19, 0.6) 80%, transparent),
-		var(--rainbow-gradient);
-}
-
-#open-for-work::before {
-	content: "";
-	background: var(--rainbow-gradient);
+	@apply decoration-border-muted hover:decoration-content underline underline-offset-4 transition-colors;
 }
 
 .scrollbar-hide {
@@ -156,17 +113,19 @@ body {
 	}
 }
 
-.description {
-	display: -webkit-box;
-	-webkit-line-clamp: 3;
-	line-clamp: 3;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
-}
-
-.grid-background {
+.bg-grid {
 	background-image:
 		linear-gradient(oklch(from var(--border) l c h / 0.3) 1px, transparent 1px),
 		linear-gradient(90deg, oklch(from var(--border) l c h / 0.3) 1px, transparent 1px);
 	background-size: 2rem 2rem;
+}
+
+.bg-dot {
+	background-image: radial-gradient(var(--border) 1px, transparent 1px);
+	background-size: 24px 24px;
+}
+
+.scanline {
+	background: linear-gradient(to bottom, transparent 0%, var(--border) 50%, transparent 100%);
+	background-size: 100% 4px;
 }

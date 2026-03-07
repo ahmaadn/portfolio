@@ -1,6 +1,8 @@
 ---
+import BackgroundText from "@/components/BackgroundText.astro";
+import InView from "@/components/motions/InView.astro";
 import { cn } from "@/lib/utils";
-import Icon from "astro-iconify";
+import { Icon } from "astro-icon/components";
 
 interface Props {
 	id: string;
@@ -19,23 +21,19 @@ const {
 } = Astro.props;
 ---
 
-<section class="relative" id={id}>
-	<div class={cn("container max-w-7xl", className)}>
-		<div>
-			<div class="text-content mb-8 inline-flex h-fit items-center gap-4">
-				{iconTitle && <Icon name={iconTitle} class="h-9 w-9 md:h-11 md:w-11" />}
-				<h1 class="text-4xl font-bold capitalize">{title}</h1>
-			</div>
+<section class="relative overflow-hidden" id={id}>
+	<div class="relative z-10 container max-w-6xl">
+		{backgroundText && <BackgroundText text={backgroundText} class="mt-12 px-4" />}
+		<div class={cn("relative z-10", className)}>
+			<InView animation="fade-up">
+				<div class="text-content mb-8 inline-flex h-fit items-center gap-4">
+					{iconTitle && <Icon name={iconTitle} class="h-9 w-9 md:h-11 md:w-11" />}
+					<h2 class="text-4xl font-bold capitalize">{title}</h2>
+				</div>
+			</InView>
+			<InView animation="fade-up" delay={0.15}>
+				<slot />
+			</InView>
 		</div>
-		<slot />
 	</div>
-	{
-		backgroundText && (
-			<div class="absolute top-0 left-0 -z-10 md:left-32">
-				<p class="text-main-dark/70 dark:text-content-muted/10 text-[15rem] font-bold select-none">
-					{backgroundText}
-				</p>
-			</div>
-		)
-	}
 </section>

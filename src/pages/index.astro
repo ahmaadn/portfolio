@@ -1,17 +1,19 @@
 ---
 import Avatar from "@/components/Avatar.astro";
-import BackgoundSquare from "@/components/BackgoundSquare.astro";
 import BaseContent from "@/components/BaseContent.astro";
 import Button from "@/components/Button.astro";
 import Chips from "@/components/Chips.astro";
 import Footer from "@/components/Footer.astro";
 import LatestProject from "@/components/LatestProject.astro";
-import Links from "@/components/Links.astro";
+import OpenForWork from "@/components/OpenForWork.astro";
 import ProjectCard from "@/components/ProjectCard.astro";
 import SiteHeading from "@/components/SiteHeading.astro";
-import { EDUCATION, SITE, SKILLS } from "@/config";
+import InView from "@/components/motions/InView.astro";
+import Stagger from "@/components/motions/Stagger.astro";
+import StaggerItem from "@/components/motions/StaggerItem.astro";
+import { EDUCATION, SITE, SKILL_CATEGORIES } from "@/config";
 import Layout from "@/layouts/layout.astro";
-import Icon from "astro-iconify";
+import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
 
 const allProject = (await getCollection("projects")).sort(
@@ -26,29 +28,51 @@ let newProjects = allProject.slice(0, 3).map((project) => project.data);
 
 <Layout title="me" description={SITE.shortDescription}>
 	<SiteHeading id="site-heading">
-		<div class="md:max-w-3xl">
-			<Button
-				label="Open for work"
-				url="/#contact"
-				id="open-for-work"
-				class="ring-offset-background focus-visible:ring-ring group animate-rainbow text-foreground before:animate-rainbow relative mb-4 inline-flex cursor-pointer items-center justify-center rounded-full border-0 bg-[length:200%] px-6 font-medium whitespace-nowrap transition-colors transition-transform duration-200 [border:calc(0.08*1rem)_solid_transparent] before:absolute before:bottom-[-20%] before:left-1/2 before:z-[0] before:h-[20%] before:w-[60%] before:-translate-x-1/2 before:[filter:blur(calc(0.8*1rem))] hover:scale-105 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
-				icon-right="ri:arrow-right-line"
-			/>
-			<h1 class="mb-4 text-4xl font-bold capitalize md:text-6xl">I'm {SITE.author}</h1>
-			<p class="mb-10 text-lg">
-				{SITE.shortDescription}
-			</p>
-			<Links
-				class="border-primary-content hover:bg-neutral hover:border-neutral hover:text-neutral-content text-content shadow-none"
-			/>
+		<div
+			class="relative z-10 mx-auto flex h-full max-w-6xl flex-col items-start justify-center px-6 pt-24 pb-28 lg:pt-0">
+			<div
+				class="flex flex-col items-start justify-end gap-12 lg:flex-row lg:items-end lg:justify-between">
+				<div class="z-20 lg:max-w-[58%]">
+					<Stagger animation="fade-up">
+						<StaggerItem class="mb-6">
+							<OpenForWork />
+						</StaggerItem>
+						<StaggerItem
+							as="h1"
+							class="text-content mb-4 text-4xl font-bold capitalize md:text-7xl">
+							I'm {SITE.author}
+						</StaggerItem>
+						<StaggerItem as="p" class="mb-10 text-lg">
+							{SITE.shortDescription}
+						</StaggerItem>
+						<StaggerItem class="inline-flex gap-4">
+							<Button
+								as="a"
+								url="#project"
+								label="View My Work"
+								icon="ri:arrow-down-line"
+								variant="invert"
+							/>
+							<Button
+								as="a"
+								url="./resume.pdf"
+								label="Resume"
+								icon="ri:file-text-line"
+								variant="basic"
+								download="./resume.pdf"
+							/>
+						</StaggerItem>
+					</Stagger>
+				</div>
+				<Stagger animation="fade-up" staggerDelay={0.12}>
+					<StaggerItem>
+						<LatestProject project={latestProject.data} />
+					</StaggerItem>
+				</Stagger>
+			</div>
 		</div>
-		<div class="mt-14 flex flex-col gap-y-2 md:mt-20">
-			<p class="text-2xl font-medium">Latest Project</p>
-			<LatestProject project={latestProject.data} />
-		</div>
-		<BackgoundSquare background-text="Portfolio" />
 	</SiteHeading>
-	<main class="mt-40 mb-20 min-h-screen w-full space-y-20 md:mt-44 md:space-y-24">
+	<main id="main-content" class="relative mb-20 min-h-screen w-full space-y-20 md:space-y-24">
 		<BaseContent
 			id="me"
 			title="About me"
@@ -66,10 +90,26 @@ let newProjects = allProject.slice(0, 3).map((project) => project.data);
 			title="Tech Stack"
 			background-text="Tech Stack"
 			icon-title="ri:code-s-slash-line">
-			<div class="space-y-4">
-				<div class="inline-flex w-full flex-wrap items-center gap-3 py-2">
-					{SKILLS.map(({ name, icon }) => <Chips name={name} icon={icon} />)}
-				</div>
+			<div class="grid gap-8 sm:grid-cols-2">
+				{
+					SKILL_CATEGORIES.map(({ category, icon: catIcon, items }, i) => (
+						<InView animation="fade-up" delay={i * 0.1}>
+							<div class="space-y-4">
+								<div class="text-content inline-flex items-center gap-2">
+									<Icon name={catIcon} class="h-5 w-5 opacity-60" />
+									<h3 class="text-sm font-semibold tracking-wider uppercase">
+										{category}
+									</h3>
+								</div>
+								<div class="flex flex-wrap gap-2">
+									{items.map(({ name, icon }) => (
+										<Chips name={name} icon={icon} />
+									))}
+								</div>
+							</div>
+						</InView>
+					))
+				}
 			</div>
 		</BaseContent>
 		<BaseContent
@@ -80,11 +120,15 @@ let newProjects = allProject.slice(0, 3).map((project) => project.data);
 			icon-title="ri:school-line">
 			<ol class="w-full space-y-12 overflow-hidden">
 				{
-					EDUCATION.map((edu) => (
-						<li class="after:bg-primary relative flex-1 after:absolute after:-bottom-11 after:left-4 after:inline-block after:h-full after:w-0.5 after:content-[''] lg:after:left-5">
+					EDUCATION.map((edu, i) => (
+						<InView
+							as="li"
+							animation="fade-left"
+							delay={i * 0.15}
+							class="after:bg-primary relative flex-1 after:absolute after:-bottom-11 after:left-4 after:inline-block after:h-full after:w-0.5 after:content-[''] lg:after:left-5">
 							<div class="flex w-full items-start font-medium">
-								<span class="bg-primary mr-8 flex aspect-square h-8 w-8 items-center justify-center rounded-full border-2 border-transparent text-sm text-white lg:h-10 lg:w-10">
-									<Icon name="mdi:education-outline" class="h-6 w-6 md:h-7 md:w-7" />
+								<span class="bg-primary text-primary-content mr-8 flex aspect-square h-8 w-8 items-center justify-center rounded-full border-2 border-transparent text-sm lg:h-10 lg:w-10">
+									<Icon name="ri:book-marked-line" class="h-6 w-6" />
 								</span>
 								<div class="block w-full space-y-2">
 									<div>
@@ -98,7 +142,7 @@ let newProjects = allProject.slice(0, 3).map((project) => project.data);
 									</div>
 								</div>
 							</div>
-						</li>
+						</InView>
 					))
 				}
 			</ol>
@@ -110,18 +154,28 @@ let newProjects = allProject.slice(0, 3).map((project) => project.data);
 			background-text="Project"
 			icon-title="ri:bnb-line">
 			<div class="flex flex-col gap-8 md:grid md:grid-cols-2 lg:grid-cols-3">
-				{newProjects && newProjects.map((project, index) => <ProjectCard project={project} />)}
+				{
+					newProjects &&
+						newProjects.map((project, i) => (
+							<InView animation="fade-up" delay={i * 0.12}>
+								<ProjectCard project={project} />
+							</InView>
+						))
+				}
 			</div>
 			<div class="mt-12 flex items-center justify-center">
 				<Button
 					as="a"
 					url="/projects"
 					label="Lihat semua proyek"
-					class="hover:bg-primary hover:text-primary-content hover:border-primary text-base font-normal transition-transform duration-300 hover:scale-105"
+					variant="basic"
+					class="text-base font-normal"
 					icon-right="ri:arrow-right-line"
 				/>
 			</div>
 		</BaseContent>
-		<Footer mail={SITE.email} />
 	</main>
+	<InView animation="fade-up">
+		<Footer mail={SITE.email} />
+	</InView>
 </Layout>
