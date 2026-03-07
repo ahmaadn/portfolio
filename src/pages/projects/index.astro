@@ -59,7 +59,7 @@ function createSlug(tag: string): string {
 					<div data-stagger="4" class="mt-8">
 						<Button
 							as="a"
-							url="#projects-section"
+							url="#main-content"
 							label="Browse Projects"
 							icon="ri:arrow-down-line"
 							variant="invert"
@@ -97,7 +97,7 @@ function createSlug(tag: string): string {
 	</SiteHeading>
 
 	<main
-		id="projects-section"
+		id="main-content"
 		class="relative min-h-screen w-full space-y-20 pt-12 pb-20 md:space-y-24">
 		<div class="container max-w-6xl">
 			<div class="mb-12 flex flex-wrap justify-center gap-1.5 md:gap-2">
@@ -143,10 +143,14 @@ function createSlug(tag: string): string {
 </Layout>
 
 <script>
+	// @ts-nocheck
 	import { animate, stagger } from "motion";
 
-	const els = document.querySelectorAll<HTMLElement>("[data-stagger]");
-	const sorted = [...els].sort((a, b) => Number(a.dataset.stagger) - Number(b.dataset.stagger));
+	/** @type {NodeListOf<HTMLElement>} */
+	const els = document.querySelectorAll("[data-stagger]");
+	const sorted = [...els].sort(
+		(a, b) => Number(a.getAttribute("data-stagger")) - Number(b.getAttribute("data-stagger"))
+	);
 
 	animate(
 		sorted,
@@ -155,28 +159,23 @@ function createSlug(tag: string): string {
 		{ duration: 0.7, easing: [0.16, 1, 0.3, 1], delay: stagger(0.12, { from: 0.2 }) }
 	);
 
+	/** @type {NodeListOf<HTMLElement>} */
 	const filterButtons = document.querySelectorAll(".filter-btn");
-	const projectItems = document.querySelectorAll<HTMLElement>(".project-item");
+	/** @type {NodeListOf<HTMLElement>} */
+	const projectItems = document.querySelectorAll(".project-item");
 
-	function setActiveButton(activeButton: Element) {
+	function setActiveButton(activeButton) {
 		filterButtons.forEach((btn) => btn.classList.remove("active"));
 		activeButton.classList.add("active");
 	}
 
-	function filterProjects(category: string) {
-		const toShow: HTMLElement[] = [];
-		const toHide: HTMLElement[] = [];
-
-		projectItems.forEach((item) => {
+	function filterProjects(category) {
+		const allItems = Array.from(projectItems);
+		const toShow = allItems.filter((item) => {
 			const itemTags = (item.getAttribute("data-tags") || "").toLowerCase();
-			const shouldShow = category === "all" || itemTags.includes(category);
-
-			if (shouldShow) {
-				toShow.push(item);
-			} else {
-				toHide.push(item);
-			}
+			return category === "all" || itemTags.includes(category);
 		});
+		const toHide = allItems.filter((item) => !toShow.includes(item));
 
 		// Animate out hidden items
 		if (toHide.length) {

@@ -12,24 +12,36 @@ const menuItems = [
 		link: "/#contact",
 	},
 ];
+
+const pathname = Astro.url.pathname;
 ---
 
-<nav class="absolute top-0 left-0 z-50 w-full">
+<nav class="absolute top-0 left-0 z-50 w-full" aria-label="navigation">
 	<div class="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-8">
 		<div class="flex flex-1 items-center justify-between">
-			<a class="text-content text-2xl font-bold tracking-tighter" href="/">AN.</a>
+			<a
+				class="text-content text-2xl font-bold tracking-tighter"
+				href="/"
+				aria-label="Go to homepage">
+				AN.
+			</a>
 			<div class="flex items-center space-x-8">
 				<!-- DESKTOP -->
-				<div
+				<ul
 					class="hidden items-center space-x-8 text-sm font-bold tracking-widest uppercase md:flex">
 					{
 						menuItems.map((item) => (
-							<a class="hover:text-content transition-colors" href={item.link}>
-								{item.name}
-							</a>
+							<li>
+								<a
+									class="hover:text-content transition-colors"
+									href={item.link}
+									aria-current={item.link === pathname ? "page" : undefined}>
+									{item.name}
+								</a>
+							</li>
 						))
 					}
-				</div>
+				</ul>
 				<div
 					class="divide-border inline-flex items-center justify-center space-x-4 divide-x text-base">
 					<div class="flex items-center justify-center pr-4">
@@ -38,7 +50,9 @@ const menuItems = [
 					<a
 						class="hover:text-content inline-flex h-8 w-8 items-center justify-center transition-colors"
 						href="/rss.xml"
-						target="_blank">
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label="Open RSS feed in a new tab">
 						<Icon name="ri:rss-line" size="24" />
 						<span class="sr-only">rss</span>
 					</a>
@@ -47,17 +61,20 @@ const menuItems = [
 		</div>
 		<!-- MOBILE -->
 		<div class="md:hidden">
-			<div class="flex items-center space-x-8 text-sm font-bold tracking-widest uppercase">
+			<ul class="flex items-center space-x-8 text-sm font-bold tracking-widest uppercase">
 				{
 					menuItems.map((item) => (
-						<a
-							class="hover:text-content transition-colors transition-opacity"
-							href={item.link}>
-							{item.name}
-						</a>
+						<li>
+							<a
+								class="hover:text-content transition-colors"
+								href={item.link}
+								aria-current={item.link === pathname ? "page" : undefined}>
+								{item.name}
+							</a>
+						</li>
 					))
 				}
-			</div>
+			</ul>
 		</div>
 	</div>
 </nav>

@@ -90,6 +90,17 @@ body {
 	@apply bg-main-light text-content-muted;
 }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[role="button"]:focus-visible {
+	outline: 2px solid var(--content);
+	outline-offset: 3px;
+	border-radius: 0.5rem;
+}
+
 .link {
 	@apply decoration-border-muted hover:decoration-content underline underline-offset-4 transition-colors;
 }
