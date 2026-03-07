@@ -22,9 +22,9 @@ const {
 ---
 
 <section class="relative overflow-hidden" id={id}>
-	<div class={cn("relative z-10 container max-w-6xl", className)}>
+	<div class="relative z-10 container max-w-6xl">
 		{backgroundText && <BackgroundText text={backgroundText} class="mt-12 px-4" />}
-		<div class="relative z-10">
+		<div class={cn("relative z-10", className)}>
 			<InView animation="fade-up">
 				<div class="text-content mb-8 inline-flex h-fit items-center gap-4">
 					{iconTitle && <Icon name={iconTitle} class="h-9 w-9 md:h-11 md:w-11" />}
