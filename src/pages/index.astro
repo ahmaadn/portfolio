@@ -8,6 +8,9 @@ import LatestProject from "@/components/LatestProject.astro";
 import OpenForWork from "@/components/OpenForWork.astro";
 import ProjectCard from "@/components/ProjectCard.astro";
 import SiteHeading from "@/components/SiteHeading.astro";
+import InView from "@/components/motions/InView.astro";
+import Stagger from "@/components/motions/Stagger.astro";
+import StaggerItem from "@/components/motions/StaggerItem.astro";
 import { EDUCATION, SITE, SKILL_CATEGORIES } from "@/config";
 import Layout from "@/layouts/layout.astro";
 import { Icon } from "astro-icon/components";
@@ -30,19 +33,19 @@ let newProjects = allProject.slice(0, 3).map((project) => project.data);
 			<div
 				class="flex flex-col items-start justify-end gap-12 lg:flex-row lg:items-end lg:justify-between">
 				<div class="z-20 lg:max-w-[58%]">
-					<div>
-						<div data-stagger="0" class="mb-6">
+					<Stagger animation="fade-up">
+						<StaggerItem class="mb-6">
 							<OpenForWork />
-						</div>
-						<h1
-							data-stagger="1"
+						</StaggerItem>
+						<StaggerItem
+							as="h1"
 							class="text-content mb-4 text-4xl font-bold capitalize md:text-7xl">
 							I'm {SITE.author}
-						</h1>
-						<p data-stagger="2" class="mb-10 text-lg">
+						</StaggerItem>
+						<StaggerItem as="p" class="mb-10 text-lg">
 							{SITE.shortDescription}
-						</p>
-						<div data-stagger="3" class="inline-flex gap-4">
+						</StaggerItem>
+						<StaggerItem class="inline-flex gap-4">
 							<Button
 								as="a"
 								url="#project"
@@ -58,10 +61,14 @@ let newProjects = allProject.slice(0, 3).map((project) => project.data);
 								variant="basic"
 								download="./resume.pdf"
 							/>
-						</div>
-					</div>
+						</StaggerItem>
+					</Stagger>
 				</div>
-				<LatestProject project={latestProject.data} data-stagger="4" />
+				<Stagger animation="fade-up" staggerDelay={0.12}>
+					<StaggerItem>
+						<LatestProject project={latestProject.data} />
+					</StaggerItem>
+				</Stagger>
 			</div>
 		</div>
 	</SiteHeading>
@@ -85,18 +92,22 @@ let newProjects = allProject.slice(0, 3).map((project) => project.data);
 			icon-title="ri:code-s-slash-line">
 			<div class="grid gap-8 sm:grid-cols-2">
 				{
-					SKILL_CATEGORIES.map(({ category, icon: catIcon, items }) => (
-						<div class="space-y-4">
-							<div class="text-content inline-flex items-center gap-2">
-								<Icon name={catIcon} class="h-5 w-5 opacity-60" />
-								<h3 class="text-sm font-semibold tracking-wider uppercase">{category}</h3>
+					SKILL_CATEGORIES.map(({ category, icon: catIcon, items }, i) => (
+						<InView animation="fade-up" delay={i * 0.1}>
+							<div class="space-y-4">
+								<div class="text-content inline-flex items-center gap-2">
+									<Icon name={catIcon} class="h-5 w-5 opacity-60" />
+									<h3 class="text-sm font-semibold tracking-wider uppercase">
+										{category}
+									</h3>
+								</div>
+								<div class="flex flex-wrap gap-2">
+									{items.map(({ name, icon }) => (
+										<Chips name={name} icon={icon} />
+									))}
+								</div>
 							</div>
-							<div class="flex flex-wrap gap-2">
-								{items.map(({ name, icon }) => (
-									<Chips name={name} icon={icon} />
-								))}
-							</div>
-						</div>
+						</InView>
 					))
 				}
 			</div>
@@ -109,8 +120,12 @@ let newProjects = allProject.slice(0, 3).map((project) => project.data);
 			icon-title="ri:school-line">
 			<ol class="w-full space-y-12 overflow-hidden">
 				{
-					EDUCATION.map((edu) => (
-						<li class="after:bg-primary relative flex-1 after:absolute after:-bottom-11 after:left-4 after:inline-block after:h-full after:w-0.5 after:content-[''] lg:after:left-5">
+					EDUCATION.map((edu, i) => (
+						<InView
+							as="li"
+							animation="fade-left"
+							delay={i * 0.15}
+							class="after:bg-primary relative flex-1 after:absolute after:-bottom-11 after:left-4 after:inline-block after:h-full after:w-0.5 after:content-[''] lg:after:left-5">
 							<div class="flex w-full items-start font-medium">
 								<span class="bg-primary text-primary-content mr-8 flex aspect-square h-8 w-8 items-center justify-center rounded-full border-2 border-transparent text-sm lg:h-10 lg:w-10">
 									<Icon name="ri:book-marked-line" class="h-6 w-6" />
@@ -127,7 +142,7 @@ let newProjects = allProject.slice(0, 3).map((project) => project.data);
 									</div>
 								</div>
 							</div>
-						</li>
+						</InView>
 					))
 				}
 			</ol>
@@ -139,7 +154,14 @@ let newProjects = allProject.slice(0, 3).map((project) => project.data);
 			background-text="Project"
 			icon-title="ri:bnb-line">
 			<div class="flex flex-col gap-8 md:grid md:grid-cols-2 lg:grid-cols-3">
-				{newProjects && newProjects.map((project, index) => <ProjectCard project={project} />)}
+				{
+					newProjects &&
+						newProjects.map((project, i) => (
+							<InView animation="fade-up" delay={i * 0.12}>
+								<ProjectCard project={project} />
+							</InView>
+						))
+				}
 			</div>
 			<div class="mt-12 flex items-center justify-center">
 				<Button
@@ -153,19 +175,7 @@ let newProjects = allProject.slice(0, 3).map((project) => project.data);
 			</div>
 		</BaseContent>
 	</main>
-	<Footer mail={SITE.email} />
+	<InView animation="fade-up">
+		<Footer mail={SITE.email} />
+	</InView>
 </Layout>
-
-<script>
-	import { animate, stagger } from "motion";
-
-	const els = document.querySelectorAll<HTMLElement>("[data-stagger]");
-	const sorted = [...els].sort((a, b) => Number(a.dataset.stagger) - Number(b.dataset.stagger));
-
-	animate(
-		sorted,
-		// @ts-ignore
-		{ opacity: 1, transform: ["translateY(20px)", "translateY(0)"] },
-		{ duration: 0.7, easing: [0.16, 1, 0.3, 1], delay: stagger(0.12, { from: 0.2 }) }
-	);
-</script>

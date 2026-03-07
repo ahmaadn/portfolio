@@ -1,9 +1,12 @@
 ---
 import Button from "@/components/Button.astro";
-import CountUp from "@/components/CountUp.astro";
+import CountUp from "@/components/motions/CountUp.astro";
 import Footer from "@/components/Footer.astro";
+import InView from "@/components/motions/InView.astro";
 import ProjectCard from "@/components/ProjectCard.astro";
 import SiteHeading from "@/components/SiteHeading.astro";
+import Stagger from "@/components/motions/Stagger.astro";
+import StaggerItem from "@/components/motions/StaggerItem.astro";
 import { SITE } from "@/config";
 import Layout from "@/layouts/layout.astro";
 import { Icon } from "astro-icon/components";
@@ -24,75 +27,77 @@ function createSlug(tag: string): string {
 	<SiteHeading id="site-heading" class="min-h-150">
 		<div
 			class="relative z-10 mx-auto flex h-full max-w-6xl flex-col items-start justify-center px-6 pt-24 lg:pt-0">
-			<!-- Breadcrumb -->
-			<nav data-stagger="0" class="mb-10">
-				<a
-					href="/"
-					class="text-content-muted hover:text-content group inline-flex items-center gap-2 text-sm transition-colors">
-					<Icon
-						name="ri:arrow-left-line"
-						class="h-4 w-4 transition-transform group-hover:-translate-x-0.5"
-					/>
-					<span>Back to home</span>
-				</a>
-			</nav>
-
-			<div class="flex w-full flex-col gap-16 lg:flex-row lg:items-end lg:justify-between">
-				<!-- Left: heading block -->
-				<div class="z-20 max-w-2xl">
-					<div data-stagger="1" class="mb-4 flex items-center gap-3">
-						<div class="bg-primary h-0.5 w-6"></div>
-						<span class="text-content-muted text-sm font-medium tracking-widest uppercase">
-							Portfolio
-						</span>
-					</div>
-
-					<h1 data-stagger="2" class="text-content mb-6 text-4xl font-bold md:text-6xl">
-						Projects
-					</h1>
-
-					<p data-stagger="3" class="text-lg md:text-xl">
-						Jelajahi kumpulan pekerjaan yang telah saya rancang dan bangun, dari aplikasi web
-						kompleks hingga aplikasi mobile.
-					</p>
-
-					<div data-stagger="4" class="mt-8">
-						<Button
-							as="a"
-							url="#main-content"
-							label="Browse Projects"
-							icon="ri:arrow-down-line"
-							variant="invert"
+			<Stagger animation="fade-up">
+				<!-- Breadcrumb -->
+				<StaggerItem as="nav" class="mb-10">
+					<a
+						href="/"
+						class="text-content-muted hover:text-content group inline-flex items-center gap-2 text-sm transition-colors">
+						<Icon
+							name="ri:arrow-left-line"
+							class="h-4 w-4 transition-transform group-hover:-translate-x-0.5"
 						/>
-					</div>
-				</div>
+						<span>Back to home</span>
+					</a>
+				</StaggerItem>
 
-				<!-- Right: stats block -->
-				<div data-stagger="5" class="z-20 shrink-0">
-					<div class="grid grid-cols-2 gap-12">
-						<div class="flex flex-col items-center">
-							<CountUp
-								target={projects.length}
-								delay={1}
-								class="text-content text-4xl font-bold"
-							/>
-							<span class="text-content-muted mt-2 text-xs tracking-wider uppercase">
-								Projects
+				<div class="flex w-full flex-col gap-16 lg:flex-row lg:items-end lg:justify-between">
+					<!-- Left: heading block -->
+					<div class="z-20 max-w-2xl">
+						<StaggerItem class="mb-4 flex items-center gap-3">
+							<div class="bg-primary h-0.5 w-6"></div>
+							<span class="text-content-muted text-sm font-medium tracking-widest uppercase">
+								Portfolio
 							</span>
-						</div>
-						<div class="flex flex-col items-center">
-							<CountUp
-								target={tags.length}
-								delay={1}
-								class="text-content text-4xl font-bold"
+						</StaggerItem>
+
+						<StaggerItem as="h1" class="text-content mb-6 text-4xl font-bold md:text-6xl">
+							Projects
+						</StaggerItem>
+
+						<StaggerItem as="p" class="text-lg md:text-xl">
+							Jelajahi kumpulan pekerjaan yang telah saya rancang dan bangun, dari aplikasi
+							web kompleks hingga aplikasi mobile.
+						</StaggerItem>
+
+						<StaggerItem class="mt-8">
+							<Button
+								as="a"
+								url="#main-content"
+								label="Browse Projects"
+								icon="ri:arrow-down-line"
+								variant="invert"
 							/>
-							<span class="text-content-muted mt-2 text-xs tracking-wider uppercase">
-								Technologies
-							</span>
-						</div>
+						</StaggerItem>
 					</div>
+
+					<!-- Right: stats block -->
+					<StaggerItem class="z-20 shrink-0">
+						<div class="grid grid-cols-2 gap-12">
+							<div class="flex flex-col items-center">
+								<CountUp
+									target={projects.length}
+									delay={1}
+									class="text-content text-4xl font-bold"
+								/>
+								<span class="text-content-muted mt-2 text-xs tracking-wider uppercase">
+									Projects
+								</span>
+							</div>
+							<div class="flex flex-col items-center">
+								<CountUp
+									target={tags.length}
+									delay={1}
+									class="text-content text-4xl font-bold"
+								/>
+								<span class="text-content-muted mt-2 text-xs tracking-wider uppercase">
+									Technologies
+								</span>
+							</div>
+						</div>
+					</StaggerItem>
 				</div>
-			</div>
+			</Stagger>
 		</div>
 	</SiteHeading>
 
@@ -100,27 +105,29 @@ function createSlug(tag: string): string {
 		id="main-content"
 		class="relative min-h-screen w-full space-y-20 pt-12 pb-20 md:space-y-24">
 		<div class="container max-w-6xl">
-			<div class="mb-12 flex flex-wrap justify-center gap-1.5 md:gap-2">
-				<Button
-					as="button"
-					variant="ghost"
-					data-filter="all"
-					label="All"
-					class="filter-btn active py-1.5 text-sm font-medium"
-				/>
+			<InView animation="fade-up">
+				<div class="mb-12 flex flex-wrap justify-center gap-1.5 md:gap-2">
+					<Button
+						as="button"
+						variant="ghost"
+						data-filter="all"
+						label="All"
+						class="filter-btn active py-1.5 text-sm font-medium"
+					/>
 
-				{
-					tags.map((tag) => (
-						<Button
-							as="button"
-							variant="ghost"
-							data-filter={createSlug(tag)}
-							label={tag}
-							class="filter-btn py-1.5 text-sm font-medium"
-						/>
-					))
-				}
-			</div>
+					{
+						tags.map((tag) => (
+							<Button
+								as="button"
+								variant="ghost"
+								data-filter={createSlug(tag)}
+								label={tag}
+								class="filter-btn py-1.5 text-sm font-medium"
+							/>
+						))
+					}
+				</div>
+			</InView>
 			<section class="relative">
 				<div
 					id="projects-container"
@@ -139,26 +146,38 @@ function createSlug(tag: string): string {
 		</div>
 	</main>
 
-	<Footer mail={SITE.email} />
+	<InView animation="fade-up">
+		<Footer mail={SITE.email} />
+	</InView>
 </Layout>
 
 <script>
 	// @ts-nocheck
-	import { animate, stagger } from "motion";
+	import { animate, inView, stagger } from "motion";
 
-	/** @type {NodeListOf<HTMLElement>} */
-	const els = document.querySelectorAll("[data-stagger]");
-	const sorted = [...els].sort(
-		(a, b) => Number(a.getAttribute("data-stagger")) - Number(b.getAttribute("data-stagger"))
-	);
+	// --- Initial entrance stagger for project cards ---
+	const container = document.getElementById("projects-container");
+	if (container) {
+		const items = container.querySelectorAll(".project-item");
+		items.forEach((el) => {
+			el.style.opacity = "0";
+			el.style.transform = "translateY(24px)";
+		});
 
-	animate(
-		sorted,
-		// @ts-ignore
-		{ opacity: [0, 1], transform: ["translateY(20px)", "translateY(0)"] },
-		{ duration: 0.7, easing: [0.16, 1, 0.3, 1], delay: stagger(0.12, { from: 0.2 }) }
-	);
+		inView(
+			container,
+			() => {
+				animate(
+					items,
+					{ opacity: [0, 1], transform: ["translateY(24px)", "translateY(0)"] },
+					{ duration: 0.55, easing: [0.16, 1, 0.3, 1], delay: stagger(0.07) }
+				);
+			},
+			{ amount: 0.1 }
+		);
+	}
 
+	// --- Filter logic ---
 	/** @type {NodeListOf<HTMLElement>} */
 	const filterButtons = document.querySelectorAll(".filter-btn");
 	/** @type {NodeListOf<HTMLElement>} */
@@ -169,36 +188,35 @@ function createSlug(tag: string): string {
 		activeButton.classList.add("active");
 	}
 
+	function showItems(items) {
+		items.forEach((el) => el.classList.add("active"));
+		if (items.length) {
+			animate(
+				items,
+				// @ts-ignore
+				{ opacity: [0, 1], transform: ["scale(0.95)", "scale(1)"] },
+				{ duration: 0.35, easing: [0.16, 1, 0.3, 1], delay: stagger(0.05) }
+			);
+		}
+	}
+
 	function filterProjects(category) {
 		const allItems = Array.from(projectItems);
 		const toShow = allItems.filter((item) => {
 			const itemTags = (item.getAttribute("data-tags") || "").toLowerCase();
 			return category === "all" || itemTags.includes(category);
 		});
-		const toHide = allItems.filter((item) => !toShow.includes(item));
 
-		// Animate out hidden items
-		if (toHide.length) {
-			animate(
-				toHide,
-				// @ts-ignore
-				{ opacity: 0, transform: "scale(0.95)" },
-				{ duration: 0.2, easing: [0.16, 1, 0.3, 1] }
-			).then(() => {
-				toHide.forEach((el) => el.classList.remove("active"));
-			});
-		}
-
-		// Animate in visible items
-		toShow.forEach((el) => el.classList.add("active"));
-		if (toShow.length) {
-			animate(
-				toShow,
-				// @ts-ignore
-				{ opacity: [0, 1], transform: ["scale(0.95)", "scale(1)"] },
-				{ duration: 0.35, easing: [0.16, 1, 0.3, 1] }
-			);
-		}
+		// Always hide all first, then show matching
+		animate(
+			allItems,
+			// @ts-ignore
+			{ opacity: 0, transform: "scale(0.95)" },
+			{ duration: 0.2, easing: [0.16, 1, 0.3, 1] }
+		).then(() => {
+			allItems.forEach((el) => el.classList.remove("active"));
+			showItems(toShow);
+		});
 	}
 
 	filterButtons.forEach((button) => {

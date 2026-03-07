@@ -13,10 +13,11 @@ const { text, class: className = "", ...attrs } = Astro.props;
 <div
 	aria-hidden="true"
 	class={cn(
-		"text-main-dark/50 dark:text-content-muted/8 pointer-events-none absolute top-1 left-0 -z-1 select-none"
+		"text-main-dark/50 dark:text-content-muted/8 overflow-none pointer-events-none absolute top-1 left-0 -z-1 select-none",
+		className
 	)}
 	{...attrs}>
-	<p class="text-[clamp(4rem,13vw,12rem)] leading-none font-black tracking-tight">
+	<p class="text-[clamp(5rem,13vw,12rem)] leading-none font-black tracking-tight">
 		{text}
 	</p>
 </div>
