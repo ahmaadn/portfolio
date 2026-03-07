@@ -4,19 +4,47 @@ import Layout from "@/layouts/layout.astro";
 ---
 
 <Layout title="404">
-	<div
-		class="flex h-full flex-col items-center justify-center py-10 md:grid md:grid-cols-2 md:py-32">
-		<h1 class="text-content py-3 text-center text-9xl font-bold">(&#62;_&#60;)</h1>
-		<div class="mt-8 space-y-2 text-center lg:text-left">
-			<h3 class="text-content text-5xl font-bold lg:text-6xl">404</h3>
-			<h5 class="text-content text-xl font-bold">UH OH! You're lost.</h5>
-			<p>
-				The page you are looking for does not exist. How you got here is a mystery. But you can
-				click the button below to go back to the homepage.
-			</p>
-			<div class="pt-2">
-				<Button as="a" url="/" label="Home" icon="ri:home-line" />
-			</div>
+	<main class="relative h-dvh overflow-hidden py-14 md:py-20">
+		<!-- Subtle grid background -->
+		<div class="bg-grid absolute inset-0 opacity-50"></div>
+		<!-- Radial fade overlay to soften the grid edges -->
+		<div
+			class="absolute inset-0"
+			style="background: radial-gradient(ellipse at 30% 50%, transparent 20%, var(--main-light) 70%);">
 		</div>
-	</div>
+
+		<div class="relative mx-auto flex min-h-[78vh] w-full items-center justify-center">
+			<section class="text-content relative w-full max-w-3xl p-8 md:p-10">
+				<div class="space-y-4">
+					<h1 class="text-4xl leading-tight font-bold md:text-6xl">
+						Halaman tidak ditemukan.
+					</h1>
+					<p class="text-content-muted max-w-2xl text-base md:text-lg">
+						Tautan yang kamu buka mungkin sudah dipindah, dihapus, atau URL-nya tidak valid.
+						Kamu bisa kembali ke beranda atau jelajahi daftar project terbaru.
+					</p>
+				</div>
+
+				<div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+					<Button
+						as="a"
+						url="/"
+						label="Kembali ke Home"
+						icon="ri:home-4-line"
+						variant="invert"
+					/>
+					<Button
+						as="a"
+						url="/projects"
+						label="Lihat Proyek"
+						icon-right="ri:arrow-right-line"
+						variant="basic"
+					/>
+				</div>
+				<div class="border-border/70 mt-8 border-t pt-5 font-mono text-sm">
+					<p class="text-content-muted inline-flex items-center gap-2">HTTP_STATUS_404</p>
+				</div>
+			</section>
+		</div>
+	</main>
 </Layout>
