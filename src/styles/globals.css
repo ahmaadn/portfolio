@@ -60,8 +60,8 @@
 }
 
 @theme {
-	--font-sans: "Onest", sans-serif;
-	--font-mono: "Geist Mono";
+	--font-sans: "Plus Jakarta Sans", sans-serif;
+	--font-mono: "Geist Mono", monospace;
 
 	--color-main-dark: var(--main-dark);
 	--color-main: var(--main);
