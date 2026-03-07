@@ -1,0 +1,73 @@
+---
+import { cn } from "@/lib/utils";
+
+type Animation = "fade-up" | "fade-down" | "fade-left" | "fade-right" | "fade" | "scale-up";
+
+interface Props {
+	as?: keyof HTMLElementTagNameMap;
+	animation?: Animation;
+	duration?: number;
+	staggerDelay?: number;
+	class?: string;
+	[key: string]: any;
+}
+
+const {
+	as: Element = "div",
+	animation = "fade-up",
+	duration = 0.7,
+	staggerDelay = 0.12,
+	class: className = "",
+	...attrs
+} = Astro.props;
+---
+
+<Element
+	class={cn(className)}
+	data-stagger-group
+	data-stagger-animation={animation}
+	data-stagger-duration={duration}
+	data-stagger-delay={staggerDelay}
+	{...attrs}>
+	<slot />
+</Element>
+
+<script>
+	import { animate, inView, stagger } from "motion";
+
+	const EASING: [number, number, number, number] = [0.16, 1, 0.3, 1];
+
+	const TRANSFORM_MAP: Record<string, { from: string; to: string }> = {
+		"fade-up": { from: "translateY(20px)", to: "translateY(0)" },
+		"fade-down": { from: "translateY(-20px)", to: "translateY(0)" },
+		"fade-left": { from: "translateX(-20px)", to: "translateX(0)" },
+		"fade-right": { from: "translateX(20px)", to: "translateX(0)" },
+		"scale-up": { from: "scale(0.95)", to: "scale(1)" },
+		fade: { from: "none", to: "none" },
+	};
+
+	document.querySelectorAll<HTMLElement>("[data-stagger-group]").forEach((group) => {
+		const items = group.querySelectorAll<HTMLElement>("[data-stagger-item]");
+		if (!items.length) return;
+
+		const anim = group.dataset.staggerAnimation || "fade-up";
+		const duration = parseFloat(group.dataset.staggerDuration || "0.7");
+		const delay = parseFloat(group.dataset.staggerDelay || "0.12");
+		const t = TRANSFORM_MAP[anim] || TRANSFORM_MAP["fade-up"];
+
+		inView(
+			group,
+			() => {
+				animate(
+					items,
+					// @ts-ignore
+					{ opacity: [0, 1], transform: [t.from, t.to] },
+					{ duration, easing: EASING, delay: stagger(delay) }
+				);
+
+				items.forEach((el) => el.classList.remove("stagger-hidden"));
+			},
+			{ amount: 0.15 }
+		);
+	});
+</script>

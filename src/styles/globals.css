@@ -105,12 +105,6 @@ select:focus-visible,
 	@apply decoration-border-muted hover:decoration-content underline underline-offset-4 transition-colors;
 }
 
-/* Hero stagger initial state (animated by motion JS) */
-[data-stagger] {
-	opacity: 0;
-	transform: translateY(20px);
-}
-
 .scrollbar-hide {
 	scrollbar-width: none;
 
