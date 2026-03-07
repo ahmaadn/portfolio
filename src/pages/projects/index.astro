@@ -1,12 +1,12 @@
 ---
 import Button from "@/components/Button.astro";
-import CountUp from "@/components/motions/CountUp.astro";
 import Footer from "@/components/Footer.astro";
+import CountUp from "@/components/motions/CountUp.astro";
 import InView from "@/components/motions/InView.astro";
-import ProjectCard from "@/components/ProjectCard.astro";
-import SiteHeading from "@/components/SiteHeading.astro";
 import Stagger from "@/components/motions/Stagger.astro";
 import StaggerItem from "@/components/motions/StaggerItem.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import SiteHeading from "@/components/SiteHeading.astro";
 import { SITE } from "@/config";
 import Layout from "@/layouts/layout.astro";
 import { Icon } from "astro-icon/components";
@@ -129,6 +129,7 @@ function createSlug(tag: string): string {
 				</div>
 			</InView>
 			<section class="relative">
+				<h2 class="sr-only">Daftar Proyek</h2>
 				<div
 					id="projects-container"
 					class="flex flex-col gap-8 md:grid md:grid-cols-2 lg:grid-cols-3">
