@@ -19,6 +19,11 @@ export const LINKS: Link[] = [
 		url: "https://www.linkedin.com/in/ahmaadn",
 		icon: "ri:linkedin-box-fill",
 	},
+	{
+		label: "Resume",
+		url: "./resume.pdf",
+		icon: "ri:file-text-line",
+	},
 ];
 
 export const EDUCATION: Education[] = [
