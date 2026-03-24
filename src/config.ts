@@ -2,12 +2,13 @@ export const SITE: Site = {
 	title: "Ahmaadn",
 	author: "Ahmad nur sahid",
 	email: "ahmadnur415@gmail.com",
-	position: "Fullstack",
+	position: "Backend Developer | Data Scientist",
 	shortDescription:
-		"Seorang software engineer dengan pengalaman dalam mengembangkan aplikasi web menggunakan berbagai teknologi seperti Vue.js, FastApi, dan PostgreSQL.",
+		"Seorang backend developer dan data scientist yang bersemangat dengan pengalaman dalam mengembangkan aplikasi web dan menganalisis data untuk menciptakan solusi yang efisien dan inovatif.",
 	description: [
-		"Hai, saya Ahmad Nur Sahid. Saya seorang software engineer yang berbasis di Indonesia. Saya memiliki pengalaman dalam membangun aplikasi web menggunakan teknologi modern seperti Vue.js, FastApi, dan PostgreSQL.",
-		"Saat ini saya sedang menempuh pendidikan di Institut Teknologi Garut. Saya selalu mencari kesempatan baru untuk belajar dan berkembang sebagai mahasiswa. Saya juga terbuka untuk pekerjaan freelance, jadi jangan ragu untuk menghubungi saya jika Anda memiliki proyek yang ingin Anda kerjakan.",
+		"Halo! Nama saya Ahmad Nur Sahid, seorang backend developer dan data scientist yang bersemangat dengan pengalaman dalam mengembangkan aplikasi web dan menganalisis data untuk menciptakan solusi yang efisien dan inovatif.",
+		"Saya memiliki pengalaman dalam merancang dan mengimplementasikan API yang kuat, serta mengelola database untuk memastikan kinerja yang optimal. Selain itu, saya juga memiliki keahlian dalam menganalisis data menggunakan berbagai alat dan teknik untuk membantu pengambilan keputusan yang lebih baik.",
+		"Saya juga terbuka untuk pekerjaan, jadi jangan ragu untuk menghubungi saya jika Anda memiliki proyek yang ingin Anda kerjakan."
 	],
 };
 
