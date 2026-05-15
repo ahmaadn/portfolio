@@ -1,8 +1,13 @@
 ---
-import { SITE } from "@/config";
+import { SITE_LOCALE } from "@/config";
+import { languages, ui } from "@/i18n/ui";
+import { getLangFromUrl, getLocalizedPath, useTranslation } from "@/i18n/utils";
 import "@/styles/globals.css";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import { SEO } from "astro-seo";
+import { getImage } from "astro:assets";
+import profilePicture from "../images/me.jpg";
+
 interface Props {
 	title?: string;
 	class?: string;
@@ -10,16 +15,37 @@ interface Props {
 	image?: string;
 }
 
-const { title, description } = Astro.props;
+interface languageAlternates {
+	href: URL | string;
+	hrefLang: string;
+}
+
+const defaultImage = await getImage({
+	src: profilePicture,
+	format: "webp",
+	width: 800,
+});
+
+const { title, description, image = `${Astro.url.origin}${defaultImage.src}` } = Astro.props;
+const { pathname } = Astro.url;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslation(lang);
+let languageAlternates: languageAlternates[] = [];
+if (lang in ui) {
+	languageAlternates = Object.entries(languages).map(([code, label]) => {
+		return { hrefLang: code, href: `${Astro.url.origin}${getLocalizedPath(pathname, code)}` };
+	});
+}
 ---
 
-<html lang="en" class="scroll-smooth">
+<html lang={`${lang}`} class="scroll-smooth">
 	<head>
 		<SEO
 			charset="UTF-8"
 			title={title}
-			titleDefault={SITE.title}
-			titleTemplate={SITE.title + " - %s"}
+			titleDefault={t(SITE_LOCALE.title)}
+			titleTemplate={t(SITE_LOCALE.title) + " - %s"}
 			description={description}
 			extend={{
 				link: [{ rel: "icon", href: "/favicon.svg" }],
@@ -27,14 +53,15 @@ const { title, description } = Astro.props;
 			}}
 			openGraph={{
 				basic: {
-					title: SITE.title,
+					title: t(SITE_LOCALE.title),
 					type: "website",
-					image: "images/profile_pict_3.jpg",
+					image: image,
 				},
 				optional: {
 					description: description,
 				},
 			}}
+			languageAlternates={languageAlternates}
 		/>
 		<slot name="head" />
 		<meta name="generator" content={Astro.generator} />
