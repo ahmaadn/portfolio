@@ -1,6 +1,7 @@
 ---
 import { cn } from "@/lib/utils";
 import { Icon } from "astro-icon/components";
+import type { HTMLAttributes } from "astro/types";
 
 type Variant =
 	| "basic"
@@ -13,7 +14,10 @@ type Variant =
 	| "error"
 	| "info";
 
-interface Props {
+type AnchorExtras = Omit<HTMLAttributes<"a">, "class" | "href">;
+type ButtonExtras = Omit<HTMLAttributes<"button">, "class" | "type">;
+
+interface BaseProps {
 	label: string;
 	url?: string;
 	icon?: string;
@@ -23,9 +27,12 @@ interface Props {
 	"icon-right"?: string;
 	"icon-right-class"?: string;
 	class?: string;
-	as?: "a" | "button";
 	variant?: Variant;
 }
+
+type Props =
+	| (BaseProps & { as: "a" } & AnchorExtras)
+	| (BaseProps & { as: "button" } & ButtonExtras);
 
 const {
 	label,
@@ -39,8 +46,9 @@ const {
 	class: className = "",
 	as: Element = "a",
 	variant = "basic",
+
 	...extra
-} = Astro.props;
+} = Astro.props as Props;
 
 const primaryIcon = iconLeft ? iconLeft : icon;
 const primaryIconClass = iconLeftClass ? iconLeftClass : iconClass;

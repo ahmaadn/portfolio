@@ -13,6 +13,7 @@ const { class: className = "" } = Astro.props;
 	{
 		LINKS.map(({ label, url, icon, ...extra }) => (
 			<Button
+				as="a"
 				label={label}
 				url={url}
 				icon={icon}

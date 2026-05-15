@@ -1,6 +1,7 @@
 ---
 import ThemeButton from "@/components/ThemeButton.astro";
 import { Icon } from "astro-icon/components";
+import SwitchLocale from "./SwitchLocale.astro";
 
 const menuItems = [
 	{
@@ -44,18 +45,23 @@ const pathname = Astro.url.pathname;
 				</ul>
 				<div
 					class="divide-border inline-flex items-center justify-center space-x-4 divide-x text-base">
-					<div class="flex items-center justify-center pr-4">
+					<div class="flex items-center justify-center pr-3">
 						<ThemeButton class="hover:text-content transition-colors" />
 					</div>
-					<a
-						class="hover:text-content inline-flex h-8 w-8 items-center justify-center transition-colors"
-						href="/rss.xml"
-						target="_blank"
-						rel="noopener noreferrer"
-						aria-label="Open RSS feed in a new tab">
-						<Icon name="ri:rss-line" size="24" />
-						<span class="sr-only">rss</span>
-					</a>
+					<div class="pr-3">
+						<a
+							class="hover:text-content inline-flex h-8 items-center justify-center transition-colors"
+							href="/rss.xml"
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label="Open RSS feed in a new tab">
+							<Icon name="ri:rss-line" size="24" />
+							<span class="sr-only">rss</span>
+						</a>
+					</div>
+					<div class="flex items-center justify-center pr-4">
+						<SwitchLocale />
+					</div>
 				</div>
 			</div>
 		</div>

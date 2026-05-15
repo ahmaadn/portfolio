@@ -1,0 +1,25 @@
+---
+import { languages } from "@/i18n/ui";
+import { getLangFromUrl, getLocalizedPath } from "@/i18n/utils";
+import Button from "./Button.astro";
+
+const { pathname } = Astro.url;
+const currentLang = getLangFromUrl(Astro.url);
+---
+
+<div id="lang-switcher" class="flex items-center gap-2">
+	{
+		Object.entries(languages).map(([code, label]) => {
+			const isCurrent = currentLang === code;
+			return (
+				<Button
+					as="a"
+					label={code.toUpperCase()}
+					class="rounded-md px-2 py-1 text-sm font-medium no-underline transition"
+					url={getLocalizedPath(pathname, code)}
+					variant={isCurrent ? "invert" : "ghost"}
+				/>
+			);
+		})
+	}
+</div>

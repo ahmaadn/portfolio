@@ -1,4 +1,4 @@
-export const langguage = {
+export const languages = {
 	id: "Endonesia",
 	en: "English",
 };

@@ -1,4 +1,4 @@
-import { defaultLang, ui, type TranslationKey } from "./ui";
+import { defaultLang, languages, ui, type TranslationKey } from "./ui";
 
 
 export function getLangFromUrl(url: URL) {
@@ -21,3 +21,19 @@ export function useTranslation<L extends keyof typeof ui = keyof typeof ui>(lang
 }
 
 
+
+export function getLocalizedPath(pathname: string, lang: string) {
+	const cleanPath = pathname.replace(/^\/|\/$/g, "");
+	const pathSegments = cleanPath.split("/");
+
+	const currentLang = pathSegments[0];
+	const hasLangPrefix = Object.keys(languages).includes(currentLang);
+
+	if (hasLangPrefix) {
+		pathSegments[0] = lang;
+	} else {
+		pathSegments.unshift(lang);
+	}
+
+	return `/${pathSegments.join("/")}`;
+}
