@@ -1,0 +1,200 @@
+---
+import Avatar from "@/components/Avatar.astro";
+import BaseContent from "@/components/BaseContent.astro";
+import Button from "@/components/Button.astro";
+import Chips from "@/components/Chips.astro";
+import Footer from "@/components/Footer.astro";
+import LatestProject from "@/components/LatestProject.astro";
+import OpenForWork from "@/components/OpenForWork.astro";
+import ProjectCard from "@/components/ProjectCard.astro";
+import SiteHeading from "@/components/SiteHeading.astro";
+import InView from "@/components/motions/InView.astro";
+import Stagger from "@/components/motions/Stagger.astro";
+import StaggerItem from "@/components/motions/StaggerItem.astro";
+import { EDUCATION, SITE, SITE_LOCALE, SKILL_CATEGORIES } from "@/config";
+import { getLangFromUrl, useTranslation } from "@/i18n/utils";
+import Layout from "@/layouts/layout.astro";
+import { Icon } from "astro-icon/components";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+	return [{ params: { locale: "en" } }, { params: { locale: "id" } }];
+}
+
+const allProject = (await getCollection("projects")).sort(
+	(a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+let latestProject =
+	allProject.filter((project) => project.data.latest || false)[0] || allProject[0];
+
+let newProjects = allProject.slice(0, 3).map((project) => project.data);
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslation(lang);
+---
+
+<Layout title="me" description={t(SITE_LOCALE.shortDescription) as string}>
+	<SiteHeading id="site-heading">
+		<div
+			class="relative z-10 mx-auto flex h-full max-w-6xl flex-col items-start px-6 pt-32 pb-28 md:justify-center md:pt-24 lg:pt-0">
+			<div
+				class="flex flex-col items-start justify-end gap-12 lg:flex-row lg:items-end lg:justify-between">
+				<div class="z-20 lg:max-w-[58%]">
+					<Stagger animation="fade-up">
+						<StaggerItem class="mb-6">
+							<OpenForWork />
+						</StaggerItem>
+						<StaggerItem
+							as="h1"
+							class="text-content mb-2 text-4xl font-bold capitalize md:text-7xl">
+							I'm {SITE.author}
+						</StaggerItem>
+						<StaggerItem
+							as="h2"
+							class="text-content mb-2 space-x-2 text-lg font-bold capitalize md:text-xl">
+							{
+								SITE_LOCALE.positions.map((position) => (
+									<span class="after:ml-2 after:content-['|'] last:after:content-none">
+										{t(position)}
+									</span>
+								))
+							}
+						</StaggerItem>
+						<StaggerItem as="p" class="mb-10 text-lg">
+							{t(SITE_LOCALE.shortDescription)}
+						</StaggerItem>
+						<StaggerItem class="inline-flex gap-4">
+							<Button
+								as="a"
+								url="#project"
+								label="View My Work"
+								icon="ri:arrow-down-line"
+								variant="invert"
+							/>
+							<Button
+								as="a"
+								url="./resume.pdf"
+								label="Resume"
+								icon="ri:file-text-line"
+								variant="basic"
+								download="./resume.pdf"
+							/>
+						</StaggerItem>
+					</Stagger>
+				</div>
+				<Stagger animation="fade-up" staggerDelay={0.12}>
+					<StaggerItem>
+						<LatestProject project={latestProject.data} />
+					</StaggerItem>
+				</Stagger>
+			</div>
+		</div>
+	</SiteHeading>
+	<main id="main-content" class="relative mb-20 min-h-screen w-full space-y-20 md:space-y-24">
+		<BaseContent
+			id="me"
+			title="About me"
+			background-text="About me"
+			icon-title="ri:compasses-2-line">
+			<div class="flex flex-col gap-y-8 md:flex-row">
+				<Avatar />
+				<div class="space-y-4 md:text-lg">
+					{(t(SITE_LOCALE.description) as unknown as string[]).map((desc) => <p>{desc}</p>)}
+				</div>
+			</div>
+		</BaseContent>
+		<BaseContent
+			id="skills"
+			title="Tech Stack"
+			background-text="Tech Stack"
+			icon-title="ri:code-s-slash-line">
+			<div class="grid gap-8 sm:grid-cols-2">
+				{
+					SKILL_CATEGORIES.map(({ category, icon: catIcon, items }, i) => (
+						<InView animation="fade-up" delay={i * 0.1}>
+							<div class="space-y-4">
+								<div class="text-content inline-flex items-center gap-2">
+									<Icon name={catIcon} class="h-5 w-5 opacity-60" />
+									<h3 class="text-sm font-semibold tracking-wider uppercase">
+										{category}
+									</h3>
+								</div>
+								<div class="flex flex-wrap gap-2">
+									{items.map(({ name, icon }) => (
+										<Chips name={name} icon={icon} />
+									))}
+								</div>
+							</div>
+						</InView>
+					))
+				}
+			</div>
+		</BaseContent>
+		<BaseContent
+			id="education"
+			title="Educations"
+			background-text="Education"
+			class="flex flex-col md:flex-row md:gap-x-16"
+			icon-title="ri:school-line">
+			<ol class="w-full space-y-12 overflow-hidden">
+				{
+					EDUCATION.map((edu, i) => (
+						<InView
+							as="li"
+							animation="fade-left"
+							delay={i * 0.15}
+							class="after:bg-primary relative flex-1 after:absolute after:-bottom-11 after:left-4 after:inline-block after:h-full after:w-0.5 after:content-[''] lg:after:left-5">
+							<div class="flex w-full items-start font-medium">
+								<span class="bg-primary text-primary-content mr-8 flex aspect-square h-8 w-8 items-center justify-center rounded-full border-2 border-transparent text-sm lg:h-10 lg:w-10">
+									<Icon name="ri:book-marked-line" class="h-6 w-6" />
+								</span>
+								<div class="block w-full space-y-2">
+									<div>
+										<time class="text-sm/none font-medium">
+											{edu.from} - {edu.to}
+										</time>
+
+										<h3 class="text-content mt-1 text-2xl font-bold">{edu.institute}</h3>
+										<p class="mt-2 text-base">{edu.location}</p>
+										<p class="text-base">{edu.course}</p>
+									</div>
+								</div>
+							</div>
+						</InView>
+					))
+				}
+			</ol>
+		</BaseContent>
+		<BaseContent
+			id="project"
+			title="Projects"
+			class="relative"
+			background-text="Project"
+			icon-title="ri:bnb-line">
+			<div class="flex flex-col gap-8 md:grid md:grid-cols-2 lg:grid-cols-3">
+				{
+					newProjects &&
+						newProjects.map((project, i) => (
+							<InView animation="fade-up" delay={i * 0.12}>
+								<ProjectCard project={project} />
+							</InView>
+						))
+				}
+			</div>
+			<div class="mt-12 flex items-center justify-center">
+				<Button
+					as="a"
+					url="/projects"
+					label={t("common.button.viewAll")}
+					variant="basic"
+					class="text-base font-normal"
+					icon-right="ri:arrow-right-line"
+				/>
+			</div>
+		</BaseContent>
+	</main>
+	<InView animation="fade-up">
+		<Footer mail={SITE.email} tagline={t("common.footer.tagline")} />
+	</InView>
+</Layout>

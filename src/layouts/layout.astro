@@ -1,8 +1,8 @@
 ---
 import { SITE } from "@/config";
 import "@/styles/globals.css";
+import SpeedInsights from "@vercel/speed-insights/astro";
 import { SEO } from "astro-seo";
-import SpeedInsights from "@vercel/speed-insights/astro"
 interface Props {
 	title?: string;
 	class?: string;
@@ -14,7 +14,6 @@ const { title, description } = Astro.props;
 ---
 
 <html lang="en" class="scroll-smooth">
-	
 	<head>
 		<SEO
 			charset="UTF-8"
