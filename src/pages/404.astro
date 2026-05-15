@@ -1,10 +1,14 @@
 ---
 import Button from "@/components/Button.astro";
-import { defaultLang } from "@/i18n/ui";
-import { useTranslation } from "@/i18n/utils";
+import { defaultLang, ui } from "@/i18n/ui";
+import { getLangFromUrl, useTranslation } from "@/i18n/utils";
 import Layout from "@/layouts/layout.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
 
-const t = useTranslation(defaultLang);
+let lang = getLangFromUrl(Astro.url);
+if (!(lang in ui)) lang = defaultLang;
+
+const t = useTranslation(lang);
 ---
 
 <Layout title="404">
@@ -31,14 +35,14 @@ const t = useTranslation(defaultLang);
 				<div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
 					<Button
 						as="a"
-						url="/"
+						url={getRelativeLocaleUrl(lang)}
 						label={t("common.button.back_to_home")}
 						icon="ri:home-4-line"
 						variant="invert"
 					/>
 					<Button
 						as="a"
-						url="/projects"
+						url={getRelativeLocaleUrl(lang, "/projects")}
 						label={t("common.button.view_all")}
 						icon-right="ri:arrow-right-line"
 						variant="basic"
