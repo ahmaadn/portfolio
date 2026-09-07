@@ -1,25 +1,20 @@
 ---
-import { languages } from "@/i18n/ui";
-import { getLangFromUrl, getLocalizedPath } from "@/i18n/utils";
-import Button from "./Button.astro";
+import { getLangFromUrl, getLocalizedPath, useTranslation } from "@/i18n/utils";
 
 const { pathname } = Astro.url;
 const currentLang = getLangFromUrl(Astro.url);
+const t = useTranslation(currentLang);
+const nextLang = currentLang === "en" ? "id" : "en";
+const nextLabel =
+	nextLang === "id" ? t("language.switch_to_indonesian") : t("language.switch_to_english");
 ---
 
-<div id="lang-switcher" class="flex items-center gap-2">
-	{
-		Object.entries(languages).map(([code, label]) => {
-			const isCurrent = currentLang === code;
-			return (
-				<Button
-					as="a"
-					label={code.toUpperCase()}
-					class="rounded-md px-2 py-1 text-sm font-medium no-underline transition"
-					url={getLocalizedPath(pathname, code)}
-					variant={isCurrent ? "invert" : "ghost"}
-				/>
-			);
-		})
-	}
-</div>
+<a
+	id="lang-switcher"
+	href={getLocalizedPath(pathname, nextLang)}
+	class="hover:text-content inline-flex h-8 w-8 items-center justify-center transition-colors"
+	aria-label={nextLabel}
+	title={nextLabel}>
+	<span class="text-base font-bold tracking-[0.12em]">{currentLang.toUpperCase()}</span>
+	<span class="sr-only">{nextLabel}</span>
+</a>
