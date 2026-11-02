@@ -1,11 +1,15 @@
 ---
-title: E-commerce
+title:
+  en: E-commerce
+  id: E-commerce
 tags:
   - Astro
   - Vue
   - Tailwind
   - FastApi
-description: E-commerce ini dibuat menggunakan Astro, FastApi, dan MySQL
+description:
+  en: This e-commerce platform was built with Astro, FastAPI, and MySQL.
+  id: E-commerce ini dibuat menggunakan Astro, FastAPI, dan MySQL.
 thumbnail: ../../images/project/ecommerce-01.png
 latest: true
 url: https://github.com/ahmaadn/ecommerce-astro-vue-fastapi

@@ -1,4 +1,8 @@
 ---
+export function getStaticPaths() {
+	return [{ params: { locale: "en" } }, { params: { locale: "id" } }];
+}
+
 import Button from "@/components/Button.astro";
 import Footer from "@/components/Footer.astro";
 import CountUp from "@/components/motions/CountUp.astro";
@@ -9,21 +13,24 @@ import ProjectCard from "@/components/ProjectCard.astro";
 import SiteHeading from "@/components/SiteHeading.astro";
 import { SITE } from "@/config";
 import Layout from "@/layouts/layout.astro";
+import { getLangFromUrl, getLocalizedPath, useTranslation } from "@/i18n/utils";
 import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
 
-const projects = (await getCollection("projects"))
-	.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
-	.map((project) => project.data);
+const projects = (await getCollection("projects")).sort(
+	(a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
 
-const tags = [...new Set(projects.flatMap((project) => project.tags))].sort();
+const tags = [...new Set(projects.flatMap((project) => project.data.tags))].sort();
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslation(lang);
 
 function createSlug(tag: string): string {
 	return tag.toLowerCase().replace(/[^a-z0-9]/g, "-");
 }
 ---
 
-<Layout title="Projects" description="Koleksi proyek yang telah saya kerjakan">
+<Layout title={t("projects.meta.title")} description={t("projects.meta.description")}>
 	<SiteHeading id="site-heading" class="min-h-150">
 		<div
 			class="relative z-10 mx-auto flex h-full max-w-6xl flex-col items-start justify-center px-6 pt-24 lg:pt-0">
@@ -31,13 +38,13 @@ function createSlug(tag: string): string {
 				<!-- Breadcrumb -->
 				<StaggerItem as="nav" class="mb-10">
 					<a
-						href="/"
+						href={getLocalizedPath("/", lang)}
 						class="text-content-muted hover:text-content group inline-flex items-center gap-2 text-sm transition-colors">
 						<Icon
 							name="ri:arrow-left-line"
 							class="h-4 w-4 transition-transform group-hover:-translate-x-0.5"
 						/>
-						<span>Back to home</span>
+						<span>{t("common.button.back_to_home")}</span>
 					</a>
 				</StaggerItem>
 
@@ -47,24 +54,23 @@ function createSlug(tag: string): string {
 						<StaggerItem class="mb-4 flex items-center gap-3">
 							<div class="bg-primary h-0.5 w-6"></div>
 							<span class="text-content-muted text-sm font-medium tracking-widest uppercase">
-								Portfolio
+								{t("projects.eyebrow")}
 							</span>
 						</StaggerItem>
 
 						<StaggerItem as="h1" class="text-content mb-6 text-4xl font-bold md:text-6xl">
-							Projects
+							{t("projects.title")}
 						</StaggerItem>
 
 						<StaggerItem as="p" class="text-lg md:text-xl">
-							Jelajahi kumpulan pekerjaan yang telah saya rancang dan bangun, dari aplikasi
-							web kompleks hingga aplikasi mobile.
+							{t("projects.description")}
 						</StaggerItem>
 
 						<StaggerItem class="mt-8">
 							<Button
 								as="a"
 								url="#main-content"
-								label="Browse Projects"
+								label={t("common.button.browse_projects")}
 								icon="ri:arrow-down-line"
 								variant="invert"
 							/>
@@ -81,7 +87,7 @@ function createSlug(tag: string): string {
 									class="text-content text-4xl font-bold"
 								/>
 								<span class="text-content-muted mt-2 text-xs tracking-wider uppercase">
-									Projects
+									{t("projects.stats.projects")}
 								</span>
 							</div>
 							<div class="flex flex-col items-center">
@@ -91,7 +97,7 @@ function createSlug(tag: string): string {
 									class="text-content text-4xl font-bold"
 								/>
 								<span class="text-content-muted mt-2 text-xs tracking-wider uppercase">
-									Technologies
+									{t("projects.stats.technologies")}
 								</span>
 							</div>
 						</div>
@@ -111,7 +117,7 @@ function createSlug(tag: string): string {
 						as="button"
 						variant="ghost"
 						data-filter="all"
-						label="All"
+						label={t("common.button.all")}
 						class="filter-btn active py-1.5 text-sm font-medium"
 					/>
 
@@ -129,7 +135,7 @@ function createSlug(tag: string): string {
 				</div>
 			</InView>
 			<section class="relative">
-				<h2 class="sr-only">Daftar Proyek</h2>
+				<h2 class="sr-only">{t("projects.list_label")}</h2>
 				<div
 					id="projects-container"
 					class="flex flex-col gap-8 md:grid md:grid-cols-2 lg:grid-cols-3">
@@ -137,8 +143,11 @@ function createSlug(tag: string): string {
 						projects.map((project, index) => (
 							<div
 								class="project-item active"
-								data-tags={project.tags.map((tag) => createSlug(tag)).join(",")}>
-								<ProjectCard project={project} />
+								data-tags={project.data.tags.map((tag) => createSlug(tag)).join(",")}>
+								<ProjectCard
+									project={project.data}
+									sourceCodeLabel={t("common.button.source_code")}
+								/>
 							</div>
 						))
 					}

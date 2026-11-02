@@ -1,14 +1,23 @@
 ---
 import Badge from "@/components/Badge.astro";
+import { getLangFromUrl } from "@/i18n/utils";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import type { InferEntrySchema } from "astro:content";
 
 interface Props {
 	project: InferEntrySchema<"projects">;
+	title?: string;
+	description?: string;
+	sourceCodeLabel?: string;
 }
 
-const { project } = Astro.props;
+const {
+	project,
+	title = project.title[getLangFromUrl(Astro.url)],
+	description = project.description[getLangFromUrl(Astro.url)],
+	sourceCodeLabel = "Source code",
+} = Astro.props;
 ---
 
 <article class="project-card group">
@@ -16,7 +25,7 @@ const { project } = Astro.props;
 	<div class="relative aspect-video overflow-hidden">
 		<Image
 			src={project.thumbnail}
-			alt={project.title}
+			alt={title}
 			class="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
 		/>
 		<!-- Gradient overlay on hover -->
@@ -33,11 +42,11 @@ const { project } = Astro.props;
 		</div>
 
 		<h3 class="text-content mb-2 truncate text-lg leading-tight font-semibold">
-			{project.title}
+			{title}
 		</h3>
 
 		<p class="mb-5 line-clamp-3 h-17 text-sm leading-relaxed">
-			{project.description}
+			{description}
 		</p>
 
 		<!-- Footer -->
@@ -48,7 +57,7 @@ const { project } = Astro.props;
 				rel="noopener noreferrer"
 				class="text-content-muted hover:text-content group/link inline-flex items-center justify-center gap-1.5 text-sm transition-colors">
 				<Icon name="ri:github-fill" class="h-4 w-4" />
-				<span>Source Code</span>
+				<span>{sourceCodeLabel}</span>
 				<Icon
 					name="ri:arrow-right-up-line"
 					class="h-3.5 w-3.5 transition-transform duration-200 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"

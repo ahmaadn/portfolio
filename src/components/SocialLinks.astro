@@ -1,19 +1,22 @@
 ---
 import Button from "@/components/Button.astro";
 import { LINKS } from "@/config";
+import { getLangFromUrl, useTranslation } from "@/i18n/utils";
 
 interface Props {
 	class?: string;
 }
 
 const { class: className = "" } = Astro.props;
+const t = useTranslation(getLangFromUrl(Astro.url));
 ---
 
 <div class="group-link inline-flex gap-4 text-sm">
 	{
 		LINKS.map(({ label, url, icon, ...extra }) => (
 			<Button
-				label={label}
+				as="a"
+				label={label === "Resume" ? t("common.button.resume") : label}
 				url={url}
 				icon={icon}
 				variant="basic"

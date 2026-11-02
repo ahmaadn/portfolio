@@ -1,9 +1,17 @@
 ---
 import Button from "@/components/Button.astro";
+import { defaultLang, ui } from "@/i18n/ui";
+import { getLangFromUrl, useTranslation } from "@/i18n/utils";
 import Layout from "@/layouts/layout.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+let lang = getLangFromUrl(Astro.url);
+if (!(lang in ui)) lang = defaultLang;
+
+const t = useTranslation(lang);
 ---
 
-<Layout title="404">
+<Layout title="404" description={t("404.description")}>
 	<main class="relative h-dvh overflow-hidden py-14 md:py-20">
 		<!-- Subtle grid background -->
 		<div class="bg-grid absolute inset-0 opacity-50"></div>
@@ -17,26 +25,25 @@ import Layout from "@/layouts/layout.astro";
 			<section class="text-content relative w-full max-w-3xl p-8 md:p-10">
 				<div class="space-y-4">
 					<h1 class="text-4xl leading-tight font-bold md:text-6xl">
-						Halaman tidak ditemukan.
+						{t("404.title")}
 					</h1>
 					<p class="text-content-muted max-w-2xl text-base md:text-lg">
-						Tautan yang kamu buka mungkin sudah dipindah, dihapus, atau URL-nya tidak valid.
-						Kamu bisa kembali ke beranda atau jelajahi daftar project terbaru.
+						{t("404.description")}
 					</p>
 				</div>
 
 				<div class="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
 					<Button
 						as="a"
-						url="/"
-						label="Kembali ke Home"
+						url={getRelativeLocaleUrl(lang)}
+						label={t("common.button.back_to_home")}
 						icon="ri:home-4-line"
 						variant="invert"
 					/>
 					<Button
 						as="a"
-						url="/projects"
-						label="Lihat Proyek"
+						url={getRelativeLocaleUrl(lang, "/projects")}
+						label={t("common.button.view_all")}
 						icon-right="ri:arrow-right-line"
 						variant="basic"
 					/>

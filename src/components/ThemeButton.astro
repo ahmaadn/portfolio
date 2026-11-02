@@ -1,4 +1,5 @@
 ---
+import { getLangFromUrl, useTranslation } from "@/i18n/utils";
 import { cn } from "@/lib/utils";
 import { Icon } from "astro-icon/components";
 
@@ -7,14 +8,17 @@ interface Props {
 }
 
 const { class: className = "" } = Astro.props;
+const t = useTranslation(getLangFromUrl(Astro.url));
 ---
 
 <button
 	class={cn("inline-flex h-8 w-8 items-center justify-center", className)}
 	id="theme-button"
 	type="button"
-	aria-label="Switch theme"
-	title="Switch theme"
+	aria-label={t("theme.switch")}
+	title={t("theme.switch")}
+	data-switch-to-light={t("theme.switch_to_light")}
+	data-switch-to-dark={t("theme.switch_to_dark")}
 	aria-live="polite">
 	<Icon size="24" name="ri:moon-line" class="block dark:hidden" />
 	<Icon size="24" name="ri:sun-line" class="hidden dark:block" />
@@ -43,12 +47,15 @@ const { class: className = "" } = Astro.props;
 
 	const reflectPreference = () => {
 		const nextTheme = theme.value === "light" ? "dark" : "light";
-		const label = `Switch to ${nextTheme} theme`;
+		const control = document.querySelector("#theme-button");
+		const label =
+			nextTheme === "light"
+				? control?.getAttribute("data-switch-to-light")
+				: control?.getAttribute("data-switch-to-dark");
 
 		function mutate() {
 			document.firstElementChild.setAttribute("data-theme", theme.value);
 
-			const control = document.querySelector("#theme-button");
 			control?.setAttribute("aria-label", label);
 			control?.setAttribute("title", label);
 			control?.setAttribute("aria-pressed", String(theme.value === "dark"));

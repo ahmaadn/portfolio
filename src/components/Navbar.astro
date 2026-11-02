@@ -1,28 +1,26 @@
 ---
 import ThemeButton from "@/components/ThemeButton.astro";
 import { Icon } from "astro-icon/components";
-
-const menuItems = [
-	{
-		name: "Projects",
-		link: "/projects",
-	},
-	{
-		name: "Contact",
-		link: "/#contact",
-	},
-];
+import SwitchLocale from "./SwitchLocale.astro";
+import { getLangFromUrl, getLocalizedPath, useTranslation } from "@/i18n/utils";
 
 const pathname = Astro.url.pathname;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslation(lang);
+const menuItems = [
+	{ name: t("nav.projects"), link: getLocalizedPath("/projects", lang) },
+	{ name: t("nav.contact"), link: `${getLocalizedPath("/", lang)}#contact` },
+];
+const homeUrl = getLocalizedPath("/", lang);
 ---
 
-<nav class="absolute top-0 left-0 z-50 w-full" aria-label="navigation">
+<nav class="absolute top-0 left-0 z-50 w-full" aria-label={t("nav.navigation")}>
 	<div class="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-8">
 		<div class="flex flex-1 items-center justify-between">
 			<a
 				class="text-content text-2xl font-bold tracking-tighter"
-				href="/"
-				aria-label="AN. – homepage">
+				href={homeUrl}
+				aria-label={t("nav.home_aria")}>
 				AN.
 			</a>
 			<div class="flex items-center space-x-8">
@@ -44,18 +42,23 @@ const pathname = Astro.url.pathname;
 				</ul>
 				<div
 					class="divide-border inline-flex items-center justify-center space-x-4 divide-x text-base">
-					<div class="flex items-center justify-center pr-4">
+					<div class="flex items-center justify-center pr-3">
 						<ThemeButton class="hover:text-content transition-colors" />
 					</div>
-					<a
-						class="hover:text-content inline-flex h-8 w-8 items-center justify-center transition-colors"
-						href="/rss.xml"
-						target="_blank"
-						rel="noopener noreferrer"
-						aria-label="Open RSS feed in a new tab">
-						<Icon name="ri:rss-line" size="24" />
-						<span class="sr-only">rss</span>
-					</a>
+					<div class="pr-3">
+						<a
+							class="hover:text-content inline-flex h-8 items-center justify-center transition-colors"
+							href="/rss.xml"
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label={t("nav.rss_aria")}>
+							<Icon name="ri:rss-line" size="24" />
+							<span class="sr-only">{t("nav.rss")}</span>
+						</a>
+					</div>
+					<div class="flex items-center justify-center pr-4">
+						<SwitchLocale />
+					</div>
 				</div>
 			</div>
 		</div>

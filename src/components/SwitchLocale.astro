@@ -1,0 +1,20 @@
+---
+import { getLangFromUrl, getLocalizedPath, useTranslation } from "@/i18n/utils";
+
+const { pathname } = Astro.url;
+const currentLang = getLangFromUrl(Astro.url);
+const t = useTranslation(currentLang);
+const nextLang = currentLang === "en" ? "id" : "en";
+const nextLabel =
+	nextLang === "id" ? t("language.switch_to_indonesian") : t("language.switch_to_english");
+---
+
+<a
+	id="lang-switcher"
+	href={getLocalizedPath(pathname, nextLang)}
+	class="hover:text-content inline-flex h-8 w-8 items-center justify-center transition-colors"
+	aria-label={nextLabel}
+	title={nextLabel}>
+	<span class="text-base font-bold tracking-[0.12em]">{currentLang.toUpperCase()}</span>
+	<span class="sr-only">{nextLabel}</span>
+</a>

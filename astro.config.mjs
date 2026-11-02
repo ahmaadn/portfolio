@@ -8,6 +8,13 @@ import icon from "astro-icon";
 // https://astro.build/config
 export default defineConfig({
 	site: "https://www.ahmaadn.my.id",
+	i18n: {
+		locales: ["en", "id"],
+		defaultLocale: "en",
+		routing: {
+			prefixDefaultLocale: true,
+		},
+	},
 	integrations: [
 		sitemap(),
 		mdx(),
