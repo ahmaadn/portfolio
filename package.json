@@ -11,35 +11,46 @@
     "format": "prettier . --write"
   },
   "dependencies": {
-    "@astrojs/mdx": "5.0.2",
-    "@astrojs/rss": "4.0.17",
-    "@astrojs/sitemap": "3.7.1",
-    "@astrojs/vercel": "^10.0.2",
-    "@tailwindcss/vite": "^4.1.11",
+    "@astrojs/mdx": "8.1.2",
+    "@astrojs/rss": "4.0.19",
+    "@astrojs/sitemap": "3.7.4",
+    "@astrojs/vercel": "^11.0.17",
+    "@tailwindcss/vite": "^4.3.3",
     "@vercel/speed-insights": "^2.0.0",
-    "astro": "6.0.8",
-    "astro-icon": "^1.1.5",
-    "astro-seo": "^0.8.4",
+    "astro": "7.4.4",
+    "astro-icon": "^1.2.0",
+    "astro-seo": "^1.2.0",
     "clsx": "^2.1.1",
-    "motion": "^12.35.0",
-    "sharp": "^0.33.5",
-    "tailwind-merge": "^2.6.0",
-    "tailwindcss": "^4.1.11"
+    "motion": "^14.9.0",
+    "sharp": "^0.35.5",
+    "tailwind-merge": "^3.7.0",
+    "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
-    "@iconify-json/devicon": "^1.2.59",
+    "@iconify-json/devicon": "^1.2.75",
     "@iconify-json/mdi": "^1.2.3",
     "@iconify-json/ri": "^1.2.10",
-    "prettier": "^3.6.2",
-    "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-astro-organize-imports": "^0.4.11",
-    "prettier-plugin-tailwindcss": "^0.6.13"
+    "prettier": "^3.9.10",
+    "prettier-plugin-astro": "^1.1.2",
+    "prettier-plugin-astro-organize-imports": "^0.4.14",
+    "prettier-plugin-tailwindcss": "^0.8.1"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
       "@tailwindcss/oxide",
       "esbuild",
       "sharp"
-    ]
+    ],
+    "overrides": {
+      "esbuild@>=0.27.3 <0.28.1": ">=0.28.1",
+      "brace-expansion@>=4.0.0 <5.0.12": ">=5.0.12",
+      "brace-expansion@>=4.0.0 <5.0.11": ">=5.0.11",
+      "brace-expansion@>=4.0.0 <5.0.10": ">=5.0.10",
+      "source-map-js@>=1.0.0 <1.2.2": ">=1.2.2",
+      "zod@<4.6.6": ">=4.6.6",
+      "undici@>=8.0.0 <8.12.2": ">=8.12.2",
+      "minimatch@<11.0.1": ">=11.0.1",
+      "glob@>=9.0.0 <=14.0.1": ">=14.0.2"
+    }
   }
 }
