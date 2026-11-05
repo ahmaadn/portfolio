@@ -1,14 +1,14 @@
 export const SITE: Site = {
 	author: "Ahmad nur sahid",
-	email: "ahmadnur415@gmail.com",
+	email: "ahmadnursahid12345@gmail.com",
 
 	// Data dibawah tidak digunakan lagi
 	title: "Ahmaadn",
-	position: "Backend Developer | Data Scientist",
+	position: "Backend Developer",
 	shortDescription:
 		"Seorang backend developer dan data scientist yang bersemangat dengan pengalaman dalam mengembangkan aplikasi web dan menganalisis data untuk menciptakan solusi yang efisien dan inovatif.",
 	description: [
-		"Halo! Nama saya Ahmad Nur Sahid, seorang backend developer dan data scientist yang bersemangat dengan pengalaman dalam mengembangkan aplikasi web dan menganalisis data untuk menciptakan solusi yang efisien dan inovatif.",
+		"Halo! Nama saya Ahmad Nur Sahid, seorang backend developer yang bersemangat dengan pengalaman dalam mengembangkan aplikasi web dan menganalisis data untuk menciptakan solusi yang efisien dan inovatif.",
 		"Saya memiliki pengalaman dalam merancang dan mengimplementasikan API yang kuat, serta mengelola database untuk memastikan kinerja yang optimal. Selain itu, saya juga memiliki keahlian dalam menganalisis data menggunakan berbagai alat dan teknik untuk membantu pengambilan keputusan yang lebih baik.",
 		"Saya juga terbuka untuk pekerjaan, jadi jangan ragu untuk menghubungi saya jika Anda memiliki proyek yang ingin Anda kerjakan.",
 	],
@@ -19,7 +19,7 @@ export const SITE_LOCALE = {
 	author: "site.author",
 	shortDescription: "site.shortDescription",
 	description: "site.description",
-	positions: ["position.backend_developer", "position.data_scientist"],
+	positions: ["position.backend_developer"],
 } as const;
 
 export const LINKS: Link[] = [

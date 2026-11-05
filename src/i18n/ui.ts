@@ -9,9 +9,9 @@ export const ui = {
 	id: {
 		"site.title": "Ahmaadn",
 		"site.shortDescription":
-			"Seorang backend developer dan data scientist yang bersemangat dengan pengalaman dalam mengembangkan aplikasi web dan menganalisis data untuk menciptakan solusi yang efisien dan inovatif.",
+			"Seorang backend developer yang bersemangat dengan pengalaman dalam mengembangkan aplikasi web dan menganalisis data untuk menciptakan solusi yang efisien dan inovatif.",
 		"site.description": [
-			"Halo! Nama saya Ahmad Nur Sahid, seorang backend developer dan data scientist yang bersemangat dengan pengalaman dalam mengembangkan aplikasi web dan menganalisis data untuk menciptakan solusi yang efisien dan inovatif.",
+			"Halo! Nama saya Ahmad Nur Sahid, seorang backend developer yang bersemangat dengan pengalaman dalam mengembangkan aplikasi web dan menganalisis data untuk menciptakan solusi yang efisien dan inovatif.",
 			"Saya memiliki pengalaman dalam merancang dan mengimplementasikan API yang kuat, serta mengelola database untuk memastikan kinerja yang optimal. Selain itu, saya juga memiliki keahlian dalam menganalisis data menggunakan berbagai alat dan teknik untuk membantu pengambilan keputusan yang lebih baik.",
 			"Saya juga terbuka untuk pekerjaan, jadi jangan ragu untuk menghubungi saya jika Anda memiliki proyek yang ingin Anda kerjakan.",
 		],
@@ -70,9 +70,9 @@ export const ui = {
 	en: {
 		"site.title": "Ahmaadn",
 		"site.shortDescription":
-			"A passionate backend developer and data scientist with experience in developing web applications and analyzing data to create efficient and innovative solutions.",
+			"A passionate backend developer with experience in developing web applications and analyzing data to create efficient and innovative solutions.",
 		"site.description": [
-			"Hello! My name is Ahmad Nur Sahid, a passionate backend developer and data scientist with experience in developing web applications and analyzing data to create efficient and innovative solutions.",
+			"Hello! My name is Ahmad Nur Sahid, a passionate backend developer with experience in developing web applications and analyzing data to create efficient and innovative solutions.",
 			"I have experience designing and implementing robust APIs and managing databases to ensure optimal performance. Furthermore, I am skilled in analyzing data using various tools and techniques to aid better decision-making.",
 			"I am also open to work, so feel free to contact me if you have a project you would like to work on.",
 		],
